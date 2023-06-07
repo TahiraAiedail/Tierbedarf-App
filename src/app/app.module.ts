@@ -3,10 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { TierheimtiereComponent } from './tierheimtiere/tierheimtiere.component';
+import { EventsComponent } from './events/events.component';
+import { ProduktkatalogComponent } from './produktkatalog/produktkatalog.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    TierheimtiereComponent,
+    EventsComponent,
+    ProduktkatalogComponent
   ],
   imports: [
     BrowserModule,
