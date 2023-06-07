@@ -1,0 +1,24 @@
+<div *ngFor="let question of questions; let i = index">
+    <h3>Frage {{i+1}}:</h3>
+    <p>{{ question }}</p>
+    <div>
+      <input type="radio" name="answer{{i}}" value="Option 1" [(ngModel)]="selectedAnswers[i]">
+      <label>Option 1</label>
+      <br>
+      <input type="radio" name="answer{{i}}" value="Option 2" [(ngModel)]="selectedAnswers[i]">
+      <label>Option 2</label>
+      <br>
+      <input type="radio" name="answer{{i}}" value="Option 3" [(ngModel)]="selectedAnswers[i]">
+      <label>Option 3</label>
+      <br>
+      <input type="radio" name="answer{{i}}" value="Option 4" [(ngModel)]="selectedAnswers[i]">
+      <label>Option 4</label>
+    </div>
+  </div>
+  
+  <button (click)="evaluateQuiz()">Quiz auswerten</button>
+  
+  <div *ngIf="showResults">
+    <h2>Ergebnis:</h2>
+    <p>{{ resultMessage }}</p>
+  </div>
