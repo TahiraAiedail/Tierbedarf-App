@@ -1,10 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AnmeldungComponent } from './anmeldung/anmeldung.component';
+import { TierheimtiereComponent } from './tierheimtiere/tierheimtiere.component';
+import { EventsComponent } from './events/events.component';
+import { ProduktkatalogComponent } from './produktkatalog/produktkatalog.component';
+import { QuizComponent } from './quiz/quiz.component';
 
-const routes: Routes = [];
+
+const routes: Routes = [
+  {path: 'Anmeldung', component: AnmeldungComponent}
+  { path: 'tierheimtiere', component: TierheimtiereComponent },
+  { path: 'events', component: EventsComponent },
+  { path: 'produktkatalog', component: ProduktkatalogComponent },
+  { path: 'quiz', component: QuizComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: []
 })
 export class AppRoutingModule { }
