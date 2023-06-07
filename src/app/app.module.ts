@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { TierheimtiereComponent } from './tierheimtiere/tierheimtiere.component';
 import { EventsComponent } from './events/events.component';
 import { ProduktkatalogComponent } from './produktkatalog/produktkatalog.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ProduktkatalogComponent } from './produktkatalog/produktkatalog.compone
     LoginComponent,
     TierheimtiereComponent,
     EventsComponent,
-    ProduktkatalogComponent
+    ProduktkatalogComponent,
+    QuizComponent
   ],
   imports: [
     BrowserModule,
