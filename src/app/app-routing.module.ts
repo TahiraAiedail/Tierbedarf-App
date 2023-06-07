@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+
 import { AnmeldungComponent } from './anmeldung/anmeldung.component';
 import { TierheimtiereComponent } from './tierheimtiere/tierheimtiere.component';
 import { EventsComponent } from './events/events.component';
@@ -8,7 +10,7 @@ import { QuizComponent } from './quiz/quiz.component';
 
 
 const routes: Routes = [
-  {path: 'Anmeldung', component: AnmeldungComponent}
+  {path: 'Anmeldung', component: AnmeldungComponent},
   { path: 'tierheimtiere', component: TierheimtiereComponent },
   { path: 'events', component: EventsComponent },
   { path: 'produktkatalog', component: ProduktkatalogComponent },
