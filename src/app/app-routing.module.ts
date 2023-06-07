@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'tierheimtiere', component: TierheimtiereComponent },
   { path: 'events', component: EventsComponent },
   { path: 'produktkatalog', component: ProduktkatalogComponent },
-  { path: 'quiz', component: QuizComponent },
+  { path: '', component: QuizComponent },
 ];
 
 @NgModule({
