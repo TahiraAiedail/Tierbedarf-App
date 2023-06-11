@@ -1,1 +1,60 @@
-<p>login works!</p>
+<div class="login__page" [style.background-image]="'url(assets/images/rabbits.jpg)'">
+    <div class="login__row min-h-screen">
+      <div class="login__hero flex flex-col justify-center items-center py-10 px-4 sm:px-8 xl:px-20 text-white">
+        <a [routerLink]="['login']" class="w-48 inline-block"><img src="assets/images/logo_color_transparent.png" alt="Tierbedarf Knut" /></a>
+        <h2 class="text-center mt-6">Willkommn zurück</h2>
+      </div>
+      <div class="login__content p-4 sm:p-8 flex flex-col justify-center bg-accent">
+        <div class="login w-full max-w-xl rounded-md mx-auto border p-4 sm:p-8 xl:p-20">
+          <form>
+            <h1 class="text-2xl font-bold">Anmelden</h1>
+            <div class="mb-4 mt-6">
+              <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email"> Benutzername oder E-Mail-Adresse</label>
+              <input
+                class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+                id="email"
+                type="text"
+                placeholder="Deine E-Mail-Adresse"
+              />
+            </div>
+            <div class="mb-6 mt-6">
+              <label class="block text-gray-700 text-sm font-semibold mb-2" htmlFor="Passwort"> Passwort </label>
+              <input
+                class="text-sm bg-gray-100 appearance-none rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10"
+                id="passwort"
+                type="passwort"
+                placeholder="Dein Passwort"
+              />
+            </div>
+            <div class="flex items-center">
+              <input
+                id="remember_me"
+                name="remember_me"
+                type="checkbox"
+                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border rounded"
+              />
+              <label for="remember_me" class="ml-2 block text-sm text-gray-900">Angemeldet bleiben</label>
+            </div>
+            <div class="flex w-full mt-6">
+              <button
+                class="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
+                type="button"
+              >
+                Anmelden
+              </button>
+            </div>
+          </form>
+          <div class="mt-4">
+            <a href="#" class="hover:underline hover:text-accent">Passwort vergessen?</a>
+          </div>
+          <div class="mt-3">
+            <span class="text-gray-600 text-sm">Noch kein Benutzerkonto?</span>
+            <a routerLink="/anmeldung/registrierung" class="text-gray-700 text-sm font-semibold hover:text-accent">Registrieren</a>
+          </div>
+          <div class="mt-4">
+            <a [routerLink]="['/home']"  class="text-gray-700 text-sm hover:text-accent inline-flex items-center"><svg class="material-icons" xmlns="h-4 w-4 leading-4 text-lg mr-2">keyboard_backspace</svg>Zurück zur Startseite</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
