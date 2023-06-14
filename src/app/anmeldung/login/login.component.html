@@ -1,46 +1,30 @@
+<form action="login.component.html">
+    <div class="container">
+      <div class="containerAnmelden">
+        <h1>Anmelden</h1>
+    </div>
 
-    <div class="login">
-      <div class="login__content">
-      
-          <form>
-            <h1 class="headline">Anmelden</h1>
-            <div class="Anmeldung">
-              <label class="Email" htmlFor="email"> Benutzername oder E-Mail-Adresse</label>
-              <input
-                class="Benutzername_input"
-                id="email"
-                type="text"
-                placeholder="Deine E-Mail-Adresse"
-              />
-            </div>
-            <div class="Passwort">
-              <label class="Passwort_Label" htmlFor="Passwort"> Passwort </label>
-              <input
-                class="Passwort_input"
-                id="passwort"
-                type="passwort"
-                placeholder="Dein Passwort"
-              />
-            </div>
-            
-            <div class="button_login">
-              <button
-                class="button_input"
-                type="button"
-              >
-                Anmelden
-              </button>
-            </div>
-          </form>
-          <div class="Passwort_Vergessen">
-            <a href="#" class="Passwort_aendern">Passwort vergessen?</a>
-          </div>
-          <div class="Kein_Benutzerkonto">
-            <span class="Benutzerkonto?">Noch kein Benutzerkonto?</span>
-            <a href="http://localhost:4200/registrierung" class="Zur_Registrierung_wechseln">Registrieren</a>
-          </div>
+    <hr>
+    <div class="containerlinks">
+      <label for="email"><b> Benutzername oder E-Mail-Adresse</b></label><br>
+      <label for="Passwort"><b> Passwort</b></label><br>
+    </div>
+
+    <div class="containerrechts">
+      <input type="text" name="email" id="email" placeholder="Deine E-Mail-Adresse" required><br>
+      <input type="passwort" name="Passwort" id="Passwort" placeholder="Passwort" required><br>
+      </div>
+
+      <hr>
+
+    </div>
+
+    <div class="containerlogin">
+      <button type="submit" class="registerbtn">Anmelden<a href="http://localhost:4200/home"></a></button>
+          <p>Haben Sie noch keinen Account? <a href="http://localhost:4200/registrierung">Registrieren</a>.</p>
           <div class="zurück">
             <a [routerLink]="['/home']"  class="Zur_Startseite_wechseln"><svg class="material-icons" xmlns="h-4 w-4 leading-4 text-lg mr-2">keyboard_backspace</svg>Zurück zur Startseite</a>
           </div>
         </div>
-    </div>
+
+  </form>
