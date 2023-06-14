@@ -1,0 +1,17 @@
+#mainContainer {
+    padding: 0;
+}
+
+
+#myNavbar{
+    background: #2b0504 !important;
+    color: white !important;
+}
+
+#myNavbar div div ul li a.nav-link{
+    color: white !important;
+}
+
+#myNavbar div div ul li a:hover.nav-link{
+    color: rgb(176, 202, 7) !important;
+}
