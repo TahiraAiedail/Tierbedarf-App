@@ -15,6 +15,8 @@ import { AnmeldungComponent } from './anmeldung/anmeldung.component';
 import { LoginComponent } from './anmeldung/login/login.component';
 import { registrierungComponent } from './anmeldung/registrierung/registrierung.component';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { HomeComponent } from './home/home.component';
     AnmeldungComponent,
     LoginComponent,
     registrierungComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

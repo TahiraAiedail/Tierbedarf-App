@@ -9,6 +9,8 @@ import { TierheimtiereComponent } from './tierheimtiere/tierheimtiere.component'
 import { EventsComponent } from './events/events.component';
 import { ProduktkatalogComponent } from './produktkatalog/produktkatalog.component';
 import { QuizComponent } from './quiz/quiz.component';
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
@@ -17,8 +19,9 @@ const routes: Routes = [
   { path: 'events', component: EventsComponent },
   { path: 'produktkatalog', component: ProduktkatalogComponent },
   { path: 'quiz', component: QuizComponent },
-  { path: '', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'registrierung', component: registrierungComponent },
+  {path:  '', component: HomeComponent}
 ];
 
 @NgModule({
