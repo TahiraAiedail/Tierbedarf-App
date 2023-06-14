@@ -8,15 +8,5 @@ app.get('/pruefungen/',function(req,res)
         password: ")JrYRPeg1NSk45A0yi1H",
     });
 
-    con.connect(function(err) {
-        if(err) throw err;
-        console.log("Connected");
-
-
-    })
 }
-
-
-
-
 )
