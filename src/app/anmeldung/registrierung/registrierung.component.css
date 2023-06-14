@@ -1,0 +1,11 @@
+.containerlinks{ grid-area: links;}
+.containerrechts{ grid-area: rechts;}
+.containerlogin{grid-area: login;}
+.containerbla{grid-area: oben;}
+.container {
+    display: grid;
+    grid-template-areas:
+        'oben oben'
+        'links rechts'
+        'login login';
+}
