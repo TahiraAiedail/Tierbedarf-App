@@ -1,0 +1,11 @@
+
+.card {
+    background-color: #F8DDA4;
+    color: #813045;
+}
+.termin {
+    background-color: #813045;
+    color: #F8DDA4;
+    border-radius: 50px; 
+    border-color: #813045;        
+}

@@ -1,5 +1,7 @@
   .containerlinks{ grid-area: links;}
-  .containerrechts{ grid-area: rechts;}
+  .containerrechts{ grid-area: rechts;
+ 
+  }
   .containerlogin{grid-area: login;}
   .containerAnmelden{grid-area: oben;}
   .container {
@@ -9,3 +11,23 @@
           'links rechts'
           'login login';
   }
+button {
+  background-color: #813045;
+  color: #F8DDA4;
+  border-radius: 50px; 
+  border-color: #813045;
+}
+
+input{
+  background-color: #F8DDA4;
+  color:#813045;
+  border-color: #813045;
+  border-radius: 25px; 
+
+}
+h1{
+  color:#813045;
+}
+label{
+  color:#813045;
+}
