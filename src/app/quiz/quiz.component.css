@@ -1,5 +1,5 @@
 body {
-    background-color: #ffa500; /* Orange Hintergrund */
+    background-color: #f8dda4; /* Orange Hintergrund */
   }
   
   .quiz-container {
@@ -7,7 +7,7 @@ body {
     margin: 0 auto;
     padding: 20px;
     background-color: white;
-    border: 12px solid #000; /* Schwarzer Rahmen */
+    border: 6px solid #000; /* Schwarzer Rahmen */
     border-radius: 10px;
     text-align: center;
   }
