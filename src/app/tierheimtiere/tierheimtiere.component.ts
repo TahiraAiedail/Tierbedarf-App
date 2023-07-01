@@ -99,6 +99,11 @@ export class TierheimtiereComponent implements OnInit{
     );
   }
   
+  openFormular(name: string, breed: string, tierID: number) {
+    // Öffne die neue Seite mit dem Formular und übergebe den Namen, die Rasse und die TierID als Parameter
+    window.open('/formular?name=' + name + '&breed=' + breed + '&tierID=' + tierID, '_blank');
+  }
+  
 }
 
 
