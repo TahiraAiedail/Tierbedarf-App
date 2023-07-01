@@ -3,6 +3,8 @@ const app = express();
 const port = 4200;
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
+const path = require('path');
+
 
 // Middleware to parse JSON entities.
 app.use(bodyParser.json());
@@ -10,9 +12,9 @@ app.use(bodyParser.json());
 // Middleware to parse urlencoded bodies.
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, '/dist/Tierbedarf-App')));  //TODO rename to your app-name
+app.use(express.static(path.join(__dirname, 'dist', 'Tierbedarf-App')));
 
-let db;
+/*let db;
 
 app.listen(4200, function() {    
     console.log("App listening on port 4200");
@@ -25,6 +27,22 @@ app.listen(4200, function() {
         }
         console.log('Connected to the SQLite database.');
     });
+});*/
+
+const db = new sqlite3.Database('./Datenbank.db', (err) => {
+  if (err) {
+    console.error(err.message);
+    return;
+  }
+  console.log('Connected to the SQLite database.');
+
+  db.all('SELECT * FROM Tierheimtiere2', [], (err, rows) => {
+    if (err) {
+      console.error(err.message);
+      return;
+    }
+    console.log(rows); // Hier kannst du die abgerufenen Daten weiterverarbeiten
+  });
 });
 
 
@@ -314,8 +332,8 @@ app.get('/eventleiterliste', (req, res) => {
     });
 });
 
-app.get('/tierheimtiere', (req, res) => {
-    const sql = 'SELECT * FROM Tierheimtiere';
+app.get('/tierheimtiere2', (req, res) => {
+    const sql = 'SELECT * FROM Tierheimtiere2';
     db.all(sql, [], (err, rows) => {
         if (err) {
             res.status(500).send(err.message);

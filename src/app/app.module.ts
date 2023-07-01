@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -36,7 +37,8 @@ import { FooterComponent } from './footer/footer.component';
     BrowserModule,
     RouterModule,
     AppRoutingModule,
-    FormsModule // <-- import the FormsModule before binding with [(ngModel)]
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

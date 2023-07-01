@@ -9,3 +9,11 @@
     border-radius: 50px; 
     border-color: #813045;        
 }
+
+.img-fluid {
+    height: 50%;
+}
+.container {
+    display: flex;
+    align-items: stretch;
+  }
