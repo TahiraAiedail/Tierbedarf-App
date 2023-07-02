@@ -15,3 +15,15 @@
 #myNavbar div div ul li a:hover.nav-link{
     color: rgb(176, 202, 7) !important;
 }
+
+#loginA {
+    float: right !important;
+}
+
+#loginLi {
+    width: 100% !important;
+}
+
+#loginUl {
+    width: 100% !important;
+}
