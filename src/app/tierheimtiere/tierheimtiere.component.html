@@ -1,30 +1,29 @@
 <p>tierheimtiere works!</p>
 
-<div class="container">
-    <div class="row">
-        <div class="col-12 mb-4" *ngFor="let animal of tierheimtiere.animals">
-          <div class="card">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img [src]="animal.image" class="img-fluid rounded-start" alt="Bild von {{animal.name}}">
-              </div>
-              <div class="col-md-4">
-                <div class="card-body">
-                  <h5 class="card-title">{{animal.type}}: {{animal.name}}</h5>
-                  <p class="card-text"><b>Rasse:</b> {{animal.breed}}</p>
-                  <p class="card-text"><b>Geschlecht:</b> {{animal.gender}}</p>
-                  <p class="card-text"><b>Alter:</b> {{animal.age}}</p>
-                  <button class="termin">Jetzt Besuchstermin anfragen</button>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card-body">
-                  <p class="card-text"><b>Beschreibung:</b> {{animal.description}}</p>
-                </div>
-              </div>
+<div class="container" style="display: flex; align-items: stretch;">
+  <div class="row">
+    <div class="col-12 mb-4" *ngFor="let animal of tierheimtiere.animals">
+      <div class="card">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img [src]="animal.image" class="img-fluid rounded-start" alt="Bild von {{animal.name}}">
+          </div>
+          <div class="col-md-4">
+            <div class="card-body">
+              <h5 class="card-title">{{animal.type}}: {{animal.name}}</h5>
+              <p class="card-text"><b>Rasse:</b> {{animal.breed}}</p>
+              <p class="card-text"><b>Geschlecht:</b> {{animal.gender}}</p>
+              <p class="card-text"><b>Alter:</b> {{animal.age}}</p>
+              <button class="termin" (click)="openFormular(animal.name, animal.breed, animal.TierID)">Jetzt Besuchstermin anfragen</button>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card-body">
+              <p class="card-text"><b>Beschreibung:</b> {{animal.description}}</p>
             </div>
           </div>
         </div>
-      </div>         
+      </div>
+    </div>
+  </div>
 </div>
-

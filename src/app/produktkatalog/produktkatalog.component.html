@@ -1,1 +1,13 @@
 <p>produktkatalog works!</p>
+<div class="card-container">
+    <div *ngFor="let ware of waren" class="card">
+      <img [src]="ware.Foto" alt="Produktfoto">
+      <h3>{{ ware.Bezeichnung }}</h3>
+      <p>Preis: {{ ware.Preis }}</p>
+      <div class="order-form">
+        <input type="number" min="0" [(ngModel)]="ware.quantity" placeholder="Anzahl">
+        <button (click)="bestellen(ware)">Bestellen</button>
+      </div>
+    </div>
+  </div>
+  

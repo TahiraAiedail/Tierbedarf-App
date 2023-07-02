@@ -10,7 +10,9 @@ import { EventsComponent } from './events/events.component';
 import { ProduktkatalogComponent } from './produktkatalog/produktkatalog.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { HeaderComponent } from './header/header.component';
+import { KennenlernformularComponent } from './kennenlernformular/kennenlernformular.component';
 import { HomeComponent } from './home/home.component';
+
 
 
 const routes: Routes = [
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'quiz', component: QuizComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registrierung', component: registrierungComponent },
+  { path: 'kennenlernformular', component: KennenlernformularComponent },
+
   {path:  '', component: HomeComponent}
 ];
 

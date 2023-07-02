@@ -1,0 +1,25 @@
+button {
+    background-color: #813045;
+    color: #F8DDA4;
+    border-radius: 50px;
+    border-color: #813045;
+  }
+  
+  input {
+    background-color: #F8DDA4;
+    color: #813045;
+    border-color: #813045;
+    border-radius: 25px;
+  }
+  
+p {
+    color: #813045;
+}
+h2 {
+    color: #813045;
+
+}
+  
+  label {
+    color: #813045;
+  }

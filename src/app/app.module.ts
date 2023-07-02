@@ -17,6 +17,9 @@ import { registrierungComponent } from './anmeldung/registrierung/registrierung.
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { KennenlernformularComponent } from './kennenlernformular/kennenlernformular.component';
+import { ShopService } from './shop.service';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { FooterComponent } from './footer/footer.component';
     registrierungComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    KennenlernformularComponent
   ],
   imports: [
     BrowserModule,
@@ -38,8 +42,9 @@ import { FooterComponent } from './footer/footer.component';
     AppRoutingModule,
     FormsModule, // <-- import the FormsModule before binding with [(ngModel)]
     HttpClientModule,
+
   ],
-  providers: [],
+  providers: [ShopService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

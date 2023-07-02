@@ -1,0 +1,31 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .card img {
+    width: 100%;
+  }
+  
+  .order-form {
+    margin-top: 10px;
+  }
+  
+  .order-form input {
+    width: 50px;
+  }
+  
+  .order-form button {
+    background-color: #813045;
+    color: #F8DDA4;
+    border-radius: 5px; 
+    border-color: #813045;
+  }
+  
