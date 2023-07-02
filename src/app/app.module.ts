@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 
-
 import { HttpClientModule } from '@angular/common/http';
 import { TierheimtiereComponent } from './tierheimtiere/tierheimtiere.component';
 import { EventsComponent } from './events/events.component';
@@ -19,6 +18,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { KennenlernformularComponent } from './kennenlernformular/kennenlernformular.component';
 import { ShopService } from './shop.service';
+import { ProfilComponent } from './profil/profil.component';
 
 
 @NgModule({
@@ -34,7 +34,8 @@ import { ShopService } from './shop.service';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    KennenlernformularComponent
+    KennenlernformularComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
