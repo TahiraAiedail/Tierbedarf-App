@@ -64,14 +64,14 @@ app.get('/tiere', (req, res) => {
 GET-ANFRAGEN
 */
 
-app.get('/tierheimtiere', (req, res) => {
+/*app.get('/tierheimtiere', (req, res) => {
     con.query("SELECT * FROM Tierheimtiere",
     function(error, results, fields) {
         if(error) throw error;
         console.log(results);
         res.send(results);
     });
-})
+})*/
 
 /* Inserts*/
 
@@ -359,14 +359,13 @@ app.get('/eventleiterliste', (req, res) => {
     });
 });
 
-app.get('/tierheimtiere2', (req, res) => {
-    const sql = 'SELECT * FROM Tierheimtiere2';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+
+app.get('/tierheimtiere', (req, res) => {
+    con.query("SELECT * FROM Tierheimtiere",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
@@ -383,7 +382,7 @@ app.get('/tierfotos', (req, res) => {
 
 app.get('/kennenlerntermin', (req, res) => {
     const sql = 'SELECT * FROM Kennenlerntermin';
-    db.all(sql, [], (err, rows) => {
+    con.all(sql, [], (err, rows) => {
         if (err) {
             res.status(500).send(err.message);
         } else {
