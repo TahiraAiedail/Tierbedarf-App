@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
+import { authGuard } from './auth/auth.guard';
 
 import { AnmeldungComponent } from './anmeldung/anmeldung.component';
 import { LoginComponent } from './anmeldung/login/login.component';
@@ -12,11 +12,12 @@ import { QuizComponent } from './quiz/quiz.component';
 import { HeaderComponent } from './header/header.component';
 import { KennenlernformularComponent } from './kennenlernformular/kennenlernformular.component';
 import { HomeComponent } from './home/home.component';
+import { ProfilComponent } from './profil/profil.component';
 
 
 
 const routes: Routes = [
-  {path: 'Anmeldung', component: AnmeldungComponent},
+  { path: 'Anmeldung', component: AnmeldungComponent},
   { path: 'tierheimtiere', component: TierheimtiereComponent },
   { path: 'events', component: EventsComponent },
   { path: 'produktkatalog', component: ProduktkatalogComponent },
@@ -24,8 +25,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registrierung', component: registrierungComponent },
   { path: 'kennenlernformular', component: KennenlernformularComponent },
-
-  {path:  '', component: HomeComponent}
+  { path: 'home', component: HomeComponent},
+  { path: 'profil', component: ProfilComponent, canActivate: [authGuard]},
+  { path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
 @NgModule({
