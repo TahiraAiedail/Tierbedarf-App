@@ -14,7 +14,7 @@
               <p class="card-text"><b>Rasse:</b> {{animal.breed}}</p>
               <p class="card-text"><b>Geschlecht:</b> {{animal.gender}}</p>
               <p class="card-text"><b>Alter:</b> {{animal.age}}</p>
-              <button class="termin" (click)="openFormular(animal.name, animal.breed, animal.TierID)">Jetzt Besuchstermin anfragen</button>
+              <button class="termin" (click)="logAnimal(animal); openFormular(animal.name, animal.breed, animal.tierID)">Jetzt Besuchstermin anfragen</button>
             </div>
           </div>
           <div class="col-md-4">

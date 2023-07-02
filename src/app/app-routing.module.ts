@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from './auth/auth.guard';
 
 import { AnmeldungComponent } from './anmeldung/anmeldung.component';
-import { LoginComponent } from './anmeldung/login/login.component';
 import { registrierungComponent } from './anmeldung/registrierung/registrierung.component';
 import { TierheimtiereComponent } from './tierheimtiere/tierheimtiere.component';
 import { EventsComponent } from './events/events.component';
@@ -22,7 +21,6 @@ const routes: Routes = [
   { path: 'events', component: EventsComponent },
   { path: 'produktkatalog', component: ProduktkatalogComponent },
   { path: 'quiz', component: QuizComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'registrierung', component: registrierungComponent },
   { path: 'kennenlernformular', component: KennenlernformularComponent },
   { path: 'home', component: HomeComponent},

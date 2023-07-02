@@ -11,7 +11,6 @@ import { EventsComponent } from './events/events.component';
 import { ProduktkatalogComponent } from './produktkatalog/produktkatalog.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { AnmeldungComponent } from './anmeldung/anmeldung.component';
-import { LoginComponent } from './anmeldung/login/login.component';
 import { registrierungComponent } from './anmeldung/registrierung/registrierung.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
@@ -29,7 +28,6 @@ import { ProfilComponent } from './profil/profil.component';
     ProduktkatalogComponent,
     QuizComponent,
     AnmeldungComponent,
-    LoginComponent,
     registrierungComponent,
     HomeComponent,
     HeaderComponent,

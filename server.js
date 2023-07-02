@@ -76,286 +76,239 @@ GET-ANFRAGEN
 /* Inserts*/
 
 app.post('/kunde', (req, res) => {
-    const data = [req.body.Benutzername, req.body.Nachname, req.body.Vorname, req.body.Geburtsdatum, req.body.Telefonnummer, req.body.EMail, req.body.Passwort, req.body.Straße, req.body.Hausnummer, req.body.Stadt, req.body.PLZ];
-    let sql = `INSERT INTO Kunde(Benutzername, Nachname, Vorname, Geburtsdatum, Telefonnummer, EMail, Passwort, Straße, Hausnummer, Stadt, PLZ) VALUES(?,?,?,?,?,?,?,?,?,?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Benutzername, Nachname, Vorname, Geburtsdatum, Telefonnummer, EMail, Passwort, Straße, Hausnummer, Stadt, PLZ} = req.body; // Extrahieren der Werte aus dem Request-Body
+    con.query(`INSERT INTO Kunde(Benutzername, Nachname, Vorname, Geburtsdatum, Telefonnummer, EMail, Passwort, Straße, Hausnummer, Stadt, PLZ) VALUES(?,?,?,?,?,?,?,?,?,?,?)`,
+    [Benutzername, Nachname, Vorname, Geburtsdatum, Telefonnummer, EMail, Passwort, Straße, Hausnummer, Stadt, PLZ], // Setze die Werte aus dem Rewuest-Body
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/kundenzahlungsmethode', (req, res) => {
-    const data = [req.body.KundenID, req.body.ZahlungsID];
-    const sql = `INSERT INTO KundenZahlungsmethode(KundenID, ZahlungsID) VALUES(?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const{KundenID, ZahlungsID} = req.body;
+    con.query(`INSERT INTO KundenZahlungsmethode(KundenID, ZahlungsID) VALUES(?,?)`,
+    [KundenID, ZahlungsID],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/event', (req, res) => {
-    const data = [req.body.Datum, req.body.Name, req.body.Thema, req.body.Beschreibung];
-    const sql = `INSERT INTO Event(Datum, Name, Thema, Beschreibung) VALUES(?,?,?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Datum, Name, Thema, Beschreibung} = req.body;
+    con.query(`INSERT INTO Event(Datum, Name, Thema, Beschreibung) VALUES(?,?,?,?)`,
+    [Datum, Name, Thema, Beschreibung],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/mitarbeiter', (req, res) => {
-    const data = [req.body.Nachname, req.body.Vorname, req.body.Geburtsdatum, req.body.Telefonnummer, req.body.EMail, req.body.Passwort, req.body.Straße, req.body.Hausnummer, req.body.Stadt, req.body.PLZ];
-    const sql = `INSERT INTO Mitarbeiter(Nachname, Vorname, Geburtsdatum, Telefonnummer, EMail, Passwort, Straße, Hausnummer, Stadt, PLZ) VALUES(?,?,?,?,?,?,?,?,?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Nachname, Vorname, Geburtsdatum, Telefonnummer, EMail, Passwort, Straße, Hausnummer, Stadt, PLZ} = req.body;
+    con.query(`INSERT INTO Mitarbeiter(Nachname, Vorname, Geburtsdatum, Telefonnummer, EMail, Passwort, Straße, Hausnummer, Stadt, PLZ) VALUES(?,?,?,?,?,?,?,?,?,?)`,
+    [Nachname, Vorname, Geburtsdatum, Telefonnummer, EMail, Passwort, Straße, Hausnummer, Stadt, PLZ],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/eventteilnehmerliste', (req, res) => {
-    const data = [req.body.KundenID, req.body.EventID];
-    const sql = `INSERT INTO EventTeilnehmerliste(KundenID, EventID) VALUES(?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {KundenID, EventID} = req.body;
+    con.query(`INSERT INTO EventTeilnehmerliste(KundenID, EventID) VALUES(?,?)`,
+    [KundenID, EventID],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/eventleiterliste', (req, res) => {
-    const data = [req.body.MitarbeiterID, req.body.EventID];
-    const sql = `INSERT INTO Eventleiterliste(MitarbeiterID, EventID) VALUES(?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {MitarbeiterID, EventID} = req.body;
+    con.query(`INSERT INTO Eventleiterliste(MitarbeiterID, EventID) VALUES(?,?)`,
+    [MitarbeiterID, EventID],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/tierheimtiere', (req, res) => {
-    const data = [req.body.Name, req.body.Tierart, req.body.Rasse, req.body.Geschlecht, req.body.Geburtsdatum, req.body.Beschreibung];
-    const sql = `INSERT INTO Tierheimtiere(Name, Tierart, Rasse, Geschlecht, Geburtsdatum, Beschreibung) VALUES(?,?,?,?,?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Name, Tierart, Rasse, Geschlecht, Geburtsdatum, Beschreibung} = req.body; // Extrahieren der Werte aus dem Request-Body
+    con.query(`INSERT INTO Tierheimtiere(Name, Tierart, Rasse, Geschlecht, Geburtsdatum, Beschreibung) VALUES(?,?,?,?,?,?)`,
+    [Datum, KundenID, TierID, MitarbeiterID],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
+ 
 
 app.post('/tierfotos', (req, res) => {
-    const data = [req.body.Tierfoto, req.body.TierID];
-    const sql = `INSERT INTO Tierfotos(Tierfoto, TierID) VALUES(?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Tierfoto, TierID} = req.body;
+    con.query(`INSERT INTO Tierfotos(Tierfoto, TierID) VALUES(?,?)`,
+    [Tierfoto, TierID],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/kennenlerntermin', (req, res) => {
-    const data = [req.body.Datum, req.body.KundenID, req.body.TierID, req.body.MitarbeiterID];
-    const sql = `INSERT INTO Kennenlerntermin(Datum, KundenID, TierID, MitarbeiterID) VALUES(?,?,?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Datum, KundenID, TierID, MitarbeiterID} = req.body; // Extrahieren der Werte aus dem Request-Body
+    con.query(`INSERT INTO Kennenlerntermin(Datum, KundenID, TierID, MitarbeiterID) VALUES(?,?,?,?)`,
+    [Datum, KundenID, TierID, MitarbeiterID],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/waren', (req, res) => {
-    const data = [req.body.Bezeichnung, req.body.Kategorie, req.body.Lagerbestand, req.body.Preis];
-    const sql = `INSERT INTO Waren(Bezeichnung, Kategorie, Lagerbestand, Preis) VALUES(?,?,?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Bezeichnung, Kategorie, Lagerbestand, Preis} = req.body;
+    con.query(`INSERT INTO Waren(Bezeichnung, Kategorie, Lagerbestand, Preis) VALUES(?,?,?,?)`,
+    [Bezeichnung, Kategorie, Lagerbestand, Preis],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/warenfoto', (req, res) => {
-    const data = [req.body.Warenfoto, req.body.WarenID];
-    const sql = `INSERT INTO Warenfoto(Warenfoto, WarenID) VALUES(?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Warenfoto, WarenID} = req.body;
+    con.query(`INSERT INTO Warenfoto(Warenfoto, WarenID) VALUES(?,?)`,
+    [Warenfoto, WarenID],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/bestellart', (req, res) => {
-    const data = [req.body.Bestellart];
-    const sql = `INSERT INTO Bestellart(Bestellart) VALUES(?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Bestellart} = req.body;
+    con.query(`INSERT INTO Bestellart(Bestellart) VALUES(?)`,
+    [Bestellart],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/bestellung', (req, res) => {
-    const data = [req.body.Datum, req.body.BestellartID, req.body.MitarbeiterID, req.body.KundenID];
-    const sql = `INSERT INTO Bestellung(Datum, BestellartID, MitarbeiterID, KundenID) VALUES(?,?,?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Datum, BestellartID, MitarbeiterID, KundenID} = req.body;
+    con.query(`INSERT INTO Bestellung(Datum, BestellartID, MitarbeiterID, KundenID) VALUES(?,?,?,?)`,
+    [Datum, BestellartID, MitarbeiterID, KundenID],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/warenkorb', (req, res) => {
-    const data = [req.body.Warenmenge, req.body.WarenID, req.body.Bestellnummer];
-    const sql = `INSERT INTO Warenkorb(Warenmenge, WarenID, Bestellnummer) VALUES(?,?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Warenmenge, WarenID, Bestellnummer} = req.body;
+    con.query(`INSERT INTO Warenkorb(Warenmenge, WarenID, Bestellnummer) VALUES(?,?,?)`,
+    [Warenmenge, WarenID, Bestellnummer],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/rechnungsstatus', (req, res) => {
-    const data = [req.body.Rechnungsstatus];
-    const sql = `INSERT INTO Rechnungsstatus(Rechnungsstatus) VALUES(?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Rechnungsstatus} = req.body;
+    con.query(`INSERT INTO Rechnungsstatus(Rechnungsstatus) VALUES(?)`,
+    [Rechnungsstatus],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/rechnung', (req, res) => {
-    const data = [req.body.Rechnungssumme, req.body.Rechnungsdatum, req.body.Bestellnummer, req.body.BezahltAm, req.body.RechnungsstatusID];
-    const sql = `INSERT INTO Rechnung(Rechnungssumme, Rechnungsdatum, Bestellnummer, BezahltAm, RechnungsstatusID) VALUES(?,?,?,?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Rechnungssumme, Rechnungsdatum, Bestellnummer, BezahltAm, RechnungsstatusID} = req.body;
+    con.query(`INSERT INTO Rechnung(Rechnungssumme, Rechnungsdatum, Bestellnummer, BezahltAm, RechnungsstatusID) VALUES(?,?,?,?,?)`,
+    [Rechnungssumme, Rechnungsdatum, Bestellnummer, BezahltAm, RechnungsstatusID],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/nachbestellung', (req, res) => {
-    const data = [req.body.Nachbestellungsnummer, req.body.Firma, req.body.Datum, req.body.MitarbeiterID];
-    const sql = `INSERT INTO Nachbestellung(Nachbestellungsnummer, Firma, Datum, MitarbeiterID) VALUES(?,?,?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Nachbestellungsnummer, Firma, Datum, MitarbeiterID} = reg.body;
+    con.query(`INSERT INTO Nachbestellung(Nachbestellungsnummer, Firma, Datum, MitarbeiterID) VALUES(?,?,?,?)`,
+    [Nachbestellungsnummer, Firma, Datum, MitarbeiterID],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 app.post('/nachbestellungskorb', (req, res) => {
-    const data = [req.body.Warenmenge, req.body.WarenID, req.body.NachbestellungsID];
-    const sql = `INSERT INTO Nachbestellungskorb(Warenmenge, WarenID, NachbestellungsID) VALUES(?,?,?)`;
-    db.run(sql, data, function(err) {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", rowid: this.lastID });
-        }
+    const {Warenmenge, WarenID, NachbestellungsID} = req.body;
+    con.query(`INSERT INTO Nachbestellungskorb(Warenmenge, WarenID, NachbestellungsID) VALUES(?,?,?)`,
+    [Warenmenge, WarenID, NachbestellungsID],
+    function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.insertId);
     });
-});
+    });
 
 /* Select Statements*/
 
 app.get('/kunde', (req, res) => {
-    const sql = 'SELECT * FROM Kunde';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Kunde",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/kundenzahlungsmethode', (req, res) => {
-    const sql = 'SELECT * FROM KundenZahlungsmethode';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM KundenZahlungsmethode",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/event', (req, res) => {
-    const sql = 'SELECT * FROM Event';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Event",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/eventteilnehmerliste', (req, res) => {
-    const sql = 'SELECT * FROM EventTeilnehmerliste';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM EventTeilnehmerliste",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/mitarbeiter', (req, res) => {
-    const sql = 'SELECT * FROM Mitarbeiter';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Mitarbeiter",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/eventleiterliste', (req, res) => {
-    const sql = 'SELECT * FROM Eventleiterliste';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Eventleiterliste",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
@@ -370,312 +323,266 @@ app.get('/tierheimtiere', (req, res) => {
 });
 
 app.get('/tierfotos', (req, res) => {
-    const sql = 'SELECT * FROM Tierfotos';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Tierfotos",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/kennenlerntermin', (req, res) => {
-    const sql = 'SELECT * FROM Kennenlerntermin';
-    con.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Kennenlerntermin",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/waren', (req, res) => {
-    const sql = 'SELECT * FROM Waren';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Waren",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/warenfoto', (req, res) => {
-    const sql = 'SELECT * FROM Warenfoto';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Warenfoto",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/bestellart', (req, res) => {
-    const sql = 'SELECT * FROM Bestellart';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Bestellart",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
+
 app.get('/bestellung', (req, res) => {
-    const sql = 'SELECT * FROM Bestellung';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Bestellung",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/warenkorb', (req, res) => {
-    const sql = 'SELECT * FROM Warenkorb';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Warenkorb",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/rechnungsstatus', (req, res) => {
-    const sql = 'SELECT * FROM Rechnungsstatus';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Rechnungsstatus",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/rechnung', (req, res) => {
-    const sql = 'SELECT * FROM Rechnung';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Rechnung",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/nachbestellung', (req, res) => {
-    const sql = 'SELECT * FROM Nachbestellung';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Nachbestellung",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.get('/nachbestellungskorb', (req, res) => {
-    const sql = 'SELECT * FROM Nachbestellungskorb';
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send(rows);
-        }
+    con.query("SELECT * FROM Nachbestellungskorb",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
+
+app.get('/mitarbeitermitwenigstenkennenlernterminen', (req, res) => {
+    con.query("SELECT MitarbeiterID FROM Mitarbeiter ORDER BY (SELECT COUNT(*) FROM Kennenlerntermin WHERE Mitarbeiter.MitarbeiterID = Kennenlerntermin.MitarbeiterID) ASC LIMIT 1",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
+    });
+});
+
 
 /* Delete Statements */
 
 app.delete('/kunde/:id', (req, res) => {
-    const sql = 'DELETE FROM Kunde WHERE KundenID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Kunde WHERE KundenID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/kundenzahlungsmethode/:id', (req, res) => {
-    const sql = 'DELETE FROM KundenZahlungsmethode WHERE KundenZahlungsmethodeID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM KundenZahlungsmethode WHERE KundenZahlungsmethodeID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/event/:id', (req, res) => {
-    const sql = 'DELETE FROM Event WHERE EventID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Event WHERE EventID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/eventteilnehmerliste/:id', (req, res) => {
-    const sql = 'DELETE FROM EventTeilnehmerliste WHERE EventTeilnehmerID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM EventTeilnehmerliste WHERE EventTeilnehmerID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/mitarbeiter/:id', (req, res) => {
-    const sql = 'DELETE FROM Mitarbeiter WHERE MitarbeiterID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Mitarbeiter WHERE MitarbeiterID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/eventleiterliste/:id', (req, res) => {
-    const sql = 'DELETE FROM Eventleiterliste WHERE EventleiterID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Eventleiterliste WHERE EventleiterID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/tierheimtiere/:id', (req, res) => {
-    const sql = 'DELETE FROM Tierheimtiere WHERE TierID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Tierheimtiere WHERE TierID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/tierfotos/:id', (req, res) => {
-    const sql = 'DELETE FROM Tierfotos WHERE TierfotoID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Tierfotos WHERE TierfotoID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/kennenlerntermin/:id', (req, res) => {
-    const sql = 'DELETE FROM Kennenlerntermin WHERE TerminID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Kennenlerntermin WHERE TerminID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/waren/:id', (req, res) => {
-    const sql = 'DELETE FROM Waren WHERE WarenID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Waren WHERE WarenID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/warenfoto/:id', (req, res) => {
-    const sql = 'DELETE FROM Warenfoto WHERE WarenfotoID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Warenfoto WHERE WarenfotoID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/bestellart/:id', (req, res) => {
-    const sql = 'DELETE FROM Bestellart WHERE BestellartID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Bestellart WHERE BestellartID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/bestellung/:id', (req, res) => {
-    const sql = 'DELETE FROM Bestellung WHERE Bestellnummer = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Bestellung WHERE Bestellnummer = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/warenkorb/:id', (req, res) => {
-    const sql = 'DELETE FROM Warenkorb WHERE WarenkorbID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Warenkorb WHERE WarenkorbID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/rechnung/:id', (req, res) => {
-    const sql = 'DELETE FROM Rechnung WHERE Rechnungsnummer = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Rechnung WHERE Rechnungsnummer = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/nachbestellung/:id', (req, res) => {
-    const sql = 'DELETE FROM Nachbestellung WHERE NachbestellungsID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Nachbestellung WHERE NachbestellungsID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
 
 app.delete('/nachbestellungskorb/:id', (req, res) => {
-    const sql = 'DELETE FROM Nachbestellungskorb WHERE NachbestellungskorbID = ?';
-    db.run(sql, req.params.id, (err) => {
-        if (err) {
-            res.status(500).send(err.message);
-        } else {
-            res.send({ message: "Success", deletedID: req.params.id });
-        }
+    con.query('DELETE FROM Nachbestellungskorb WHERE NachbestellungskorbID = ?',
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
     });
 });
-
