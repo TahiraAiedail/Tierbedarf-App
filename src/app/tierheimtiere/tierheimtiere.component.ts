@@ -14,55 +14,6 @@ export class TierheimtiereComponent {
     animals: []
   };
   
-    /*  {
-        name: 'Max',
-        type: 'Hund',
-        breed: 'Labrador Retriever',
-        gender: 'männlich',
-        age: '3 Jahre',
-        description: 'Max ist ein aktiver und freundlicher Hund, der gerne draußen spielt und spazieren geht. Er liebt es, mit Kindern zu spielen und ist sehr gutmütig. Max ist bereits stubenrein und kennt einige Grundkommandos. Er würde sich gut in einer Familie mit Kindern oder aktiven Erwachsenen eignen.',
-        image: 'assets/images/Max_Labrador.jpg',
-      },
-      {
-        name: 'Oreo',
-        type: 'Katze',
-        breed: 'Europäisch Kurzhaar',
-        gender: 'weiblich',
-        age: '2 Jahre',
-        description: 'Oreo ist eine süße und schüchterne Katze, die gerne in ihrem Versteck bleibt. Sie liebt es, gestreichelt zu werden, sobald sie Vertrauen aufgebaut hat. Oreo ist bereits kastriert und stubenrein. Sie würde sich gut in einem ruhigen Haushalt eignen, ohne kleine Kinder oder andere Haustiere.',
-        image: 'assets/images/Oreo_Katze.jpg',
-      },
-      {
-        name: 'Nemo',
-        type: 'Kaninchen',
-        breed: 'Zwergkaninchen',
-        gender: 'männlich',
-        age: '1 Jahr',
-        description: 'Nemo ist ein süßes und neugieriges Kaninchen, das gerne hüpft und spielt. Er ist bereits kastriert und stubenrein. Nemo braucht viel Platz und Bewegung, daher wäre ein großer Käfig oder ein Freigehege ideal für ihn. Er würde sich gut in einer Familie mit älteren Kindern oder als Begleiter für ein anderes Kaninchen eignen.',
-        image: 'assets/images/Nemo_Kaninchen.jpg',
-      },
-      {
-        name: 'Cookie',
-        type: 'Meerschweinchen',
-        breed: 'Glatthaar-Meerschweinchen',
-        gender: 'weiblich',
-        age: '1 Jahr',
-        description: 'Cookie ist ein süßes und verspieltes Meerschweinchen, das gerne kuschelt und gestreichelt wird. Sie ist bereits kastriert und stubenrein. Cookie braucht viel Platz und Bewegung, daher wäre ein großer Käfig oder ein Freigehege ideal für sie. Sie würde sich gut in einer Familie mit Kindern oder als Begleiter für ein anderes Meerschweinchen eignen.',
-        image: 'assets/Cookie_Meerschweinchen.jpg',
-      },
-      {
-        name: 'Rio',
-        type: 'Vogel',
-        breed: 'Wellensittich',
-        gender: 'männlich',
-        age: '1 Jahr',
-        description: 'Rio ist ein lebhafter und neugieriger Wellensittich, der gerne zwitschert und spielt. Er ist bereits zahm und kann auf die Hand genommen werden. Rio braucht viel Platz und Bewegung, daher wäre ein großer Käfig oder ein Freiflugzimmer ideal für ihn. Er würde sich gut als Begleiter für einen anderen Wellensittich oder als Haustier für jemanden, der viel Zeit für ihn hat, eignen.',
-
-        image: 'assets/Rio_Wellensittich.jpg',
-      },*/
-    
-  
-  
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -72,9 +23,10 @@ export class TierheimtiereComponent {
   getTierheimtiere() {
     console.log('getTierheimtiere() wird aufgerufen');
 
-    this.http.get<any[]>('/tierheimtiere2').subscribe(
+    this.http.get<any[]>('/tierheimtiere').subscribe(
       (response: any[]) => {
         const fetchedTierheimtiere = response.map((item) => ({
+          tierID: item.tierID,
           name: item.Name,
           type: item.Tierart,
           breed: item.Rasse,
