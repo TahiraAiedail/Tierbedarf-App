@@ -1,1 +1,16 @@
 <p>home works!</p>
+
+<div style="border: 1px solid red;">
+  <p>{{myTest.name}}</p>
+  <button (click)="getTierheimtiere()">DB</button>
+  <table>
+    <tr>
+      <th>Vorname</th>
+      <th>Nachname</th>
+    </tr>
+    <tr *ngFor="let data of tierheimtiereDaten">
+      <td>{{data.Name}}</td>
+      <td>{{data.Tierart}}</td>
+    </tr>
+  </table>
+</div>

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 
 
-
+import { HttpClientModule } from '@angular/common/http';
 import { TierheimtiereComponent } from './tierheimtiere/tierheimtiere.component';
 import { EventsComponent } from './events/events.component';
 import { ProduktkatalogComponent } from './produktkatalog/produktkatalog.component';
@@ -36,7 +36,8 @@ import { FooterComponent } from './footer/footer.component';
     BrowserModule,
     RouterModule,
     AppRoutingModule,
-    FormsModule // <-- import the FormsModule before binding with [(ngModel)]
+    FormsModule, // <-- import the FormsModule before binding with [(ngModel)]
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

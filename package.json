@@ -1,13 +1,17 @@
 {
   "name": "tierbedarf-app",
   "version": "0.0.0",
+  "description": "Project for INTO SoSe23",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js", 
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
+
+  "main": "server.js",
+  
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.0.4",
@@ -19,6 +23,8 @@
     "@angular/platform-browser-dynamic": "^16.0.4",
     "@angular/router": "^16.0.4",
     "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.5.3",
     "zone.js": "~0.13.0"

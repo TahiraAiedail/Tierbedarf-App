@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tierheimtiere.component.css']
 })
 
-export class TierheimtiereComponent implements OnInit{
+export class TierheimtiereComponent {
 
-  tierheimtiere = {
+    tierheimtiere = {
 
     animals:[
       {
@@ -58,12 +58,4 @@ export class TierheimtiereComponent implements OnInit{
       },
     ]
   };
-  
-
- 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }
