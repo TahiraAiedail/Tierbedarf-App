@@ -42,7 +42,8 @@ var con = mysql.createConnection({
   // application -------------------------------------------------------------
 
 /*
-TESTSATZ
+TESTSATZ ZUM VERSTEHEN
+Bitte mit home.component.html und home.component.ts abgleichen
 */
 
 app.get('/test', function(req,res) {
@@ -59,6 +60,9 @@ app.get('/tiere', (req, res) => {
     });
 })
 
+/*
+GET-ANFRAGEN
+*/
 
 app.get('/tierheimtiere', (req, res) => {
     con.query("SELECT * FROM Tierheimtiere",
