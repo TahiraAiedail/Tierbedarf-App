@@ -16,17 +16,30 @@ export class KennenlernformularComponent implements OnInit {
   public breed!: string;
   public tierID!: number;
   public MitarbeiterID!: number;
+  public minDate: Date;
+  public maxDate: Date;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient) {
+    const currentYear = new Date().getFullYear();
+    this.minDate = new Date();
+    this.maxDate = new Date(currentYear + 1, 11, 31);
+   }
 
   ngOnInit(): void {
+    console.log('ngOnInit aufgerufen');
     this.route.queryParams.subscribe(params => {
       this.name = params['name'];
       this.breed = params['breed'];
       this.tierID = Number(params['tierID']);
+      console.log('Empfangene tierID:', this.tierID); // Hinzufügen dieser Zeile
       this.getEmployeeWithLeastAppointments();
-    });
-  }
+        });
+      }
+  
+  dateFilter = (date: Date | null): boolean => {
+    const day = (date || new Date()).getDay();
+    return day !== 0 && day !== 6;
+}
 
   onSubmit(formData: any): void {
  console.log(formData);
@@ -63,6 +76,6 @@ export class KennenlernformularComponent implements OnInit {
         console.error('Fehler beim Abrufen des Mitarbeiters mit den wenigsten Kennenlernterminen:', error);
       }
     );
-  }
-  
+   
+    }
 }

@@ -18,6 +18,11 @@ import { FooterComponent } from './footer/footer.component';
 import { KennenlernformularComponent } from './kennenlernformular/kennenlernformular.component';
 import { ShopService } from './shop.service';
 import { ProfilComponent } from './profil/profil.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -40,7 +45,11 @@ import { ProfilComponent } from './profil/profil.component';
     RouterModule,
     AppRoutingModule,
     FormsModule, // <-- import the FormsModule before binding with [(ngModel)]
-    HttpClientModule,
+    HttpClientModule, BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
 
   ],
   providers: [ShopService],
