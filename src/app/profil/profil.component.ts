@@ -11,10 +11,11 @@ import { HttpClient } from '@angular/common/http';
 export class ProfilComponent {
 
   constructor(private http: HttpClient) {
-    this.getUserdaten();
+    //this.getUserdaten();
   }
 
   /**
+   
    * Holt die Daten eines eingeloggten Users aus der Datenbank.
    * Wird für die Userverwaltung benötigt.
    */

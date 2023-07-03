@@ -4,14 +4,12 @@
   "description": "Project for INTO SoSe23",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js", 
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-
   "main": "server.js",
-  
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.0.4",

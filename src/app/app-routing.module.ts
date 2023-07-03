@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { KennenlernformularComponent } from './kennenlernformular/kennenlernformular.component';
 import { HomeComponent } from './home/home.component';
 import { ProfilComponent } from './profil/profil.component';
+import { LoginComponent } from './anmeldung/login/login.component';
 
 
 
@@ -24,8 +25,8 @@ const routes: Routes = [
   { path: 'registrierung', component: registrierungComponent },
   { path: 'kennenlernformular', component: KennenlernformularComponent },
   { path: 'home', component: HomeComponent},
- // { path: 'profil', component: ProfilComponent, canActivate: [authGuard]},
   { path: 'profil', component: ProfilComponent},
+  { path: 'login', component: LoginComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
@@ -35,3 +36,6 @@ const routes: Routes = [
   providers: []
 })
 export class AppRoutingModule { }
+
+
+// { path: 'profil', component: ProfilComponent, canActivate: [authGuard]},
