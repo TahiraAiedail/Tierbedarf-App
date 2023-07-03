@@ -73,6 +73,24 @@ app.get('/tierheimtiere', (req, res) => {
     });
 })
 
+app.get('/kundendaten', (req, res) => {
+    con.query("SELECT KundenID, Vorname, Nachname, Geburtsdatum, " + 
+    "\"E-Mail-Adresse\", Straße, Hausnummer, Stadt, PLZ FROM Kunde;", 
+    function(error, results, fields) {
+        if(error) throw error;
+        res.send(results);
+    })
+})
+
+app.get('/mitarbeiterdaten', (req, res) => {
+    con.query("SELECT MitarbeiterID, Vorname, Nachname, Geburtsdatum, " + 
+    "Telefonnummer, \"E-Mail-Adresse\", Straße, Hausnummer, Stadt, PLZ FROM Mitarbeiter;", 
+    function(error, results, fields) {
+        if(error) throw error;
+        res.send(results);
+    })
+})
+
 /* Inserts*/
 
 app.post('/kunde', (req, res) => {

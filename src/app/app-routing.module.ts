@@ -26,7 +26,8 @@ const routes: Routes = [
   { path: 'registrierung', component: registrierungComponent },
   { path: 'kennenlernformular', component: KennenlernformularComponent },
   { path: 'home', component: HomeComponent},
-  { path: 'profil', component: ProfilComponent, canActivate: [authGuard]},
+ // { path: 'profil', component: ProfilComponent, canActivate: [authGuard]},
+  { path: 'profil', component: ProfilComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
