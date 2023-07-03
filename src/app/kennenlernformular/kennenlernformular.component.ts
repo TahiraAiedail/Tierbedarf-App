@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 
 
 @Component({
@@ -13,6 +15,7 @@ export class KennenlernformularComponent implements OnInit {
   public name!: string;
   public breed!: string;
   public tierID!: number;
+  public MitarbeiterID!: number;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
@@ -21,6 +24,7 @@ export class KennenlernformularComponent implements OnInit {
       this.name = params['name'];
       this.breed = params['breed'];
       this.tierID = Number(params['tierID']);
+      this.getEmployeeWithLeastAppointments();
     });
   }
 
@@ -37,7 +41,7 @@ export class KennenlernformularComponent implements OnInit {
    Datum: formData.date, 
    KundenID: formData.customerID, //ToDO: geteingeloggterNutzer
    TierID: this.tierID,
-   MitarbeiterID: formData.employeeID //ToDO: Mitarbeiter automatisch setzen
+   MitarbeiterID: this.MitarbeiterID //ToDO: Mitarbeiter automatisch setzen
  };
 
  this.http.post('/kennenlerntermin', data).subscribe(
@@ -49,4 +53,16 @@ export class KennenlernformularComponent implements OnInit {
    }
  );
   }
+
+  getEmployeeWithLeastAppointments() {
+    this.http.get('/mitarbeitermitwenigstenkennenlernterminen').subscribe(
+      (response: any) => {
+        this.MitarbeiterID = response.MitarbeiterID; // Setzen Sie die MitarbeiterID auf die ID des Mitarbeiters mit den wenigsten Kennenlernterminen
+      },
+      (error: any) => {
+        console.error('Fehler beim Abrufen des Mitarbeiters mit den wenigsten Kennenlernterminen:', error);
+      }
+    );
+  }
+  
 }

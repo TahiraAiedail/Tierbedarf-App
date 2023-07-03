@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router'; 
+
 
 
 @Component({
@@ -14,7 +16,7 @@ export class TierheimtiereComponent {
     animals: []
   };
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.getTierheimtiere(); // Aufruf der Methode bei Initialisierung der Komponente
@@ -31,9 +33,9 @@ export class TierheimtiereComponent {
           type: item.Tierart,
           breed: item.Rasse,
           gender: item.Geschlecht,
-          age: item.Geburtsdatum,
+          age: this.formatDate(item.Geburtsdatum), // Formatieren des Geburtsdatums
           description: item.Beschreibung,
-          image: 'assets/images/' + item.Name + '.jpg', // Stelle sicher, dass die Bilder im assets/images-Ordner vorhanden sind
+          image: 'assets/images/' + item.Name + '_'+ item.Tierart + '.jpg', // Stelle sicher, dass die Bilder im assets/images-Ordner vorhanden sind
         }));
         this.tierheimtiere.animals = fetchedTierheimtiere;
         console.log('Tierheimdaten: ', this.tierheimtiere);
@@ -48,11 +50,22 @@ export class TierheimtiereComponent {
     );
   }
   
-  openFormular(name: string, breed: string, tierID: number) {
-    // Öffne die neue Seite mit dem Formular und übergebe den Namen, die Rasse und die TierID als Parameter
-    window.open('/formular?name=' + name + '&breed=' + breed + '&tierID=' + tierID, '_blank');
+    openFormular(name: string, breed: string, tierID: number) {
+      this.router.navigate(['/kennenlernformular'], { 
+        queryParams: { name: name, breed: breed, tierID: tierID } 
+      });
+
   }
-  
+  formatDate(dateStr: string): string {
+    let date = new Date(dateStr);
+    let day = ("0" + date.getDate()).slice(-2);
+    let month = ("0" + (date.getMonth() + 1)).slice(-2);
+    let year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+  }
+  logAnimal(animal: any) {
+    console.log(animal);
+  }
 }
 
 
