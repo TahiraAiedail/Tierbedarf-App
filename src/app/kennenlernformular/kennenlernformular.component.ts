@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-kennenlernformular',
   templateUrl: './kennenlernformular.component.html',
   styleUrls: ['./kennenlernformular.component.css']
+
 })
 export class KennenlernformularComponent implements OnInit {
 
