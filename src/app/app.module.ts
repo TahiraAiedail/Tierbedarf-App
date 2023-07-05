@@ -18,6 +18,8 @@ import { FooterComponent } from './footer/footer.component';
 import { KennenlernformularComponent } from './kennenlernformular/kennenlernformular.component';
 import { ShopService } from './shop.service';
 import { ProfilComponent } from './profil/profil.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { ProfilComponent } from './profil/profil.component';
     RouterModule,
     AppRoutingModule,
     FormsModule, // <-- import the FormsModule before binding with [(ngModel)]
-    HttpClientModule,
+    HttpClientModule, 
+    BrowserAnimationsModule
+
 
   ],
   providers: [ShopService],

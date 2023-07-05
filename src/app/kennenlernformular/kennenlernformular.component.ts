@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormControl} from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+
 
 
 
@@ -9,6 +11,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-kennenlernformular',
   templateUrl: './kennenlernformular.component.html',
   styleUrls: ['./kennenlernformular.component.css']
+
 })
 export class KennenlernformularComponent implements OnInit {
 
@@ -16,17 +19,41 @@ export class KennenlernformularComponent implements OnInit {
   public breed!: string;
   public tierID!: number;
   public MitarbeiterID!: number;
+  public minDate: Date;
+  public maxDate: Date;
+  date!: FormControl;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient) {
+    const currentYear = new Date().getFullYear();
+    this.minDate = new Date();
+    this.maxDate = new Date(currentYear + 1, 11, 31);
+    this.date = new FormControl('', [this.weekdayValidator]);
+
+   }
 
   ngOnInit(): void {
+    console.log('ngOnInit aufgerufen');
     this.route.queryParams.subscribe(params => {
       this.name = params['name'];
       this.breed = params['breed'];
       this.tierID = Number(params['tierID']);
+      console.log('Empfangene tierID:', this.tierID); // Hinzufügen dieser Zeile
       this.getEmployeeWithLeastAppointments();
-    });
-  }
+        });
+      }
+  
+      weekdayValidator = (control: AbstractControl): ValidationErrors | null => {
+        const date = new Date(control.value);
+        const day = date.getDay();
+      
+        // Reject the date if it's a Saturday or Sunday
+        if (day === 0 || day === 6) {
+          return { weekend: true };
+        }
+      
+        return null;
+      }
+      
 
   onSubmit(formData: any): void {
  console.log(formData);
@@ -63,6 +90,6 @@ export class KennenlernformularComponent implements OnInit {
         console.error('Fehler beim Abrufen des Mitarbeiters mit den wenigsten Kennenlernterminen:', error);
       }
     );
-  }
-  
+   
+    }
 }

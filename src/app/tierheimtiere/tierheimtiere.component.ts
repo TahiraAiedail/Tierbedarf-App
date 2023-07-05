@@ -28,7 +28,7 @@ export class TierheimtiereComponent {
     this.http.get<any[]>('/tierheimtiere').subscribe(
       (response: any[]) => {
         const fetchedTierheimtiere = response.map((item) => ({
-          tierID: item.tierID,
+          tierID: item.TierID,
           name: item.Name,
           type: item.Tierart,
           breed: item.Rasse,
