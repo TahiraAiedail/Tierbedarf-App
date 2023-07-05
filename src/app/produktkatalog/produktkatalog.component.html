@@ -1,7 +1,6 @@
-<p>produktkatalog works!</p>
 <div class="card-container">
     <div *ngFor="let ware of waren" class="card">
-      <img [src]="ware.Foto" alt="Produktfoto">
+      <img [src]="ware.bild" alt="Produktfoto">
       <h3>{{ ware.Bezeichnung }}</h3>
       <p>Preis: {{ ware.Preis }}</p>
       <div class="order-form">

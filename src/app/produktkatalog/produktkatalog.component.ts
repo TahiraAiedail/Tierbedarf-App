@@ -13,20 +13,40 @@ export class ProduktkatalogComponent implements OnInit {
   constructor(private shopService: ShopService) { }
 
   ngOnInit(): void {
-    this.getWaren();
+    this.getWaren(); // Aufruf der Methode bei Initialisierung der Komponente
   }
 
   getWaren() {
+    console.log('getWaren() wird aufgerufen');
+
     this.shopService.getWaren().subscribe(
       (response: any[]) => {
-        this.waren = response;
-      },
+        const fetchedWaren = response.map((item) => ({
+        warenID: item.WarenID,
+        Bezeichnung: item.Bezeichnung,
+        beschreibung: item.Beschreibung,
+        Preis: item.Preis,
+        bild: '../assets/images/' + item.Bezeichnung + '.jpg', // Stelle sicher, dass die Bilder im assets/images-Ordner vorhanden sind
+        }));
+
+        this.waren = fetchedWaren;
+        console.log('Waren: ', this.waren);
+
+        fetchedWaren.forEach((waren) => {
+          console.log('Bilderpfad:', waren.bild);
+        });
+      }, 
       (error: any) => {
         console.error('Fehler beim Abrufen der Waren:', error);
       }
     );
   }
-  bestellen(ware: any) {
+
+  logWaren(waren : any)
+{
+  console.log(waren);
+
+}  bestellen(ware: any) {
     //Logik fehlt noch
     console.log(`Bestellung für ${ware.Bezeichnung} erhalten.`);
   }
