@@ -1,26 +1,22 @@
 <p>events works!</p>
-<div class="container" style="display: flex; align-items: stretch;">
-    <div class="row">
-      <div class="col-12 mb-4" *ngFor="let event of veranstaltungen.events">
-        <div class="card">
-          <div class="row g-0">
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">{{ event.title }}</h5>
-                <p class="card-text"><b>Thema:</b> {{ event.theme }}</p>
-                <p class="card-text"><b>Datum:</b> {{ event.date }}</p>
-                <button class="termin" (click)="goToRegistration(event.eventID)">Jetzt anmelden</button>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card-body">
-                <p class="card-text"><b>Beschreibung:</b> {{ event.description }}</p>
-              </div>
-            </div>
+<div class="container">
+  <div class="row">
+    <div class="col-12 mb-4" *ngFor="let event of veranstaltungen.events">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ event.title }}</h5>
+          <div class="card-text">
+            <p><b>Thema:</b> {{ event.theme }}</p>
+            <p><b>Datum:</b> {{ event.date }}</p>
+            <p><b>Beschreibung:</b></p>
+            <p>{{ event.description }}</p>
           </div>
+          <button class="termin" (click)="goToRegistration(event.eventID)">Jetzt anmelden</button>
         </div>
       </div>
     </div>
   </div>
+</div>
+
   
   

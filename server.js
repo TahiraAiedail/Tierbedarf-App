@@ -285,6 +285,17 @@ app.get('/event', (req, res) => {
     });
 });
 
+app.get('/nextevent', (req, res) => {
+    con.query("SELECT * FROM Event WHERE Datum >= CURDATE() ORDER BY Datum ASC LIMIT 1",
+      function(error, results, fields) {
+        if (error) throw error;
+        console.log(results);
+        res.send(results);
+      }
+    );
+  });
+  
+
 app.get('/eventteilnehmerliste', (req, res) => {
     con.query("SELECT * FROM EventTeilnehmerliste",
     function(error, results, fields) {
@@ -322,6 +333,16 @@ app.get('/tierheimtiere', (req, res) => {
     });
 })
 
+app.get('/letztestierheimtier', (req, res) => {
+    con.query("SELECT * FROM Tierheimtiere ORDER BY TierID DESC LIMIT 1",
+      function(error, results, fields) {
+        if (error) throw error;
+        console.log(results);
+        res.send(results);
+      }
+    );
+  });
+  
 app.get('/kundendaten', (req, res) => {
     con.query("SELECT KundenID, Vorname, Nachname, Geburtsdatum, " + 
     "\"E-Mail-Adresse\", Straße, Hausnummer, Stadt, PLZ FROM Kunde;", 
