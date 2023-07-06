@@ -39,6 +39,8 @@ export class registrierungComponent implements OnInit  {
         console.error(error);
       }
     );
+    const datePipe = new DatePipe('en-US');
+    const mysqlDate = datePipe.transform(this.formData.Geburtsdatum, 'yyyy-MM-dd');
   
   }
 }
