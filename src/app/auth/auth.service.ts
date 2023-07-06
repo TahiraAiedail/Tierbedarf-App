@@ -55,9 +55,50 @@ export class AuthService {
     );
   }
   
-  getUsername(): string | null {
-    return this.benutzername; // Methode zum Abrufen des Vornamens
+  getKundenID(): number | null {
+    return this.kundenID;
   }
+  
+  getBenutzername(): string | null {
+    return this.benutzername;
+  }
+  
+  getNachname(): string | null {
+    return this.nachname;
+  }
+  
+  getGeburtsdatum(): string | null {
+    return this.geburtsdatum;
+  }
+  
+  getTelefonnummer(): number | null {
+    return this.telefonnummer;
+  }
+  
+  getEmail(): string | null {
+    return this.email;
+  }
+  
+  getPasswort(): string | null {
+    return this.passwort;
+  }
+  
+  getStrasse(): string | null {
+    return this.strasse;
+  }
+  
+  getHausnummer(): number | null {
+    return this.hausnummer;
+  }
+  
+  getStadt(): string | null {
+    return this.stadt;
+  }
+  
+  getPLZ(): number | null {
+    return this.plz;
+  }
+  
 
   formatDate(dateStr: string): string {
     let date = new Date(dateStr);
