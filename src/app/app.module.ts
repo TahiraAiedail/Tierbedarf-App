@@ -49,9 +49,11 @@ import { LoginComponent } from './anmeldung/login/login.component';
     HttpClientModule, 
     BrowserAnimationsModule,
     ReactiveFormsModule,
-
-
+    FormsModule, // <-- import the FormsModule before binding with [(ngModel)]
+    HttpClientModule,
+    ReactiveFormsModule
   ],
+  exports: [RouterModule],
   providers: [ShopService],
   bootstrap: [AppComponent]
 })
