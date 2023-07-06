@@ -19,8 +19,14 @@
                 <!--<li class="nav-item"><a class="nav-link" routerLink="profil">Profil</a></li>-->
             </ul>
             <ul class="navbar-nav" id="loginUl">
-              <li class="nav-item" id="loginLi"><a class="nav-link" routerLink="login" id="loginA">Login</a></li>
+              <li class="nav-item" id="loginLi" *ngIf="!authService.isLoggedIn">
+                <a class="nav-link" routerLink="login" id="loginA">Login</a>
+              </li>
+              <li class="nav-item" id="loginLi" *ngIf="authService.isLoggedIn">
+                <a class="nav-link" routerLink="profil" id="loginA">{{ authService.getUsername() }}</a>
+              </li>
             </ul>
+            
         </div>
     </div>
   </nav>

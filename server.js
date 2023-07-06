@@ -255,6 +255,22 @@ app.post('/nachbestellungskorb', (req, res) => {
         console.log(results.insertId);
     });
     });
+    
+    app.post('/login', (req, res) => {
+        const { email, password } = req.body; 
+        const query = 'SELECT * FROM Kunde WHERE EMail = ? AND Passwort = ?';
+        con.query(query, [email, password], function(error, results, fields) {
+            if(error) throw error;
+            if(results.length > 0) {
+                    //User wurde gefunden, Email und passwort sind korrekt, User wird in Array gespeichert
+                const user = results[0]; // Nehme den ersten User des Arrays
+                res.send({ status: 'success', message: 'Login erfolgreich', data: user });
+            } else {
+                res.send({ status: 'fail', message: 'E-Mail oder Passwort nicht korrekt' });
+            }
+        });
+    });
+    
 
 /* Select Statements*/
 
