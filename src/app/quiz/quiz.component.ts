@@ -108,7 +108,12 @@ export class QuizComponent {
   currentQuestion: any;
   selectedAnswers: any = {};
   quizResult: string | null = null;
-  answerCounts: { [key: string]: number } = {};
+  answerCounts: { [key: string]: number } = {
+    A: 0,
+    B: 0,
+    C: 0,
+    D: 0
+  };
 
   ngOnInit() {
     this.currentQuestion = this.questions[this.currentQuestionIndex];
@@ -131,27 +136,26 @@ export class QuizComponent {
   selectAnswer(answer: string) {
     this.selectedAnswers[this.currentQuestionIndex] = answer;
   }
-  evaluateAnswers() {
-    const selectedAnswer = this.selectedAnswers[this.currentQuestionIndex];
-
-  if (selectedAnswer) {
-    const answer = selectedAnswer as string;
-    const answerCount = this.answerCounts[answer] || 0;
-    this.answerCounts[answer] = answerCount + 1;
-
-    if (this.currentQuestionIndex < this.questions.length - 1) {
-      this.currentQuestionIndex++;
-    } else {
-      let maxCount = 0;
-      let maxAnswer = '';
-
-      for (const [key, value] of Object.entries(this.answerCounts)) {
-        if (value > maxCount) {
-          maxCount = value;
-          maxAnswer = key;
-        }
-      }
   
+  evaluateAnswers() {
+    for (let i = 0; i < this.questions.length; i++) {
+      const selectedAnswer = this.selectedAnswers[i];
+  
+      if (selectedAnswer) {
+        const answer = selectedAnswer as string;
+        this.answerCounts[answer]++;
+      }
+    }
+  
+    let maxCount = 0;
+    let maxAnswer = '';
+  
+    for (const [key, value] of Object.entries(this.answerCounts)) {
+      if (value > maxCount) {
+        maxCount = value;
+        maxAnswer = key;
+      }
+    }
 
       switch (maxAnswer) {
         case 'A':
@@ -168,10 +172,7 @@ export class QuizComponent {
         break;
         default:
           this.quizResult = 'Es tut uns leid, wir konnten kein Ergebnis für dich finden. Bitte versuche es erneut.';
-      }       
-
-      
-    
+    }
   }
 }
-}}
+

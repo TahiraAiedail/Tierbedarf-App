@@ -1,10 +1,33 @@
 <p>home works!</p>
 
 <div class="container" style="display: flex; align-items: stretch;">
+    <div class="row">
+      <div class="col-md-12">
+          <div class="welcome-text">
+            <h3>Willkommen bei Tierbedarf Knuth!</h3>
+            <div class="welcome-container">
+            <p>Als autonomer privater Einzelhandel auf einer beeindruckenden Fläche von insgesamt 500 Quadratmetern in der Hansestadt Bremen sind wir die zentrale Anlaufstelle für alle Tierliebhaber, egal ob Sie kleine oder große Tiere besitzen.</p>
+            <p>Unser Hauptfokus liegt auf der Versorgung Ihrer tierischen Gefährten. Wir bieten eine breite Auswahl an hochwertiger Tiernahrung, abwechslungsreichem Spielzeug, komfortablen Möbeln, Pflege- und Hygieneartikeln sowie informativen Tierbüchern, stilvollen Leinen und robustem Geschirr. Bei uns finden Sie alles, was Ihre Tiere für ein glückliches und gesundes Leben benötigen.</p>
+            <p>Neben der umfangreichen Grundausstattung bieten wir Ihnen auch eine professionelle Beratung zur artgerechten Haltung Ihrer Tiere. Unsere kompetenten Mitarbeiter stehen Ihnen mit ihrem Fachwissen zur Seite und beantworten gerne all Ihre Fragen. Wir möchten sicherstellen, dass Sie und Ihre Tiere eine harmonische und erfüllte Beziehung haben.</p>
+            <p>Als stolzer Partner des Tierheims Fellnase engagieren wir uns aktiv für den Tierschutz. Wir vermitteln Tierheimtiere an liebevolle Interessenten und helfen dabei, diesen Tieren ein neues Zuhause zu schenken. Indem Sie ein Tierheimtier bei uns adoptieren, geben Sie ihnen die Chance auf ein glückliches und geborgenes Leben.</p>
+            <p>Wir laden Sie herzlich ein, unseren liebevoll gestalteten Laden zu besuchen und das umfassende Angebot von Tierbedarf Knuth zu entdecken. Tauchen Sie ein in die Welt der Tierliebe und lassen Sie sich von unserer Leidenschaft für Ihre tierischen Begleiter inspirieren. Gemeinsam sorgen wir dafür, dass Ihre Tiere bestens versorgt sind und Sie als Tierbesitzer voller Freude und Zufriedenheit sind.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+<p></p>
+<p></p>
+<p></p>
+
+<div class="container" style="display: flex; align-items: stretch;">
   <div class="row">
-    <h3>Unser neuestes Mitglied sucht ein neues Zuhause</h3>
     <div class="col-12 mb-4" *ngFor="let animal of tierheimtiere.animals" (click)="openFormular(animal.name, animal.breed, animal.tierID)">
       <div class="card">
+        <h3>Unser neuestes Mitglied sucht ein neues Zuhause</h3>
         <div class="row g-0">
           <div class="col-md-4">
             <div class="card-img-container">
@@ -30,9 +53,9 @@
 
 <div class="container">
   <div class="row">
-    <h3>Unser nächstes Event steht bevor</h3>
     <div class="col-12 mb-4" *ngFor="let event of veranstaltungen.events">
       <div class="card">
+        <h3>Unser nächstes Event steht bevor</h3>
         <div class="card-body">
           <h5 class="card-title">{{ event.title }}</h5>
           <div class="card-text">
