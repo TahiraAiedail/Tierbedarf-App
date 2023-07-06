@@ -1,48 +1,48 @@
-<form action="registrierung.component.html">
-    <div class="container">
-      <div class="containerbla">
+<form (ngSubmit)="submitForm()">
+  <div class="container">
+    <div class="containerbla">
         <h1>Registrierung</h1>
         <p>Bitte füllen sie den Registrierungsbogen aus, um sich zu registrieren.</p>
-      </div>
+    </div>
     
-      <hr>
-      <div class="containerlinks">
-        <label for="Vorname"><b>Vorname</b></label><br>
-        <label for="Nachname"><b>Nachname</b></label><br>
-        <label for="Benutzername"><b>Benutzername</b></label><br>
-        <label for="Geburtstag"><b>Geburtstag</b></label><br>
-        <label for="Telefonnummer"><b>Telefonnummer</b></label><br>
-        <label for="Email"><b>Email-Adresse</b></label><br>
-        <label for="Passwort"><b>Passwort</b></label><br>
-        <label for="Passwort wiederholen"><b>Wiederholen Sie ihr Passwort</b></label><br>
-        <label for="Straße"><b>Straße</b></label><br>
-        <label for="Hausnummer"><b>Hausnummer</b></label><br>
-        <label for="PLZ"><b>Postleitzahl</b></label><br>
-        <label for="Stadt"><b>Stadt</b></label><br>
-      </div>
+    <hr>
 
-      <div class="containerrechts">
-        <input type="text" name="Vorname" id="Vorname" required><br>
-        <input type="text" name="Nachname" id="Nachname" required><br>
-        <input type="text" name="Benutzername" id="Benutzername" required><br>
-        <input type="date" name="Geburtstag" id="Geburtstag"><br>
-        <input type="tel" name="Telefonnummer" id="Telefonnummer" required><br>
-        <input type="text" name="Email" id="Email" required><br>
-        <input type="passwort" name="Passwort" id="Passwort" required><br>
-        <input type="passwort" name="Passwort wiederholen" id="Passwort wiederholen" required><br>
-        <input type="text" name="Straße" id="Straße" required><br>
-        <input type="number" name="Hausnummer" id="Hausnummer" required><br>
-        <input type="number" name="PLZ" id="PLZ" required><br>
-        <input type="text" name="Stadt" id="Stadt" required><br>
-      </div>
-
-      <hr>
-  
+    <div class="containerlinks">
+      <label for="Vorname"><b>Vorname</b></label><br>
+     <label for="Nachname"><b>Nachname</b></label><br>
+      <label for="Benutzername"><b>Benutzername</b></label><br>
+      <label for="Geburtstag"><b>Geburtstag</b></label><br>
+      <label for="Telefonnummer"><b>Telefonnummer</b></label><br>
+      <label for="Email"><b>Email-Adresse</b></label><br>
+      <label for="Passwort"><b>Passwort</b></label><br>
+      <label for="Passwort wiederholen"><b>Wiederholen Sie ihr Passwort</b></label><br>
+      <label for="Straße"><b>Straße</b></label><br>
+      <label for="Hausnummer"><b>Hausnummer</b></label><br>
+      <label for="PLZ"><b>Postleitzahl</b></label><br>
+      <label for="Stadt"><b>Stadt</b></label><br>
     </div>
-  
+
+    <div class="containerrechts">
+      <input type="text" class="form-control" name="Vorname" id="Vorname" ngModel required><br>
+      <input type="text" class="form-control" name="Nachname" id="Nachname" ngModel required><br>
+      <input type="text" class="form-control" name="Benutzername" id="Benutzername" ngModel required><br>
+      <input type="date" class="form-control" name="Geburtstag" id="Geburtstag"><br>
+      <input type="tel" class="form-control" name="Telefonnummer" id="Telefonnummer" ngModel required><br>
+      <input type="text" class="form-control" name="Email" id="Email" ngModel required><br>
+      <input type="password" class="form-control" name="Passwort" id="Passwort" ngModel required><br>
+      <input type="password" class="form-control" name="Passwort wiederholen" id="Passwort wiederholen" ngModel required><br>
+      <input type="text" class="form-control" name="Straße" id="Straße" ngModel required><br>
+      <input type="number" class="form-control" name="Hausnummer" id="Hausnummer" ngModel required><br>
+      <input type="number" class="form-control" name="PLZ" id="PLZ" ngModel required><br>
+      <input type="text" class="form-control" name="Stadt" id="Stadt" ngModel required><br>
+    </div>
+
+    <hr>
+
     <div class="containerlogin">
-      <p>Mit dem Erstellen eines Accountes stimmen sie unseren <a href="">Terms & Privacy</a> zu.</p>
-      <button type="submit" class="registerbtn">Registrieren<a href="http://localhost:4200/home"></a></button>
-      <p>Haben Sie schon einen Account? <a href="http://localhost:4200/">Einloggen</a>.</p>
+      <p>Mit dem Erstellen eines Accountes stimmen sie unseren Terms & Privacy zu.</p>
+      <button type="submit" class="registerbtn">Registrieren</button>
+      <p>Haben Sie schon einen Account? Einloggen.</p>
     </div>
-  </form>
+  </div>
+</form>

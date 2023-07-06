@@ -8,6 +8,27 @@ const path = require('path');
 var mysql    = require('mysql'); 
 const server = http.createServer(app)
 
+app.use(express.json());
+
+app.post('/api/endpoint', (req, res) => {
+    // Extrahiere die Daten aus dem Request-Body
+    const { Benutzername, Nachname, Vorname, sqlGeburtsdatum, Telefonnummer, EMail, Passwort, Straße, Hausnummer, Stadt, PLZ } = req.body;
+  
+    // Erstelle eine SQL-Abfrage zum Einfügen der Daten
+    const query = `INSERT INTO Kunde (Benutzername, Nachname, Vorname, sqlGeburtsdatum, Telefonnummer, EMail, Passwort, Straße, Hausnummer, Stadt, PLZ) VALUES (?,?,?,?,?,?,?,?,?,?,?)`;
+    const values = [Benutzername, Nachname, Vorname, sqlGeburtsdatum, Telefonnummer, EMail, Passwort, Straße, Hausnummer, Stadt, PLZ];
+  
+    // Führe die SQL-Abfrage aus
+    connection.query(query, values, (err, result) => {
+      if (err) {
+        console.error('Fehler beim Einfügen der Daten in die MySQL-Datenbank:', err);
+        res.status(500).json({ message: 'Interner Serverfehler' });
+        return;
+      }
+      res.status(200).json({ message: 'Daten erfolgreich gespeichert' });
+    });
+  });
+
 bodyParser = require('body-parser');
  
  
