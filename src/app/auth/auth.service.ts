@@ -13,6 +13,7 @@ export class AuthService {
   redirectUrl: string | null = null;
   benutzername: string | null = null; 
   kundenID: number | null = null;
+  vorname: string | null = null;
   nachname: string | null = null;
   geburtsdatum: string | null = null;
   telefonnummer: number | null = null;
@@ -28,13 +29,22 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post<any>('/login', { email, password }).pipe(
+    return this.http.post<any>('/loginKunde', { email, password }).pipe(
       tap(response => {
         if (response.status === 'success') {
           this.isLoggedIn = true;
           this.kundenID = response.data.KundenID;
-          this.benutzername = response.data.Benutzername;
+          this.vorname = response.data.Vorname;
           this.nachname = response.data.Nachname;
+          this.setUserTyp(response.data.EMail);
+          if(this.usertyp?.match("kunde")) {
+            this.benutzername = response.data.Benutzername;
+          }else if(this.usertyp?.match("mitarbeiter")) {
+            console.log("Ist Mitarbeiter");
+            this.benutzername = this.vorname + " " + this.nachname;
+          }else {
+            console.log("ist nix");
+          }
           this.geburtsdatum = this.formatDate(response.data.Geburtsdatum), // Formatieren des Geburtsdatums
           this.telefonnummer = response.data.Telefonnummer;
           this.email = response.data.EMail;
@@ -43,7 +53,6 @@ export class AuthService {
           this.hausnummer = response.data.Hausnummer;
           this.stadt = response.data.Stadt;
           this.plz = response.data.PLZ;
-          this.setUserTyp(response.data.EMail);
           console.log('Login erfolgreich, Benutzername: ', this.benutzername);
         } else {
           console.log('Login fehlgeschlagen, Antwort: ', response);

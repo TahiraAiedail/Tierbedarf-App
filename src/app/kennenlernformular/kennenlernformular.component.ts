@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormControl} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-
-
+import { AuthService } from 'src/app/auth/auth.service';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -15,26 +15,30 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 })
 export class KennenlernformularComponent implements OnInit {
 
-  public name!: string;
+  public tiername!: string;
   public breed!: string;
   public tierID!: number;
   public MitarbeiterID!: number;
   public minDate: Date;
   public maxDate: Date;
-  date!: FormControl;
+  public userForm: FormGroup;
+ // date!: FormControl;
+  date!: Date;
+  public datepipe: DatePipe;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, public authService: AuthService, private fb:FormBuilder) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date();
     this.maxDate = new Date(currentYear + 1, 11, 31);
-    this.date = new FormControl('', [this.weekdayValidator]);
-
+   // this.date = new FormControl('', [this.weekdayValidator]);
+      this.datepipe = new DatePipe("en-US");
+      this.userForm=this.fb.group({date:""})
    }
 
   ngOnInit(): void {
     console.log('ngOnInit aufgerufen');
     this.route.queryParams.subscribe(params => {
-      this.name = params['name'];
+      this.tiername = params['tiername'];
       this.breed = params['breed'];
       this.tierID = Number(params['tierID']);
       console.log('Empfangene tierID:', this.tierID); // Hinzufügen dieser Zeile
@@ -43,7 +47,7 @@ export class KennenlernformularComponent implements OnInit {
       }
   
       weekdayValidator = (control: AbstractControl): ValidationErrors | null => {
-        const date = new Date(control.value);
+        const date = control.value;
         const day = date.getDay();
       
         // Reject the date if it's a Saturday or Sunday
@@ -59,27 +63,33 @@ export class KennenlernformularComponent implements OnInit {
  console.log(formData);
 
  // Zugriff auf  Eigenschaften des Tieres
- console.log(this.name);
+ console.log(this.tiername);
  console.log(this.breed);
  console.log(this.tierID);
-
+ this.date=this.userForm.get("termin")?.value;
+ console.log(this.date);
  // Daten für Datenbankabfrage zusammenstellen
  const data = {
-   Datum: formData.date, 
-   KundenID: formData.customerID, //ToDO: geteingeloggterNutzer
+   Datum: this.date,
+   KundenID: this.authService.kundenID, //ToDO: geteingeloggterNutzer
    TierID: this.tierID,
    MitarbeiterID: this.MitarbeiterID //ToDO: Mitarbeiter automatisch setzen
  };
+  var day = this.date.getDate;
+ if(day == 0 || day == 6) {
+   console.log("wrong day!");
+ }else {
+  this.http.post('/kennenlerntermin', data).subscribe(
+    (response: any) => {
+      console.log('Formular erfolgreich übermittelt:', response);
+    },
+    (error: any) => {
+      console.error('Fehler beim Übermitteln des Formulars:', error);
+    }
+  );
+ }
+}
 
- this.http.post('/kennenlerntermin', data).subscribe(
-   (response: any) => {
-     console.log('Formular erfolgreich übermittelt:', response);
-   },
-   (error: any) => {
-     console.error('Fehler beim Übermitteln des Formulars:', error);
-   }
- );
-  }
 
   getEmployeeWithLeastAppointments() {
     this.http.get('/mitarbeitermitwenigstenkennenlernterminen').subscribe(

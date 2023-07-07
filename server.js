@@ -277,7 +277,7 @@ app.post('/nachbestellungskorb', (req, res) => {
     });
     });
     
-    app.post('/login', (req, res) => {
+    app.post('/loginKunde', (req, res) => {
         const { email, password } = req.body; 
         const query = 'SELECT * FROM Kunde WHERE EMail = ? AND Passwort = ?';
         con.query(query, [email, password], function(error, results, fields) {
