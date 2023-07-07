@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
+
 
 @Component({
   selector: 'app-events',
@@ -13,7 +15,8 @@ export class EventsComponent {
     events: []
   };
 
-  constructor(private http: HttpClient, private router: Router) { }
+
+  constructor(private http: HttpClient, private router: Router,private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getEvents(); // Aufruf der Methode bei Initialisierung der Komponente
@@ -40,8 +43,8 @@ export class EventsComponent {
     );
   }
 
-  goToRegistration(eventId: number) {
-    this.router.navigate(['/registration'], { queryParams: { eventId: eventId } });
+  goToRegistration(eventId: number, eventname: string, eventdatum: string) {
+    this.router.navigate(['/anmeldeformularevent'], { queryParams: { eventid: eventId, eventname: eventname, eventdatum: eventdatum } });
   }
 
   formatDate(dateStr: string): string {
@@ -50,6 +53,11 @@ export class EventsComponent {
     let month = ("0" + (date.getMonth() + 1)).slice(-2);
     let year = date.getFullYear();
     return `${day}.${month}.${year}`;
+  }
+
+  isLoggedIn(): boolean {
+    // Rufe den Login-Status ab
+    return this.authService.isLoggedIn;
   }
 }
 

@@ -12,6 +12,7 @@ import { KennenlernformularComponent } from './kennenlernformular/kennenlernform
 import { HomeComponent } from './home/home.component';
 import { ProfilComponent } from './profil/profil.component';
 import { LoginComponent } from './anmeldung/login/login.component';
+import { AnmeldeformulareventComponent } from './anmeldeformularevent/anmeldeformularevent.component';
 
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'profil', component: ProfilComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'anmeldeformularevent', component: AnmeldeformulareventComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 

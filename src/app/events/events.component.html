@@ -11,7 +11,7 @@
             <p><b>Beschreibung:</b></p>
             <p>{{ event.description }}</p>
           </div>
-          <button class="termin" (click)="goToRegistration(event.eventID)">Jetzt anmelden</button>
+          <button *ngIf="isLoggedIn()" class="termin" (click)="goToRegistration(event.eventID,event.title,event.date)">Jetzt anmelden</button>
         </div>
       </div>
     </div>

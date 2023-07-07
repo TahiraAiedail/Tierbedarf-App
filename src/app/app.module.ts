@@ -4,9 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { TierheimtiereComponent } from './tierheimtiere/tierheimtiere.component';
 import { EventsComponent } from './events/events.component';
@@ -22,6 +20,7 @@ import { ShopService } from './shop.service';
 import { ProfilComponent } from './profil/profil.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './anmeldung/login/login.component';
+import { AnmeldeformulareventComponent } from './anmeldeformularevent/anmeldeformularevent.component';
 
 
 
@@ -39,7 +38,8 @@ import { LoginComponent } from './anmeldung/login/login.component';
     FooterComponent,
     KennenlernformularComponent,
     ProfilComponent,
-    LoginComponent
+    LoginComponent,
+    AnmeldeformulareventComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +51,7 @@ import { LoginComponent } from './anmeldung/login/login.component';
     ReactiveFormsModule,
     FormsModule, // <-- import the FormsModule before binding with [(ngModel)]
     HttpClientModule,
+    MatSnackBarModule,
     ReactiveFormsModule
   ],
   exports: [RouterModule],
