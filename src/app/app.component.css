@@ -16,16 +16,17 @@
     color: rgb(176, 202, 7) !important;
 }
 
-#loginA {
+.loginA {
     float: right !important;
     color: white; 
  
 }
 
-#loginLi {
+.loginLi {
     width: 100% !important;
 }
 
-#loginUl {
+.loginUl {
     width: 100% !important;
+    list-style-type: none;
 }

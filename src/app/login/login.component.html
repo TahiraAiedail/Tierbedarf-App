@@ -8,20 +8,20 @@
 
     <div class="containerlinks">
       <label for="email"><b>Benutzername oder E-Mail-Adresse</b></label><br>
-      <input type="text" [(ngModel)]="email" name="email" id="email" placeholder="Deine E-Mail-Adresse" required><br>
+     <input type="text" [(ngModel)]="email" name="email" id="email" placeholder="Deine E-Mail-Adresse" required><br>
       <input type="password" [(ngModel)]="password" name="password" id="password" placeholder="Passwort" required><br>
     
     </div>
 
     <div class="containerrechts">
-      <p>Noch kein Konto? <a href="http://localhost:4200/registrierung" class="register-link">Jetzt registrieren</a></p>
+      <p>Noch kein Konto? <a routerLink="/registrieren" class="register-link">Jetzt registrieren</a></p>
     </div>
 
     <hr>
 
     <div class="containerlogin">
       <button type="submit" class="registerbtn">Anmelden</button><br>
-      <a href="http://localhost:4200/home">Zurück zur Startseite</a>
+      <a routerLink="home">Zurück zur Startseite</a>
     </div>
   </div>
 </form>

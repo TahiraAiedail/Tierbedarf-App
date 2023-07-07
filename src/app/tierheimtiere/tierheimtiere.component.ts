@@ -29,7 +29,7 @@ export class TierheimtiereComponent {
       (response: any[]) => {
         const fetchedTierheimtiere = response.map((item) => ({
           tierID: item.TierID,
-          name: item.Name,
+          tiername: item.Name,
           type: item.Tierart,
           breed: item.Rasse,
           gender: item.Geschlecht,
@@ -50,9 +50,9 @@ export class TierheimtiereComponent {
     );
   }
   
-    openFormular(name: string, breed: string, tierID: number) {
+    openFormular(tiername: string, breed: string, tierID: number) {
       this.router.navigate(['/kennenlernformular'], { 
-        queryParams: { name: name, breed: breed, tierID: tierID } 
+        queryParams: { tiername: tiername, breed: breed, tierID: tierID } 
       });
 
   }
