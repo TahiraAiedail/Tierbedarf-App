@@ -1,4 +1,4 @@
-<form (ngSubmit)="submitForm()">
+<form [formGroup]="meinFormular" (ngSubmit)="submitForm()">
   <div class="container">
     <div class="containerbla">
         <h1>Registrierung</h1>
@@ -23,25 +23,25 @@
     </div>
 
     <div class="containerrechts">
-      <input type="text" class="form-control" name="Vorname" id="Vorname" ngModel required><br>
-      <input type="text" class="form-control" name="Nachname" id="Nachname" ngModel required><br>
-      <input type="text" class="form-control" name="Benutzername" id="Benutzername" ngModel required><br>
-      <input type="date" class="form-control" name="Geburtstag" id="Geburtstag"><br>
-      <input type="tel" class="form-control" name="Telefonnummer" id="Telefonnummer" ngModel required><br>
-      <input type="text" class="form-control" name="Email" id="Email" ngModel required><br>
-      <input type="password" class="form-control" name="Passwort" id="Passwort" ngModel required><br>
-      <input type="password" class="form-control" name="Passwort wiederholen" id="Passwort wiederholen" ngModel required><br>
-      <input type="text" class="form-control" name="Straße" id="Straße" ngModel required><br>
-      <input type="number" class="form-control" name="Hausnummer" id="Hausnummer" ngModel required><br>
-      <input type="number" class="form-control" name="PLZ" id="PLZ" ngModel required><br>
-      <input type="text" class="form-control" name="Stadt" id="Stadt" ngModel required><br>
+      <input type="text" class="form-control" formControlName="Vorname" required><br>
+      <input type="text" class="form-control" formControlName="Nachname" required><br>
+      <input type="text" class="form-control" formControlName="Benutzername" required><br>
+      <input type="date" class="form-control" formControlName="Geburtstag"><br>
+      <input type="tel" class="form-control" formControlName="Telefonnummer" required><br>
+      <input type="email" class="form-control" formControlName="Email" required><br>
+      <input type="password" class="form-control" formControlName="Passwort" required><br>
+      <input type="password" class="form-control" formControlName="Passwort wiederholen" required><br>
+      <input type="text" class="form-control" formControlName="Straße" required><br>
+      <input type="number" class="form-control" formControlName="Hausnummer" required><br>
+      <input type="number" class="form-control" formControlName="PLZ" required><br>
+      <input type="text" class="form-control" formControlName="Stadt" required><br>
     </div>
-
+  
     <hr>
-
+  
     <div class="containerlogin">
       <p>Mit dem Erstellen eines Accountes stimmen sie unseren Terms & Privacy zu.</p>
-      <button type="submit" class="registerbtn">Registrieren</button>
+      <button type="submit" class="registerbtn" [disabled]="!meinFormular.valid">Registrieren</button>
       <p>Haben Sie schon einen Account? Einloggen.</p>
     </div>
   </div>
