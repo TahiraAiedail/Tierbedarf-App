@@ -22,6 +22,7 @@ export class AuthService {
   hausnummer: number | null = null;
   stadt: string | null = null;
   plz: number | null = null;
+  usertyp: string | null = null;
 
 
   constructor(private http: HttpClient) {}
@@ -42,7 +43,7 @@ export class AuthService {
           this.hausnummer = response.data.Hausnummer;
           this.stadt = response.data.Stadt;
           this.plz = response.data.PLZ;
-          
+          this.setUserTyp(response.data.EMail);
           console.log('Login erfolgreich, Benutzername: ', this.benutzername);
         } else {
           console.log('Login fehlgeschlagen, Antwort: ', response);
@@ -98,6 +99,10 @@ export class AuthService {
   getPLZ(): number | null {
     return this.plz;
   }
+
+  getUserTyp(): string | null {
+    return this.usertyp;
+  }
   
 
   formatDate(dateStr: string): string {
@@ -111,5 +116,15 @@ export class AuthService {
   logout(): void {
     this.isLoggedIn = false;
     this.benutzername='';
+  }
+
+  setUserTyp(email: string): void {
+    const result = email.split('@');
+
+    if(result[1] === 'tierbedarf-knut.de'){
+      this.usertyp = 'mitarbeiter'
+    }else{
+      this.usertyp = 'kunde'
+    }
   }
 }
