@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AnmeldungComponent } from './anmeldung/anmeldung.component';
-import { registrierungComponent } from './anmeldung/registrierung/registrierung.component';
+import { registrierungComponent } from './registrierung/registrierung.component';
 import { TierheimtiereComponent } from './tierheimtiere/tierheimtiere.component';
 import { EventsComponent } from './events/events.component';
 import { ProduktkatalogComponent } from './produktkatalog/produktkatalog.component';
@@ -11,13 +10,12 @@ import { HeaderComponent } from './header/header.component';
 import { KennenlernformularComponent } from './kennenlernformular/kennenlernformular.component';
 import { HomeComponent } from './home/home.component';
 import { ProfilComponent } from './profil/profil.component';
-import { LoginComponent } from './anmeldung/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { AnmeldeformulareventComponent } from './anmeldeformularevent/anmeldeformularevent.component';
 
 
 
 const routes: Routes = [
-  { path: 'Anmeldung', component: AnmeldungComponent},
   { path: 'tierheimtiere', component: TierheimtiereComponent },
   { path: 'events', component: EventsComponent },
   { path: 'produktkatalog', component: ProduktkatalogComponent },
@@ -28,7 +26,7 @@ const routes: Routes = [
   { path: 'profil', component: ProfilComponent},
   { path: 'login', component: LoginComponent},
   { path: 'anmeldeformularevent', component: AnmeldeformulareventComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full'}
+  { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
 @NgModule({

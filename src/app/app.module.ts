@@ -10,8 +10,7 @@ import { TierheimtiereComponent } from './tierheimtiere/tierheimtiere.component'
 import { EventsComponent } from './events/events.component';
 import { ProduktkatalogComponent } from './produktkatalog/produktkatalog.component';
 import { QuizComponent } from './quiz/quiz.component';
-import { AnmeldungComponent } from './anmeldung/anmeldung.component';
-import { registrierungComponent } from './anmeldung/registrierung/registrierung.component';
+import { registrierungComponent } from './registrierung/registrierung.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -19,7 +18,7 @@ import { KennenlernformularComponent } from './kennenlernformular/kennenlernform
 import { ShopService } from './shop.service';
 import { ProfilComponent } from './profil/profil.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './anmeldung/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { AnmeldeformulareventComponent } from './anmeldeformularevent/anmeldeformularevent.component';
 
 
@@ -31,7 +30,6 @@ import { AnmeldeformulareventComponent } from './anmeldeformularevent/anmeldefor
     EventsComponent,
     ProduktkatalogComponent,
     QuizComponent,
-    AnmeldungComponent,
     registrierungComponent,
     HomeComponent,
     HeaderComponent,
