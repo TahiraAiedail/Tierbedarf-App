@@ -20,8 +20,16 @@ import { ProfilComponent } from './profil/profil.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { AnmeldeformulareventComponent } from './anmeldeformularevent/anmeldeformularevent.component';
-
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { KennenlernbestaetigungComponent } from './kennenlernbestaetigung/kennenlernbestaetigung.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { RechnungkundeComponent } from './rechnungkunde/rechnungkunde.component';
+import { RechnungsuebersichtkundeComponent } from './rechnungsuebersichtkunde/rechnungsuebersichtkunde.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +45,10 @@ import { AnmeldeformulareventComponent } from './anmeldeformularevent/anmeldefor
     KennenlernformularComponent,
     ProfilComponent,
     LoginComponent,
-    AnmeldeformulareventComponent
+    AnmeldeformulareventComponent,
+    KennenlernbestaetigungComponent,
+    RechnungkundeComponent,
+    RechnungsuebersichtkundeComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +61,14 @@ import { AnmeldeformulareventComponent } from './anmeldeformularevent/anmeldefor
     FormsModule, // <-- import the FormsModule before binding with [(ngModel)]
     HttpClientModule,
     MatSnackBarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule
   ],
   exports: [RouterModule],
   providers: [ShopService],

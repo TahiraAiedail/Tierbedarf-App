@@ -1,0 +1,23 @@
+<p>rechnungkunde works!</p>
+<p>Rechnungsdetails:</p>
+
+<table>
+  <tr>
+    <th>RechnungsID</th>
+    <th>Rechnungsnummer</th>
+    <th>Rechnungssumme</th>
+    <th>Rechnungsdatum</th>
+    <th>BestellungsID</th>
+    <th>RechnungsstatusID</th>
+  </tr>
+  <tr *ngFor="let rechnung of rechnungsdetails">
+    <td>{{ rechnung.RechnungsID }}</td>
+    <td>{{ rechnung.Rechnungsnummer }}</td>
+    <td>{{ rechnung.Rechnungssumme }}</td>
+    <td>{{ rechnung.Rechnungsdatum | date }}</td>
+    <td>{{ rechnung.BestellungsID }}</td>
+    <td>{{ rechnung.RechnungsstatusID }}</td>
+  </tr>
+</table>
+
+<button (click)="goBack()">Zurück</button>
