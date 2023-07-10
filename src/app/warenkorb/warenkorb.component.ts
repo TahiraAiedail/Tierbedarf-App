@@ -36,4 +36,10 @@ export class WarenkorbComponent implements OnInit {
   bestellmethodeAuswaehlen(bestellmethode: string) {
     console.log('Bestellmethode ausgewählt : ${bestellmethode}');
   }
+
+  bestellungAbschliessen() {
+    // Implementieren Sie die Logik zum Abschließen der Bestellung hier
+    console.log('Bestellung wurde abgeschlossen');
+    // Weitere Logik für die Bestellungsabwicklung hier...
+  }
 }
