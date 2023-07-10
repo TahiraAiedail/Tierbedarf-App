@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ShopService } from '../shop.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class ProduktkatalogComponent implements OnInit {
   waren: any[] = [];
   warenkorb: any[] = [];
 
-  constructor(private shopService: ShopService) { }
+  constructor(private router: Router, private shopService: ShopService) { }
 
   ngOnInit(): void {
     this.getWaren();
@@ -60,4 +61,9 @@ export class ProduktkatalogComponent implements OnInit {
     }
     return gesamtsumme;
   }
+
+  bezahlen() {
+    this.router.navigate(['/warenkorb']);
+  }
+  
 }

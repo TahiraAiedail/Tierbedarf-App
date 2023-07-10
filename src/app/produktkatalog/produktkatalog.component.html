@@ -21,5 +21,5 @@
   <div *ngIf="warenkorb.length > 0" class="gesamtsumme">
     Gesamtsumme: {{ getGesamtsumme() | currency:'EUR' }}
   </div>
-  <button *ngIf="warenkorb.length > 0" class="bezahlen-button">Bezahlen</button>
+  <button *ngIf="warenkorb.length > 0" (click)="bezahlen()" class="bezahlen-button">Bezahlen</button>
 </div>
