@@ -1,12 +1,24 @@
-<p>profil works!</p>
-<div class="bestellungen-container">
-  <h4 *ngIf="bestellungen.bestellungen.length > 0">Bestellungen</h4>
+
+<div class="bestellungen-container form-container">
+  <h4>Bestellungen</h4>
+  <div *ngIf="bestellungen.bestellungen.length === 0">Keine angemeldeten Events vorhanden.</div>
   <div *ngFor="let bestellung of bestellungen.bestellungen">
     <div class="bestellung-container">
       <div class="bestellnummer-datum">
         <div class="bestellnummer">{{ bestellung.bestellnummer }}</div>
         <div class="datum">{{ bestellung.datum }}</div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="event-container form-container">
+  <h4>Angemeldete Events</h4>
+  <div *ngIf="kundenevents.events.length === 0">Keine angemeldeten Events vorhanden.</div>
+  <div *ngFor="let event of kundenevents.events">
+    <div class="event-item">
+      <div class="event-name">{{ event.name }}</div>
+      <div class="event-datum">{{ event.datum }}</div>
     </div>
   </div>
 </div>
@@ -64,8 +76,10 @@
 
     <button type="submit">Speichern</button>
   </form>
-
+</div>
+<div class="form-container">
   <form (submit)="submitFormPasswort()">
+    <h4>Passwort ändern</h4>
     <div>
       <label for="oldPassword">Altes Passwort:</label>
       <input type="password" id="oldPassword" name="oldPassword" required #oldPasswordInput>

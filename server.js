@@ -394,6 +394,18 @@ app.get('/eventleiterliste', (req, res) => {
     });
 });
 
+app.get('/kunde/:kundenid/events', (req, res) => {
+    const kundenid = req.params.kundenid;
+    con.query(
+      'SELECT Event.EventID, Event.Datum, Event.Name, Event.Thema, Event.Beschreibung FROM EventTeilnehmerliste JOIN Event ON EventTeilnehmerliste.EventID = Event.EventID WHERE EventTeilnehmerliste.KundenID = ?',
+      [kundenid],
+      function(error, results, fields) {
+        if (error) throw error;
+        res.send(results);
+      }
+    );
+  });
+  
 
 app.get('/tierheimtiere', (req, res) => {
     con.query("SELECT * FROM Tierheimtiere",

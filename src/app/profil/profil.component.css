@@ -5,6 +5,7 @@
     background-color: #f0f0f0;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
   }
   
   .form-group {
@@ -101,4 +102,39 @@
   .datum {
     color: #888888;
   }
+
+  .event-container {
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .event-container h4 {
+    color: #333;
+  }
+  
+  .event-container .event-item {
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+  }
+  
+  .event-container .event-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .event-container .event-name {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  .event-container .event-datum {
+    color: #888888;
+  }
+  
     
