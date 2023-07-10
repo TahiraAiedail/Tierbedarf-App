@@ -41,6 +41,8 @@ import { AnmeldeformulareventComponent } from './anmeldeformularevent/anmeldefor
     LoginComponent,
     AnmeldeformulareventComponent
   ],
+
+  
   imports: [
     BrowserModule,
     RouterModule,

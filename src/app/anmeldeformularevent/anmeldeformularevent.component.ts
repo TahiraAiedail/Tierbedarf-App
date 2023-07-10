@@ -15,6 +15,7 @@ export class AnmeldeformulareventComponent {
 
   user = {
   kundenID: this.authService.getKundenID(),
+  vorname: this.authService.getVorname(),
   nachname: this.authService.getNachname(),
   telefonnummer: this.authService.getTelefonnummer(),
   email:this.authService.getEmail(),
@@ -50,7 +51,6 @@ export class AnmeldeformulareventComponent {
   (response) => {
     // Erfolgreiche Antwort vom Server erhalten
     console.log('Erfolgreich eingefügt:', response);
-    this.snackBar.open('Anmeldung erfolgreich!', 'OK', { duration: 3000 });
   },
   (error) => {
     // Fehler beim Senden der Anfrage oder beim Verarbeiten der Antwort
@@ -58,5 +58,6 @@ export class AnmeldeformulareventComponent {
   }
 );
   this.router.navigate(['/events']);
+  this.snackBar.open('Anmeldung erfolgreich!', 'OK', { duration: 3000 });
  }
 }

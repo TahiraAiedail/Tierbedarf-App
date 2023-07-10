@@ -76,6 +76,10 @@ export class AuthService {
   getNachname(): string | null {
     return this.nachname;
   }
+
+  getVorname(): string | null {
+    return this.vorname
+  }
   
   getGeburtsdatum(): string | null {
     return this.geburtsdatum;
