@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { registrierungComponent } from './registrierung/registrierung.component';
 import { TierheimtiereComponent } from './tierheimtiere/tierheimtiere.component';
 import { EventsComponent } from './events/events.component';
 import { ProduktkatalogComponent } from './produktkatalog/produktkatalog.component';
@@ -15,6 +14,7 @@ import { AnmeldeformulareventComponent } from './anmeldeformularevent/anmeldefor
 import { KennenlernbestaetigungComponent } from './kennenlernbestaetigung/kennenlernbestaetigung.component';
 import { RechnungkundeComponent } from './rechnungkunde/rechnungkunde.component';
 import { RechnungsuebersichtkundeComponent } from './rechnungsuebersichtkunde/rechnungsuebersichtkunde.component';
+import { ErsatzfuerregComponent } from './ersatzfuerreg/ersatzfuerreg.component';
 
 
 const routes: Routes = [
@@ -22,7 +22,6 @@ const routes: Routes = [
   { path: 'events', component: EventsComponent },
   { path: 'produktkatalog', component: ProduktkatalogComponent },
   { path: 'quiz', component: QuizComponent },
-  { path: 'registrierung', component: registrierungComponent },
   { path: 'kennenlernformular', component: KennenlernformularComponent },
   { path: 'home', component: HomeComponent},
   { path: 'profil', component: ProfilComponent},
@@ -31,7 +30,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'kennenlernbestaetigung', component: KennenlernbestaetigungComponent},
   { path: 'rechnungkunde', component: RechnungkundeComponent},
-  { path: 'rechnungsuebersichtkunde', component: RechnungsuebersichtkundeComponent}
+  { path: 'rechnungsuebersichtkunde', component: RechnungsuebersichtkundeComponent},
+  { path: 'testnr2', component: ErsatzfuerregComponent}
 ];
 
 @NgModule({

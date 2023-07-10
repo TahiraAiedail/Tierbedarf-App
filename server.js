@@ -309,6 +309,23 @@ app.post('/nachbestellungskorb', (req, res) => {
         });
       });
       
+      app.post('/benutzername', (req, res) => {
+        const { Benutzername } = req.body;
+      
+        con.query('SELECT COUNT(*) AS count FROM Kunde WHERE Benutzername = ?', [Benutzername], (error, results, fields) => {
+          if (error) {
+            throw error;
+          }
+      
+          const count = results[0].count;
+          if (count > 0) {
+            res.status(200).json({ available: false });
+          } else {
+            res.status(200).json({ available: true });
+          }
+        });
+      });
+      
 
 /* Select Statements*/
 

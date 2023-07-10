@@ -10,7 +10,6 @@ import { TierheimtiereComponent } from './tierheimtiere/tierheimtiere.component'
 import { EventsComponent } from './events/events.component';
 import { ProduktkatalogComponent } from './produktkatalog/produktkatalog.component';
 import { QuizComponent } from './quiz/quiz.component';
-import { registrierungComponent } from './registrierung/registrierung.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -30,6 +29,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { RechnungkundeComponent } from './rechnungkunde/rechnungkunde.component';
 import { RechnungsuebersichtkundeComponent } from './rechnungsuebersichtkunde/rechnungsuebersichtkunde.component';
+import { AuthService } from './auth/auth.service';
+import { ErsatzfuerregComponent } from './ersatzfuerreg/ersatzfuerreg.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,6 @@ import { RechnungsuebersichtkundeComponent } from './rechnungsuebersichtkunde/re
     EventsComponent,
     ProduktkatalogComponent,
     QuizComponent,
-    registrierungComponent,
     HomeComponent,
     HeaderComponent,
     FooterComponent,
@@ -48,7 +48,8 @@ import { RechnungsuebersichtkundeComponent } from './rechnungsuebersichtkunde/re
     AnmeldeformulareventComponent,
     KennenlernbestaetigungComponent,
     RechnungkundeComponent,
-    RechnungsuebersichtkundeComponent
+    RechnungsuebersichtkundeComponent,
+    ErsatzfuerregComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +72,7 @@ import { RechnungsuebersichtkundeComponent } from './rechnungsuebersichtkunde/re
     MatIconModule
   ],
   exports: [RouterModule],
-  providers: [ShopService],
+  providers: [ShopService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
