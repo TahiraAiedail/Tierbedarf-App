@@ -31,11 +31,8 @@ import { RechnungkundeComponent } from './rechnungkunde/rechnungkunde.component'
 import { RechnungsuebersichtkundeComponent } from './rechnungsuebersichtkunde/rechnungsuebersichtkunde.component';
 import { AuthService } from './auth/auth.service';
 import { ErsatzfuerregComponent } from './ersatzfuerreg/ersatzfuerreg.component';
-<<<<<<< HEAD
 import { ProfilmitarbeiterComponent } from './profilmitarbeiter/profilmitarbeiter.component';
-=======
 import { WarenkorbComponent } from './warenkorb/warenkorb.component';
->>>>>>> c7042bd87cced36f24e577369c3460ab17f3be67
 
 @NgModule({
   declarations: [
@@ -55,11 +52,8 @@ import { WarenkorbComponent } from './warenkorb/warenkorb.component';
     RechnungkundeComponent,
     RechnungsuebersichtkundeComponent,
     ErsatzfuerregComponent,
-<<<<<<< HEAD
     ProfilmitarbeiterComponent,
-=======
     WarenkorbComponent,
->>>>>>> c7042bd87cced36f24e577369c3460ab17f3be67
   ],
 
   
