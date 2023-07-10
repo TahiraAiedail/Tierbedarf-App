@@ -279,7 +279,7 @@ app.post('/nachbestellungskorb', (req, res) => {
     });
     });
     
-    app.post('/loginKundee', (req, res) => {
+    app.post('/loginKunde', (req, res) => {
         const { email, password } = req.body; 
         const kundeQuery = 'SELECT * FROM Kunde WHERE EMail = ? AND Passwort = ?';
         const mitarbeiterQuery = 'SELECT * FROM Mitarbeiter WHERE EMail = ? AND Passwort = ?';
@@ -734,3 +734,32 @@ app.delete('/nachbestellungskorb/:id', (req, res) => {
 
 })
 
+
+/* Update */
+
+
+app.put('/kunde/:kundenid', (req, res) => {
+    const kundenid = req.params.kundenid;
+    const {Nachname, Vorname,Telefonnummer, Straße, Hausnummer, Stadt, PLZ } = req.body;
+    con.query(
+      'UPDATE Kunde SET Nachname = ?, Vorname = ?, Telefonnummer = ?, Straße = ?, Hausnummer = ?, Stadt = ?, PLZ = ? WHERE KundenID = ?',
+      [Nachname, Vorname,Telefonnummer, Straße, Hausnummer, Stadt, PLZ, kundenid],
+      function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.affectedRows);
+      }
+    );
+  });
+
+  app.put('/kunde/:kundenid/passwort', (req, res) => {
+    const kundenid = req.params.kundenid;
+    const { Passwort } = req.body;
+    con.query(
+      'UPDATE Kunde SET Passwort = ? WHERE KundenID = ?',
+      [Passwort, kundenid],
+      function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.affectedRows);
+      }
+    );
+  });

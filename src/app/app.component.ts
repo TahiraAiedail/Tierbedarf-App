@@ -10,13 +10,21 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'Tierbedarf-App';
 
- 
   constructor(private router: Router, public authService: AuthService) {}
 
   navigateToBestellungsuebersicht(): void {
     const kundenID = this.authService.getKundenID();
     if (kundenID) {
       this.router.navigate(['/rechnungsuebersicht', kundenID]);
+    }
+  }
+
+  isKundeLoggedIn(): boolean {
+    // Rufe den Login-Status ab
+    if (this.authService.isLoggedIn && this.authService.getUserTyp() === 'kunde') {
+      return true;
+    } else {
+      return false;
     }
   }
 }
