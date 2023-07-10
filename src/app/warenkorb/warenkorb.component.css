@@ -1,0 +1,29 @@
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .warenkorb-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .warenkorb-artikel {
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  .warenkorb-artikel img {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .gesamtsumme {
+    text-align: right;
+    margin-top: 20px;
+    font-weight: bold;
+  }

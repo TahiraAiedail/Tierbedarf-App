@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-warenkorb',
@@ -8,20 +9,21 @@ import { Component, OnInit } from '@angular/core';
 export class WarenkorbComponent implements OnInit {
   warenkorb: any[] = [];
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getWarenkorb();
   }
 
   getWarenkorb() {
-    // Hier können Sie die Produkte aus dem Warenkorb abrufen, z.B. von einer Datenbank oder einem Service
-    // In diesem Beispiel verwenden wir eine statische Datenquelle
-    this.warenkorb = [
-      { Bezeichnung: 'Produkt 1', quantity: 2, Preis: 9.99, bild: 'produkt1.jpg' },
-      { Bezeichnung: 'Produkt 2', quantity: 1, Preis: 14.99, bild: 'produkt2.jpg' },
-      { Bezeichnung: 'Produkt 3', quantity: 3, Preis: 5.99, bild: 'produkt3.jpg' }
-    ];
+    this.route.queryParams.subscribe(params => {
+      if (params && params['warenkorb']) {
+        this.warenkorb = JSON.parse(params['warenkorb']);
+      } else {
+        // Fallback, wenn keine Warenkorb-Daten vorhanden sind
+        this.warenkorb = [];
+      }
+    });
   }
 
   getGesamtsumme() {
@@ -34,7 +36,6 @@ export class WarenkorbComponent implements OnInit {
 
   zahlungsmethodeAuswaehlen(zahlungsmethode: string) {
     // Implementieren Sie die gewünschte Logik für die Auswahl der Zahlungsmethode
-    console.log(`Zahlungsmethode ausgewählt: ${zahlungsmethode}`);
+    console.log('Zahlungsmethode ausgewählt: ${zahlungsmethode}');
   }
-  
 }
