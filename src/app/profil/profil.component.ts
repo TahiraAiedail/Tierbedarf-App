@@ -17,6 +17,14 @@ export class ProfilComponent {
 
   @ViewChild('oldPasswordInput') oldPasswordInput!: ElementRef;
   @ViewChild('newPasswordInput') newPasswordInput!: ElementRef;
+  @ViewChild('vorname') vorname!: ElementRef;
+  @ViewChild('nachname') nachname!: ElementRef;
+  @ViewChild('strasse') strasse!: ElementRef;
+  @ViewChild('hausnummer') hausnummer!: ElementRef;
+  @ViewChild('stadt') stadt!: ElementRef;
+  @ViewChild('plz') plz!: ElementRef;
+  @ViewChild('telefon') telefon!: ElementRef;
+
 
   public bestellungen: any = {
     bestellungen: []
@@ -74,8 +82,30 @@ export class ProfilComponent {
   }
 
   submitForm(): void{
+    const url = '/kunde/${this.user.kundenID}'; 
+    const kunde = {
+      Nachname: this.nachname.nativeElement.value,
+      Vorname: this.vorname.nativeElement.value,
+      Telefonnummer: this.telefon.nativeElement.value,
+      Straße: this.strasse.nativeElement.value,
+      Hausnummer: this.hausnummer.nativeElement.value,
+      Stadt: this.stadt.nativeElement.value,
+      PLZ: this.plz.nativeElement.value,
+    };
 
+    this.http.put(url, kunde).subscribe(
+      (response) => {
+        console.log('Kunde erfolgreich aktualisiert.');
+        this.snackBar.open('Änderungen erfolgreich übernommen.', 'OK', { duration: 3000 });
+      },
+      (error) => {
+        console.error('Fehler beim Aktualisieren des Kunden:', error);
+      }
+    );
   }
+
+
+
 
   submitFormPasswort(): void {
     // Überprüfen, ob das eingegebene alte Passwort mit dem gespeicherten alten Passwort übereinstimmt
@@ -83,7 +113,20 @@ export class ProfilComponent {
       this.snackBar.open('Das eingegebene alte Passwort stimmt nicht überein', 'OK', { duration: 3000 });
       console.log('Das eingegebene alte Passwort ist nicht korrekt.');
     }else{
+      const url = '/kunde/${this.user.kundenID}/passwort'; 
+      const body = { Passwort: this.newPasswordInput.nativeElement.value };
 
+      this.http.put(url, body).subscribe(
+      (response) => {
+        console.log('Passwort erfolgreich aktualisiert.');
+        this.snackBar.open('Passwort erfolgreich aktualisiert.', 'OK', { duration: 3000 });
+        this.oldPasswordInput.nativeElement.set("");
+        this.newPasswordInput.nativeElement.set("");
+      },
+      (error) => {
+        console.error('Fehler beim Aktualisieren des Passworts:', error);
+      }
+    );
     }
   
   }
