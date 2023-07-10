@@ -1,0 +1,23 @@
+<div class="warenkorb-container">
+    <h2>Warenkorb</h2>
+    <div *ngIf="warenkorb.length === 0" class="empty-cart">
+      Der Warenkorb ist leer.
+    </div>
+    <div *ngFor="let artikel of warenkorb" class="warenkorb-artikel">
+      <img [src]="artikel.bild" alt="Produktfoto">
+      <p>{{ artikel.Bezeichnung }} - Anzahl: {{ artikel.quantity }} - Preis: {{ (artikel.Preis * artikel.quantity) | currency:'EUR' }}</p>
+    </div>
+    <div *ngIf="warenkorb.length > 0" class="gesamtsumme">
+      Gesamtsumme: {{ getGesamtsumme() | currency:'EUR' }}
+    </div>
+    <div class="zahlungsmethoden">
+      <h3>Zahlungsmethoden</h3>
+      <ul>
+        <li><button (click)="zahlungsmethodeAuswaehlen('Kreditkarte')">Kreditkarte</button></li>
+        <li><button (click)="zahlungsmethodeAuswaehlen('PayPal')">PayPal</button></li>
+        <li><button (click)="zahlungsmethodeAuswaehlen('Überweisung')">Überweisung</button></li>
+        <!-- Weitere Zahlungsmethoden hier hinzufügen -->
+      </ul>
+    </div>
+  </div>
+  

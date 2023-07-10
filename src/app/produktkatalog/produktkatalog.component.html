@@ -2,7 +2,7 @@
   <div *ngFor="let ware of waren" class="card">
     <img [src]="ware.bild" alt="Produktfoto">
     <h3>{{ ware.Bezeichnung }}</h3>
-    <p>Preis: {{ ware.Preis }}</p>
+    <p>Preis: {{ ware.Preis | currency:'EUR' }}</p>
     <div class="order-form">
       <input type="number" min="0" [(ngModel)]="ware.quantity" placeholder="Anzahl">
       <button (click)="bestellen(ware)">Bestellen</button>
@@ -10,4 +10,16 @@
   </div>
 </div>
 
-  
+<div class="warenkorb-container">
+  <h2>Warenkorb</h2>
+  <div *ngIf="warenkorb.length === 0" class="empty-cart">
+    Der Warenkorb ist leer.
+  </div>
+  <div *ngFor="let artikel of warenkorb" class="warenkorb-artikel">
+    <p>{{ artikel.Bezeichnung }} - Anzahl: {{ artikel.quantity }} - Preis: {{ (artikel.Preis * artikel.quantity) | currency:'EUR' }}</p>
+  </div>
+  <div *ngIf="warenkorb.length > 0" class="gesamtsumme">
+    Gesamtsumme: {{ getGesamtsumme() | currency:'EUR' }}
+  </div>
+  <button *ngIf="warenkorb.length > 0" (click)="bezahlen()" class="bezahlen-button">Bezahlen</button>
+</div>

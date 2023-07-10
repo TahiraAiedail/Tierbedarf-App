@@ -13,6 +13,7 @@ export class AuthService {
   redirectUrl: string | null = null;
   benutzername: string | null = null; 
   kundenID: number | null = null;
+  mitarbeiterID: number | null = null;
   vorname: string | null = null;
   nachname: string | null = null;
   geburtsdatum: string | null = null;
@@ -33,15 +34,16 @@ export class AuthService {
       tap(response => {
         if (response.status === 'success') {
           this.isLoggedIn = true;
-          this.kundenID = response.data.KundenID;
           this.vorname = response.data.Vorname;
           this.nachname = response.data.Nachname;
           this.setUserTyp(response.data.EMail);
           if(this.usertyp?.match("kunde")) {
             this.benutzername = response.data.Benutzername;
+            this.kundenID = response.data.KundenID;
           }else if(this.usertyp?.match("mitarbeiter")) {
             console.log("Ist Mitarbeiter");
-            this.benutzername = this.vorname + " " + this.nachname;
+            this.benutzername = this.vorname + " " + this.nachname;            
+            this.mitarbeiterID = response.data.MitarbeiterID;
           }else {
             console.log("ist nix");
           }
@@ -67,6 +69,9 @@ export class AuthService {
   
   getKundenID(): number | null {
     return this.kundenID;
+  }
+  getMitarbeiterID(): number | null {
+    return this.mitarbeiterID;
   }
   
   getBenutzername(): string | null {
