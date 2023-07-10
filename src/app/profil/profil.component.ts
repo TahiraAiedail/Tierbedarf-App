@@ -30,6 +30,10 @@ export class ProfilComponent {
     bestellungen: []
   };
 
+  public kundenevents: any = {
+    events: []
+  };
+
   user = {
     benutzername: this.authService.getBenutzername(),
     kundenID: this.authService.getKundenID(),
@@ -48,11 +52,30 @@ export class ProfilComponent {
 
   ngOnInit(): void {
     this.getBestellungen();
+    this.getKundenEvents();
+  }
+
+  getKundenEvents() {
+    this.http.get<any[]>(`/kunde/${this.user.kundenID}/events`).subscribe(
+      (response: any[]) => {
+      const fetchedEvents = response.map((item) => ({ 
+        id: item.EventID,
+        datum: this.formatDate(item.Datum),
+        name: item.Name,
+        thema: item.Thema,
+        beschreibung: item.Beschreibung
+      }));
+      this.kundenevents.events = fetchedEvents;
+      },
+      (error) => {
+        console.error('Fehler beim Abrufen der Events:', error);
+      }
+    );
   }
 
   getBestellungen() {
     console.log('getBestellungen() wird aufgerufen');
-    this.http.get<any[]>('/bestellung/${this.user.kundenID}').subscribe(
+    this.http.get<any[]>(`/bestellung/${this.user.kundenID}`).subscribe(
       (response: any[]) => {
         const fetchedBestellungen = response.map((item) => ({
           bestellnummer: item.Bestellnummer,
@@ -61,7 +84,7 @@ export class ProfilComponent {
           mitarbeiterID: item.MitarbeiterID,
           kundenID: item.KundenID
         }));
-        this.bestellungen = fetchedBestellungen;
+        this.bestellungen.bestellungen = fetchedBestellungen;
         console.log('Bestellungen:', this.bestellungen);
       },
       (error: any) => {
@@ -82,7 +105,7 @@ export class ProfilComponent {
   }
 
   submitForm(): void{
-    const url = '/kunde/${this.user.kundenID}'; 
+    const url = `/kunde/${this.user.kundenID}`; 
     const kunde = {
       Nachname: this.nachname.nativeElement.value,
       Vorname: this.vorname.nativeElement.value,
@@ -96,12 +119,12 @@ export class ProfilComponent {
     this.http.put(url, kunde).subscribe(
       (response) => {
         console.log('Kunde erfolgreich aktualisiert.');
-        this.snackBar.open('Änderungen erfolgreich übernommen.', 'OK', { duration: 3000 });
       },
       (error) => {
         console.error('Fehler beim Aktualisieren des Kunden:', error);
       }
     );
+    this.snackBar.open('Änderungen erfolgreich übernommen.', 'OK', { duration: 3000 });
   }
 
 
@@ -113,13 +136,12 @@ export class ProfilComponent {
       this.snackBar.open('Das eingegebene alte Passwort stimmt nicht überein', 'OK', { duration: 3000 });
       console.log('Das eingegebene alte Passwort ist nicht korrekt.');
     }else{
-      const url = '/kunde/${this.user.kundenID}/passwort'; 
+      const url = `/kunde/${this.user.kundenID}/passwort`; 
       const body = { Passwort: this.newPasswordInput.nativeElement.value };
 
       this.http.put(url, body).subscribe(
       (response) => {
         console.log('Passwort erfolgreich aktualisiert.');
-        this.snackBar.open('Passwort erfolgreich aktualisiert.', 'OK', { duration: 3000 });
         this.oldPasswordInput.nativeElement.set("");
         this.newPasswordInput.nativeElement.set("");
       },
@@ -127,6 +149,7 @@ export class ProfilComponent {
         console.error('Fehler beim Aktualisieren des Passworts:', error);
       }
     );
+    this.snackBar.open('Passwort erfolgreich aktualisiert.', 'OK', { duration: 3000 });
     }
   
   }
