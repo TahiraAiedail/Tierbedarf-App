@@ -13,10 +13,48 @@
   <div class="zahlungsmethoden">
     <h3>Zahlungsmethoden</h3>
     <ul>
-      <li><button (click)="zahlungsmethodeAuswaehlen('Kreditkarte')">Kreditkarte</button></li>
-      <li><button (click)="zahlungsmethodeAuswaehlen('PayPal')">PayPal</button></li>
-      <li><button (click)="zahlungsmethodeAuswaehlen('Überweisung')">Überweisung</button></li>
+      <li>
+        <label>
+          <input type="radio" name="zahlungsmethode" value="Überweisung" (click)="zahlungsmethodeAuswaehlen('Überweisung')">
+          Überweisung
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="radio" name="zahlungsmethode" value="Rechnung" (click)="zahlungsmethodeAuswaehlen('Rechnung')">
+          Rechnung
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="radio" name="zahlungsmethode" value="Klarna" (click)="zahlungsmethodeAuswaehlen('Klarna')">
+          Klarna
+        </label>
+      </li>
       <!-- Weitere Zahlungsmethoden hier hinzufügen -->
+    </ul>
+  </div>
+  <div class="bestellart">
+    <h4>Bestellart</h4>
+    <ul>
+      <li>
+        <label>
+          <input type="radio" name="bestellart" value="Reservierung zur Abholung" (click)="bestellmethodeAuswaehlen('Reservierung zur Abholung')">
+          Reservierung zur Abholung
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="radio" name="bestellart" value="Bestellung zur Abholung" (click)="bestellmethodeAuswaehlen('Bestellung zur Abholung')">
+          Bestellung zur Abholung
+        </label>
+      </li>
+      <li>
+        <label>
+          <input type="radio" name="bestellart" value="Bestellung mit Lieferservice" (click)="bestellmethodeAuswaehlen('Bestellung mit Lieferservice')">
+          Bestellung mit Lieferservice
+        </label>
+      </li>
     </ul>
   </div>
 </div>
