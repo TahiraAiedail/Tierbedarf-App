@@ -1,7 +1,7 @@
 
 <div class="bestellungen-container form-container">
   <h4>Bestellungen</h4>
-  <div *ngIf="bestellungen.bestellungen.length === 0">Keine angemeldeten Events vorhanden.</div>
+  <div *ngIf="bestellungen.bestellungen.length === 0">Keine Bestellungen vorhanden.</div>
   <div *ngFor="let bestellung of bestellungen.bestellungen">
     <div class="bestellung-container">
       <div class="bestellnummer-datum">
@@ -80,11 +80,11 @@
 <div class="form-container">
   <form (submit)="submitFormPasswort()">
     <h4>Passwort ändern</h4>
-    <div>
+    <div class="form-group">
       <label for="oldPassword">Altes Passwort:</label>
       <input type="password" id="oldPassword" name="oldPassword" required #oldPasswordInput>
     </div>
-    <div>
+    <div class="form-group">
       <label for="newPassword">Neues Passwort:</label>
       <input type="password" id="newPassword" name="newPassword" required #newPasswordInput>
     </div>
