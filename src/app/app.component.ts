@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,13 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent {
   title = 'Tierbedarf-App';
 
-  constructor(public authService: AuthService) {}
+ 
+  constructor(private router: Router, public authService: AuthService) {}
 
-
+  navigateToBestellungsuebersicht(): void {
+    const kundenID = this.authService.getKundenID();
+    if (kundenID) {
+      this.router.navigate(['/rechnungsuebersicht', kundenID]);
+    }
+  }
 }

@@ -60,3 +60,9 @@ button[type="submit"]:disabled {
 button[type="submit"]:hover:not([disabled]) {
   background-color: #dcdcdc;
 }
+
+.mat-datepicker-panel {
+  font-size: 12px; 
+  width: auto !important; 
+  max-width: 200px; 
+}

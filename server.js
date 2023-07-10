@@ -6,9 +6,11 @@ const app = express();
 const port = 4200;
 const path = require('path');
 var mysql    = require('mysql'); 
+const e = require('express');
 const server = http.createServer(app)
 
 app.use(express.json());
+
 
 app.post('/api/endpoint', (req, res) => {
     // Extrahiere die Daten aus dem Request-Body
@@ -277,21 +279,53 @@ app.post('/nachbestellungskorb', (req, res) => {
     });
     });
     
-    app.post('/loginKunde', (req, res) => {
+    app.post('/loginKundee', (req, res) => {
         const { email, password } = req.body; 
-        const query = 'SELECT * FROM Kunde WHERE EMail = ? AND Passwort = ?';
-        con.query(query, [email, password], function(error, results, fields) {
-            if(error) throw error;
-            if(results.length > 0) {
-                    //User wurde gefunden, Email und passwort sind korrekt, User wird in Array gespeichert
-                const user = results[0]; // Nehme den ersten User des Arrays
-                res.send({ status: 'success', message: 'Login erfolgreich', data: user });
-            } else {
+        const kundeQuery = 'SELECT * FROM Kunde WHERE EMail = ? AND Passwort = ?';
+        const mitarbeiterQuery = 'SELECT * FROM Mitarbeiter WHERE EMail = ? AND Passwort = ?';
+      
+        con.query(kundeQuery, [email, password], function(kundeError, kundeResults) {
+          if (kundeError) throw kundeError;
+      
+          if (kundeResults.length > 0) {
+            // Benutzer als Kunde gefunden
+            const user = kundeResults[0];
+            res.send({ status: 'success', message: 'Login erfolgreich als Kunde', data: user });
+          } else {
+            // Benutzer als Kunde nicht gefunden, nach Mitarbeiter suchen
+            con.query(mitarbeiterQuery, [email, password], function(mitarbeiterError, mitarbeiterResults) {
+              if (mitarbeiterError) throw mitarbeiterError;
+      
+              if (mitarbeiterResults.length > 0) {
+                // Benutzer als Mitarbeiter gefunden
+                const user = mitarbeiterResults[0];
+                res.send({ status: 'success', message: 'Login erfolgreich als Mitarbeiter', data: user });
+              } else {
+                // Kein Benutzer gefunden
                 res.send({ status: 'fail', message: 'E-Mail oder Passwort nicht korrekt' });
-            }
+              }
+            });
+          }
         });
-    });
-    
+      });
+      
+      app.post('/benutzername', (req, res) => {
+        const { Benutzername } = req.body;
+      
+        con.query('SELECT COUNT(*) AS count FROM Kunde WHERE Benutzername = ?', [Benutzername], (error, results, fields) => {
+          if (error) {
+            throw error;
+          }
+      
+          const count = results[0].count;
+          if (count > 0) {
+            res.status(200).json({ available: false });
+          } else {
+            res.status(200).json({ available: true });
+          }
+        });
+      });
+      
 
 /* Select Statements*/
 
@@ -498,14 +532,49 @@ app.get('/nachbestellungskorb', (req, res) => {
     });
 });
 
-app.get('/mitarbeitermitwenigstenkennenlernterminen', (req, res) => {
-    con.query("SELECT MitarbeiterID FROM Mitarbeiter ORDER BY (SELECT COUNT(*) FROM Kennenlerntermin WHERE Mitarbeiter.MitarbeiterID = Kennenlerntermin.MitarbeiterID) ASC LIMIT 1",
-    function(error, results, fields) {
-        if(error) throw error;
-        console.log(results);
-        res.send(results);
+app.get('/rechnungkundeuebersicht', (req, res) => {
+    const kundenID = req.query.kundenID; // Kunden-ID aus dem Anfrageparameter abrufen
+  
+    con.query('SELECT Rechnungssumme, Rechnungsnummer, Rechnungsdatum FROM Rechnung WHERE KundenID = ?', [kundenID], (error, results, fields) => {
+      if (error) {
+        throw error;
+      }
+      console.log(results);
+      res.send(results);
     });
-});
+  });
+
+  app.get('/rechnungkundedetails/:rechnungsnummer', (req, res) => {
+    const rechnungsnummer = req.params.rechnungsnummer;
+  
+    con.query('SELECT * FROM Rechnung WHERE Rechnungsnummer = ?', [rechnungsnummer], (error, results, fields) => {
+      if (error) {
+        throw error;
+      }
+      console.log(results);
+      res.send(results);
+    });
+  });
+  
+app.get('/mitarbeitermitwenigstenkennenlernterminen', (req, res) => {
+  
+    con.query('SELECT MitarbeiterID FROM Mitarbeiter ORDER BY (SELECT COUNT(*) FROM Kennenlerntermin WHERE Mitarbeiter.MitarbeiterID = Kennenlerntermin.MitarbeiterID) ASC LIMIT 1',
+      function (error, results, fields) {
+      if (error) throw error;
+
+      console.log(results);
+      
+  
+      if (results.length > 0) {
+        const employee = results[0];
+        const response = {
+          MitarbeiterID: employee.MitarbeiterID
+        };
+        res.json(response); 
+      } else {
+        res.sendStatus(404); 
+      }
+    });
 
 
 /* Delete Statements */
@@ -662,3 +731,6 @@ app.delete('/nachbestellungskorb/:id', (req, res) => {
         res.send(results);
     });
 });
+
+})
+
