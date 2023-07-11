@@ -347,7 +347,6 @@ app.post('/nachbestellungskorb', (req, res) => {
           } else {
             res.status(200).json({ available: true });
           }
-          res.send(results);
         });
       });
       
