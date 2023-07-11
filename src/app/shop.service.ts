@@ -13,11 +13,24 @@ export class ShopService {
   }
 
   createBestellung(bestellung: any) {
-    // Datum in das richtige Format umwandeln (optional)
-    const formattedDatum = bestellung.datum.toISOString().slice(0, 10);
-
-    // Bestellung an den Server senden
-    return this.http.post('/api/bestellung', { ...bestellung, datum: formattedDatum });
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+  
+    const formattedDate = `${year}-${month}-${day}`;
+  
+    const requestBody = {
+      Datum: formattedDate,
+      BestellartID: bestellung.bestellartID,
+      MitarbeiterID: bestellung.mitarbeiterID,
+      KundenID: bestellung.kundenID,
+      Zahlungsart: bestellung.zahlungsart 
+    };
+  
+    return this.http.post('/bestellung', requestBody);
   }
+  
+  
 
 }

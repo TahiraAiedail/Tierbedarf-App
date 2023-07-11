@@ -14,6 +14,7 @@ export class AppComponent {
 
   navigateToBestellungsuebersicht(): void {
     const kundenID = this.authService.getKundenID();
+    console.log('Kunden-ID:', kundenID); // Konsolenausgabe
     if (kundenID) {
       this.router.navigate(['/rechnungsuebersicht', kundenID]);
     }

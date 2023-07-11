@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'kennenlernbestaetigung', component: KennenlernbestaetigungComponent},
   { path: 'rechnungkunde', component: RechnungkundeComponent},
-  { path: 'rechnungsuebersichtkunde', component: RechnungsuebersichtkundeComponent},
+  { path: 'rechnungsuebersichtkunde/:kundenID', component: RechnungsuebersichtkundeComponent},
   { path: 'testnr2', component: ErsatzfuerregComponent},
   { path: 'bestellabschluss', component: WarenkorbComponent}
 ];
