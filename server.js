@@ -105,6 +105,7 @@ app.post('/kunde', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
     });
     });
 
@@ -115,6 +116,8 @@ app.post('/kundenzahlungsmethode', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
+
     });
     });
 
@@ -125,6 +128,8 @@ app.post('/event', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
+
     });
     });
 
@@ -135,6 +140,7 @@ app.post('/mitarbeiter', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
     });
     });
 
@@ -145,6 +151,8 @@ app.post('/eventteilnehmerliste', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
+
     });
     });
 
@@ -155,6 +163,7 @@ app.post('/eventleiterliste', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
     });
     });
 
@@ -165,6 +174,7 @@ app.post('/tierheimtiere', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
     });
     });
  
@@ -176,6 +186,8 @@ app.post('/tierfotos', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
+
     });
     });
 
@@ -186,6 +198,7 @@ app.post('/kennenlerntermin', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
     });
     });
 
@@ -196,6 +209,7 @@ app.post('/waren', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
     });
     });
 
@@ -206,6 +220,8 @@ app.post('/warenfoto', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
+
     });
     });
 
@@ -216,6 +232,7 @@ app.post('/bestellart', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
     });
     });
 
@@ -226,6 +243,7 @@ app.post('/bestellung', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
     });
     });
 
@@ -236,6 +254,7 @@ app.post('/warenkorb', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
     });
     });
 
@@ -246,6 +265,7 @@ app.post('/rechnungsstatus', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
     });
     });
 
@@ -256,6 +276,8 @@ app.post('/rechnung', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
+
     });
     });
 
@@ -266,6 +288,7 @@ app.post('/nachbestellung', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
     });
     });
 
@@ -276,6 +299,7 @@ app.post('/nachbestellungskorb', (req, res) => {
     function(error, results, fields) {
         if (error) throw error;
         console.log(results.insertId);
+        res.send(results);
     });
     });
     
@@ -323,6 +347,7 @@ app.post('/nachbestellungskorb', (req, res) => {
           } else {
             res.status(200).json({ available: true });
           }
+          res.send(results);
         });
       });
       
