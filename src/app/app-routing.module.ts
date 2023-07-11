@@ -14,6 +14,8 @@ import { KennenlernbestaetigungComponent } from './kennenlernbestaetigung/kennen
 import { RechnungkundeComponent } from './rechnungkunde/rechnungkunde.component';
 import { RechnungsuebersichtkundeComponent } from './rechnungsuebersichtkunde/rechnungsuebersichtkunde.component';
 import { ErsatzfuerregComponent } from './ersatzfuerreg/ersatzfuerreg.component';
+import { ProfilmitarbeiterComponent } from './profilmitarbeiter/profilmitarbeiter.component';
+import { WarenkorbComponent } from './warenkorb/warenkorb.component';
 
 
 const routes: Routes = [
@@ -24,13 +26,15 @@ const routes: Routes = [
   { path: 'kennenlernformular', component: KennenlernformularComponent },
   { path: 'home', component: HomeComponent},
   { path: 'profil', component: ProfilComponent},
+  { path: 'profilmitarbeiter', component: ProfilmitarbeiterComponent},
   { path: 'login', component: LoginComponent},
   { path: 'anmeldeformularevent', component: AnmeldeformulareventComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'kennenlernbestaetigung', component: KennenlernbestaetigungComponent},
   { path: 'rechnungkunde', component: RechnungkundeComponent},
   { path: 'rechnungsuebersichtkunde', component: RechnungsuebersichtkundeComponent},
-  { path: 'testnr2', component: ErsatzfuerregComponent}
+  { path: 'testnr2', component: ErsatzfuerregComponent},
+  { path: 'bestellabschluss', component: WarenkorbComponent}
 ];
 
 @NgModule({

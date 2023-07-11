@@ -18,6 +18,7 @@
                 <li class="nav-item"><a class="nav-link" routerLink="tierheimtiere">Tierheimtiere</a></li>
                 <li class="nav-item"><a class="nav-link" routerLink="quiz">Quiz</a></li>
                 <li *ngIf="isKundeLoggedIn()" class="nav-item"><a class="nav-link" routerLink="profil">Profil</a></li>
+                <li *ngIf="isMitarbeiterLoggedIn()" class="nav-item"><a class="nav-link" routerLink="profilmitarbeiter">Profil</a></li>
             </ul>
             <ul class="navbar-nav" class="loginUl">
               <li class="nav-item" class="loginLi" *ngIf="!authService.isLoggedIn">

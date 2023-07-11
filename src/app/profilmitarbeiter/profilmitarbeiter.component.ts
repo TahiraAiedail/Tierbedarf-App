@@ -4,17 +4,19 @@ import { AuthService } from '../auth/auth.service';
 import { ElementRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
-
 @Component({
-  selector: 'app-profil',
-  templateUrl: './profil.component.html',
-  styleUrls: ['./profil.component.css']
+  selector: 'app-profilmitarbeiter',
+  templateUrl: './profilmitarbeiter.component.html',
+  styleUrls: ['./profilmitarbeiter.component.css']
 })
+export class ProfilmitarbeiterComponent {
 
+  public events: any = {
+    events: []
+  };
 
-export class ProfilComponent {
-
+  public eventTeilnehmer: any = {};
+  
   @ViewChild('oldPasswordInput') oldPasswordInput!: ElementRef;
   @ViewChild('newPasswordInput') newPasswordInput!: ElementRef;
   @ViewChild('vorname') vorname!: ElementRef;
@@ -25,18 +27,9 @@ export class ProfilComponent {
   @ViewChild('plz') plz!: ElementRef;
   @ViewChild('telefon') telefon!: ElementRef;
 
-
-  public bestellungen: any = {
-    bestellungen: []
-  };
-
-  public kundenevents: any = {
-    events: []
-  };
-
   user = {
     benutzername: this.authService.getBenutzername(),
-    kundenID: this.authService.getKundenID(),
+    mitarbeiterID: this.authService.getKundenID(),
     vorname: this.authService.getVorname(),
     nachname: this.authService.getNachname(),
     geburtsdatum:this.authService.getGeburtsdatum(),
@@ -51,48 +44,53 @@ export class ProfilComponent {
   };
 
   ngOnInit(): void {
-    this.getBestellungen();
-    this.getKundenEvents();
+    this.getEvents();
   }
 
-  getKundenEvents() {
-    this.http.get<any[]>(`/kunde/${this.user.kundenID}/events`).subscribe(
+  getEvents(): void {
+    this.http.get<any[]>('/events/before').subscribe(
       (response: any[]) => {
-      const fetchedEvents = response.map((item) => ({ 
-        id: item.EventID,
-        datum: this.formatDate(item.Datum),
-        name: item.Name,
-        thema: item.Thema,
-        beschreibung: item.Beschreibung
-      }));
-      this.kundenevents.events = fetchedEvents;
+        const fetchedEvents = response.map((item) => ({ 
+          id: item.EventID,
+          datum: this.formatDate(item.Datum),
+          name: item.Name,
+          thema: item.Thema,
+          beschreibung: item.Beschreibung
+        }));
+        this.events.events = fetchedEvents;
+        this.events.events.forEach((event: any) => {
+          this.getTeilnehmer(event.id);
+        });
+        },
+    (error) => {
+      console.error('Fehler beim Abrufen der bevorstehenden Events:', error);
+    }
+  );
+  }
+
+  getTeilnehmer(eventID: number): void {
+    this.http.get<any[]>(`/events/${eventID}/teilnehmer`).subscribe(
+      (response) => {
+        const fetchedTeilnehmer = response.map((item) => ({
+          id: item.KundenID,
+          nachname: item.Nachname,
+          vorname: item.Vorname,
+          email: item.Email
+        }));
+        
+        this.eventTeilnehmer[eventID] = fetchedTeilnehmer;
       },
       (error) => {
-        console.error('Fehler beim Abrufen der Events:', error);
-      }
-    );
-  }
-
-  getBestellungen() {
-    console.log('getBestellungen() wird aufgerufen');
-    this.http.get<any[]>(`/bestellung/${this.user.kundenID}`).subscribe(
-      (response: any[]) => {
-        const fetchedBestellungen = response.map((item) => ({
-          bestellnummer: item.Bestellnummer,
-          datum: this.formatDate(item.Datum),
-          bestellartID: item.BestellartID,
-          mitarbeiterID: item.MitarbeiterID,
-          kundenID: item.KundenID
-        }));
-        this.bestellungen.bestellungen = fetchedBestellungen;
-        console.log('Bestellungen:', this.bestellungen);
-      },
-      (error: any) => {
-        console.error('Fehler beim Abrufen der Bestellungen:', error);
+        console.error('Fehler beim Abrufen der Teilnehmer:', error);
       }
     );
   }
   
+
+  getTeilnehmerForEvent(eventID: number): any[] {
+    return this.eventTeilnehmer[eventID] || [];
+  }
+
   formatDate(dateStr: string): string {
     let date = new Date(dateStr);
     let day = ("0" + date.getDate()).slice(-2);
@@ -105,8 +103,8 @@ export class ProfilComponent {
   }
 
   submitForm(): void{
-    const url = `/kunde/${this.user.kundenID}`; 
-    const kunde = {
+    const url = `/mitarbeiter/${this.user.mitarbeiterID}`; 
+    const mitarbeiter = {
       Nachname: this.nachname.nativeElement.value,
       Vorname: this.vorname.nativeElement.value,
       Telefonnummer: this.telefon.nativeElement.value,
@@ -116,20 +114,16 @@ export class ProfilComponent {
       PLZ: this.plz.nativeElement.value,
     };
 
-    this.http.put(url, kunde).subscribe(
+    this.http.put(url, mitarbeiter).subscribe(
       (response) => {
-        console.log('Kunde erfolgreich aktualisiert.');
+        console.log('Mitarbeiter erfolgreich aktualisiert.');
         this.snackBar.open('Änderungen erfolgreich übernommen.', 'OK', { duration: 3000 });
       },
       (error) => {
-        console.error('Fehler beim Aktualisieren des Kunden:', error);
+        console.error('Fehler beim Aktualisieren:', error);
       }
     );
-   
   }
-
-
-
 
   submitFormPasswort(): void {
     // Überprüfen, ob das eingegebene alte Passwort mit dem gespeicherten alten Passwort übereinstimmt
@@ -137,25 +131,23 @@ export class ProfilComponent {
       this.snackBar.open('Das eingegebene alte Passwort stimmt nicht überein', 'OK', { duration: 3000 });
       console.log('Das eingegebene alte Passwort ist nicht korrekt.');
     }else{
-      const url = `/kunde/${this.user.kundenID}/passwort`; 
+      const url = `/mitarbeiter/${this.user.mitarbeiterID}/passwort`; 
       const body = { Passwort: this.newPasswordInput.nativeElement.value };
 
-      this.http.put(url, body).subscribe({
-        next: (): void => {
-          console.log('Passwort erfolgreich aktualisiert.');
-          this.oldPasswordInput.nativeElement.value = "";
-          this.newPasswordInput.nativeElement.value = "";
-          this.snackBar.open('Passwort erfolgreich aktualisiert.', 'OK', { duration: 3000 });
-        },
-        error: (error) => {
-          console.error('Fehler beim Aktualisieren des Passworts:', error);
-        }
-      });
-      
-    
+      this.http.put(url, body).subscribe(
+      (response) => {
+        console.log('Passwort erfolgreich aktualisiert.');
+        this.snackBar.open('Passwort erfolgreich aktualisiert.', 'OK', { duration: 3000 });
+        this.oldPasswordInput.nativeElement.set("");
+        this.newPasswordInput.nativeElement.set("");
+      },
+      (error) => {
+        console.error('Fehler beim Aktualisieren des Passworts:', error);
+      }
+    );
+  
     }
   
   }
-
 
 }

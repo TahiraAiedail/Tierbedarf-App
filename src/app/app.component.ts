@@ -27,4 +27,13 @@ export class AppComponent {
       return false;
     }
   }
+
+  isMitarbeiterLoggedIn(): boolean {
+    // Rufe den Login-Status ab
+    if (this.authService.isLoggedIn && this.authService.getUserTyp() === 'mitarbeiter') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

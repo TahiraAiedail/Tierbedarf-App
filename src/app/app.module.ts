@@ -31,6 +31,7 @@ import { RechnungkundeComponent } from './rechnungkunde/rechnungkunde.component'
 import { RechnungsuebersichtkundeComponent } from './rechnungsuebersichtkunde/rechnungsuebersichtkunde.component';
 import { AuthService } from './auth/auth.service';
 import { ErsatzfuerregComponent } from './ersatzfuerreg/ersatzfuerreg.component';
+import { ProfilmitarbeiterComponent } from './profilmitarbeiter/profilmitarbeiter.component';
 import { WarenkorbComponent } from './warenkorb/warenkorb.component';
 
 @NgModule({
@@ -51,6 +52,7 @@ import { WarenkorbComponent } from './warenkorb/warenkorb.component';
     RechnungkundeComponent,
     RechnungsuebersichtkundeComponent,
     ErsatzfuerregComponent,
+    ProfilmitarbeiterComponent,
     WarenkorbComponent,
   ],
 

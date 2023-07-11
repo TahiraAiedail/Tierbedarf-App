@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ShopService } from '../shop.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class ProduktkatalogComponent implements OnInit {
   waren: any[] = [];
   warenkorb: any[] = [];
 
-  constructor(private router: Router, private shopService: ShopService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private shopService: ShopService) { }
 
   ngOnInit(): void {
     this.getWaren();
@@ -28,7 +28,6 @@ export class ProduktkatalogComponent implements OnInit {
           Lagerbestand: item.Lagerbestand,
           bild: '../assets/images/' + item.Bezeichnung + '.jpg',
         }));
-
         this.waren = fetchedWaren;
       },
       (error: any) => {
@@ -36,7 +35,7 @@ export class ProduktkatalogComponent implements OnInit {
       }
     );
   }
-
+  
   bestellen(ware: any) {
     const bestellterArtikel = {
       ...ware,
@@ -63,7 +62,12 @@ export class ProduktkatalogComponent implements OnInit {
   }
 
   bezahlen() {
-    this.router.navigate(['/warenkorb']);
+    const queryParams = {
+      warenkorb: JSON.stringify(this.warenkorb),
+      gesamtsumme: this.getGesamtsumme()
+    };
+  
+    this.router.navigate(['/bestellabschluss'], { queryParams });
   }
   
 }

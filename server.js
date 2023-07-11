@@ -581,6 +581,36 @@ app.get('/rechnungkundeuebersicht', (req, res) => {
     });
   });
 
+  app.get('/events/:eventid/teilnehmer', (req, res) => {
+    const eventid = req.params.eventid;
+    con.query(
+      'SELECT Kunde.KundenID, Kunde.Nachname, Kunde.Vorname, Kunde.Email ' +
+      'FROM Kunde ' +
+      'INNER JOIN EventTeilnehmerliste ON Kunde.KundenID = EventTeilnehmerliste.KundenID ' +
+      'WHERE EventTeilnehmerliste.EventID = ?',
+      [eventid],
+      function(error, results, fields) {
+        if (error) throw error;
+        res.send(results);
+      }
+    );
+  });
+
+  app.get('/events/before', (req, res) => {
+    const currentDate = new Date();
+    
+    con.query(
+      'SELECT * FROM Event WHERE Datum > ?',
+      [currentDate],
+      function(error, results, fields) {
+        if (error) throw error;
+        res.send(results);
+      }
+    );
+  });
+  
+  
+
   app.get('/rechnungkundedetails/:rechnungsnummer', (req, res) => {
     const rechnungsnummer = req.params.rechnungsnummer;
   
@@ -800,3 +830,30 @@ app.put('/kunde/:kundenid', (req, res) => {
       }
     );
   });
+
+  app.put('/mitarbeiter/:mitarbeiterid', (req, res) => {
+    const mitarbeiterid = req.params.mitarbeiterid;
+    const { Nachname, Vorname, Telefonnummer, Straße, Hausnummer, Stadt, PLZ } = req.body;
+    con.query(
+      'UPDATE Mitarbeiter SET Nachname = ?, Vorname = ?, Telefonnummer = ?, Straße = ?, Hausnummer = ?, Stadt = ?, PLZ = ? WHERE MitarbeiterID = ?',
+      [Nachname, Vorname, Telefonnummer, Straße, Hausnummer, Stadt, PLZ, mitarbeiterid],
+      function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.affectedRows);
+      }
+    );
+  });
+  
+  app.put('/mitarbeiter/:mitarbeiterid/passwort', (req, res) => {
+    const mitarbeiterid = req.params.mitarbeiterid;
+    const { Passwort } = req.body;
+    con.query(
+      'UPDATE Mitarbeiter SET Passwort = ? WHERE MitarbeiterID = ?',
+      [Passwort, mitarbeiterid],
+      function(error, results, fields) {
+        if (error) throw error;
+        console.log(results.affectedRows);
+      }
+    );
+  });
+  
