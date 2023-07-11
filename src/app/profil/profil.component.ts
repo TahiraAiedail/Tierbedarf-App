@@ -119,12 +119,13 @@ export class ProfilComponent {
     this.http.put(url, kunde).subscribe(
       (response) => {
         console.log('Kunde erfolgreich aktualisiert.');
+        this.snackBar.open('Änderungen erfolgreich übernommen.', 'OK', { duration: 3000 });
       },
       (error) => {
         console.error('Fehler beim Aktualisieren des Kunden:', error);
       }
     );
-    this.snackBar.open('Änderungen erfolgreich übernommen.', 'OK', { duration: 3000 });
+   
   }
 
 
@@ -139,17 +140,19 @@ export class ProfilComponent {
       const url = `/kunde/${this.user.kundenID}/passwort`; 
       const body = { Passwort: this.newPasswordInput.nativeElement.value };
 
-      this.http.put(url, body).subscribe(
-      (response) => {
-        console.log('Passwort erfolgreich aktualisiert.');
-        this.oldPasswordInput.nativeElement.set("");
-        this.newPasswordInput.nativeElement.set("");
-      },
-      (error) => {
-        console.error('Fehler beim Aktualisieren des Passworts:', error);
-      }
-    );
-    this.snackBar.open('Passwort erfolgreich aktualisiert.', 'OK', { duration: 3000 });
+      this.http.put(url, body).subscribe({
+        next: (): void => {
+          console.log('Passwort erfolgreich aktualisiert.');
+          this.oldPasswordInput.nativeElement.value = "";
+          this.newPasswordInput.nativeElement.value = "";
+          this.snackBar.open('Passwort erfolgreich aktualisiert.', 'OK', { duration: 3000 });
+        },
+        error: (error) => {
+          console.error('Fehler beim Aktualisieren des Passworts:', error);
+        }
+      });
+      
+    
     }
   
   }
