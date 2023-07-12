@@ -43,4 +43,5 @@ export class LoginComponent {
     this.authService.logout();
     this.message = 'status: logged out'
   }
+
 }
