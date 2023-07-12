@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -27,7 +28,7 @@ export class AuthService {
   usertyp: string | null = null;
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string): Observable<any> {
     return this.http.post<any>('/loginKunde', { email, password }).pipe(
@@ -134,6 +135,8 @@ export class AuthService {
   logout(): void {
     this.isLoggedIn = false;
     this.benutzername='';
+    this.router.navigate(['/home']);
+
   }
 
   setUserTyp(email: string): void {
