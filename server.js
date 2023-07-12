@@ -814,6 +814,7 @@ app.put('/kunde/:kundenid', (req, res) => {
       function(error, results, fields) {
         if (error) throw error;
         console.log(results.affectedRows);
+        res.send(results);
       }
     );
   });
@@ -827,6 +828,7 @@ app.put('/kunde/:kundenid', (req, res) => {
       function(error, results, fields) {
         if (error) throw error;
         console.log(results.affectedRows);
+        res.send(results);
       }
     );
   });
@@ -840,6 +842,7 @@ app.put('/kunde/:kundenid', (req, res) => {
       function(error, results, fields) {
         if (error) throw error;
         console.log(results.affectedRows);
+        res.send(results);
       }
     );
   });
@@ -853,6 +856,7 @@ app.put('/kunde/:kundenid', (req, res) => {
       function(error, results, fields) {
         if (error) throw error;
         console.log(results.affectedRows);
+        res.send(results);
       }
     );
   });
