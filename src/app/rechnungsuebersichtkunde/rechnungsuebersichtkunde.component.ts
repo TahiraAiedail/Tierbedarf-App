@@ -26,9 +26,9 @@ export class RechnungsuebersichtkundeComponent implements OnInit {
     },
     {
       Rechnungsnummer: 3,
-      Rechnungsdatum: '2022-03-25',
-      Rechnungssumme: 2.99,
-      Rechnungsstatus: 'bezahlt'
+      Rechnungsdatum: '2023-07-12',
+      Rechnungssumme: 8.99,
+      Rechnungsstatus: 'offen'
     }
   ];
 

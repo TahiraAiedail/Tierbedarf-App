@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ShopService } from '../shop.service';
 
 @Component({
@@ -12,6 +12,7 @@ export class WarenkorbComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private shopService: ShopService
   ) { }
 
@@ -44,10 +45,20 @@ export class WarenkorbComponent implements OnInit {
   }
 
   bestellmethodeAuswaehlen(bestellmethode: string) {
-    console.log('Bestellmethode ausgewählt : ${bestellmethode}');
+    console.log(`Bestellmethode ausgewählt: ${bestellmethode}`);
   }
 
   bestellungAbschliessen() {
+    // Hier wird der Alert mit der Nachricht "Bestellung erfolgreich" angezeigt
+    alert('Die Bestellung war erfolgreich');
+
+    // Weiterleitung zur Home-Seite
+    this.router.navigate(['']); // Geben Sie hier den Pfad zur Home-Seite an
+  }
+}
+
+
+  /*bestellungAbschliessen() {
     // Daten für die Bestellung zusammenstellen
     const zahlungsart = 'gewählte Zahlungsart'; // Hier den tatsächlichen Wert verwenden
     const bestellung = {
@@ -70,8 +81,8 @@ export class WarenkorbComponent implements OnInit {
         // Behandeln Sie den Fehler entsprechend
       }
     );
-  }
-}  
+  }*/
+  
 
 
 
