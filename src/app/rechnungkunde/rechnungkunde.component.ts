@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './rechnungkunde.component.html',
   styleUrls: ['./rechnungkunde.component.css']
 })
+
+
 export class RechnungkundeComponent implements OnInit {
   rechnungsdetails: any[] = [];
 

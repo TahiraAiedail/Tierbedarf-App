@@ -9,7 +9,41 @@ import { Router } from '@angular/router';
   templateUrl: './rechnungsuebersichtkunde.component.html',
   styleUrls: ['./rechnungsuebersichtkunde.component.css']
 })
+
 export class RechnungsuebersichtkundeComponent implements OnInit {
+  rechnungsdaten: any[] = [
+    {
+      Rechnungsnummer: 1,
+      Rechnungsdatum: '2020-10-13',
+      Rechnungssumme: 111.75,
+      Rechnungsstatus: 'bezahlt'
+    },
+    {
+      Rechnungsnummer: 2,
+      Rechnungsdatum: '2021-04-03',
+      Rechnungssumme: 206.88,
+      Rechnungsstatus: 'bezahlt'
+    },
+    {
+      Rechnungsnummer: 3,
+      Rechnungsdatum: '2023-07-12',
+      Rechnungssumme: 8.99,
+      Rechnungsstatus: 'offen'
+    }
+  ];
+
+  constructor() {}
+
+  ngOnInit(): void {
+      
+  }
+
+  zeigeRechnungsdetails(rechnungsnummer: number): void {
+    // Code zum Anzeigen der Rechnungsdetails
+  }
+
+
+/*export class RechnungsuebersichtkundeComponent implements OnInit {
   rechnungsdaten: any[] = [];
 
   constructor(private http: HttpClient, private authService: AuthService, private router: Router) {}
@@ -35,4 +69,5 @@ export class RechnungsuebersichtkundeComponent implements OnInit {
   zeigeRechnungsdetails(rechnungsnummer: number): void {
     this.router.navigate(['/rechnungkunde', rechnungsnummer]);
   }
+}*/
 }

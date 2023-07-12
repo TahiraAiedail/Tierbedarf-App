@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ShopService } from '../shop.service';
+
 @Component({
   selector: 'app-warenkorb',
   templateUrl: './warenkorb.component.html',
@@ -7,10 +9,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WarenkorbComponent implements OnInit {
   warenkorb: any[] = [];
-  constructor(private route: ActivatedRoute) { }
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private shopService: ShopService
+  ) { }
+
   ngOnInit(): void {
     this.getWarenkorb();
   }
+
   getWarenkorb() {
     this.route.queryParams.subscribe(params => {
       if (params && params['warenkorb']) {
@@ -21,6 +30,7 @@ export class WarenkorbComponent implements OnInit {
       }
     });
   }
+
   getGesamtsumme() {
     let gesamtsumme = 0;
     for (const artikel of this.warenkorb) {
@@ -28,18 +38,52 @@ export class WarenkorbComponent implements OnInit {
     }
     return gesamtsumme.toFixed(2);
   }
-  zahlungsmethodeAuswaehlen(zahlungsmethode: string) {
+
+  zahlungsmethodeAuswaehlen(zahlungsart: string) {
     // Implementieren Sie die gewünschte Logik für die Auswahl der Zahlungsmethode
-    console.log('Zahlungsmethode ausgewählt: ${zahlungsmethode}');
+    console.log(`Zahlungsart ausgewählt: ${zahlungsart}`);
   }
 
   bestellmethodeAuswaehlen(bestellmethode: string) {
-    console.log('Bestellmethode ausgewählt : ${bestellmethode}');
+    console.log(`Bestellmethode ausgewählt: ${bestellmethode}`);
   }
 
   bestellungAbschliessen() {
-    // Implementieren Sie die Logik zum Abschließen der Bestellung hier
-    console.log('Bestellung wurde abgeschlossen');
-    // Weitere Logik für die Bestellungsabwicklung hier...
+    // Hier wird der Alert mit der Nachricht "Bestellung erfolgreich" angezeigt
+    alert('Die Bestellung war erfolgreich');
+
+    // Weiterleitung zur Home-Seite
+    this.router.navigate(['']); // Geben Sie hier den Pfad zur Home-Seite an
   }
 }
+
+
+  /*bestellungAbschliessen() {
+    // Daten für die Bestellung zusammenstellen
+    const zahlungsart = 'gewählte Zahlungsart'; // Hier den tatsächlichen Wert verwenden
+    const bestellung = {
+      zahlungsart,
+      warenkorb: this.warenkorb
+    };
+  
+    // Bestellung an den ShopService senden
+    this.shopService.createBestellung(bestellung).subscribe(
+      (bestellungsnummer) => {
+        console.log('Bestellung wurde abgeschlossen. Bestellungsnummer:', bestellungsnummer);
+  
+        // Erfolgsmeldung anzeigen
+        alert('Die Bestellung wurde erfolgreich abgeschlossen.');
+  
+        // Weitere Logik für die Bestellungsabwicklung hier...
+      },
+      (error) => {
+        console.error('Fehler beim Abschließen der Bestellung:', error);
+        // Behandeln Sie den Fehler entsprechend
+      }
+    );
+  }*/
+  
+
+
+
+

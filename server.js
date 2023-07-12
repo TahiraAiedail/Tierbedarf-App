@@ -236,7 +236,7 @@ app.post('/bestellart', (req, res) => {
     });
     });
 
-app.post('/bestellung', (req, res) => {
+/*app.post('/bestellung', (req, res) => {
     const {Datum, BestellartID, MitarbeiterID, KundenID} = req.body;
     con.query(`INSERT INTO Bestellung(Datum, BestellartID, MitarbeiterID, KundenID) VALUES(?,?,?,?)`,
     [Datum, BestellartID, MitarbeiterID, KundenID],
@@ -245,7 +245,7 @@ app.post('/bestellung', (req, res) => {
         console.log(results.insertId);
         res.send(results);
     });
-    });
+    });*/
 
 app.post('/warenkorb', (req, res) => {
     const {Warenmenge, WarenID, Bestellnummer} = req.body;
@@ -347,7 +347,6 @@ app.post('/nachbestellungskorb', (req, res) => {
           } else {
             res.status(200).json({ available: true });
           }
-          res.send(results);
         });
       });
       
@@ -860,4 +859,35 @@ app.put('/kunde/:kundenid', (req, res) => {
       }
     );
   });
+  
+ // Route zum Erstellen einer Bestellung
+ app.post('/api/bestellung', (req, res) => {
+    const zahlungsart = req.body.zahlungsart;
+    const warenkorb = req.body.warenkorb;
+    const datum = req.body.datum; // Datum aus dem Request Body entnehmen
+  
+    // Weitere Verarbeitung der Bestellung, z. B. Speichern in der Datenbank
+    // Generierung der Bestellungsnummer, etc.
+  
+    // Beispiel: Einfügen der Bestellung in die Datenbank und Rückgabe der Bestellungsnummer
+    const query = 'INSERT INTO Bestellung (Datum, BestellartID, MitarbeiterID, KundenID, Zahlungsart) VALUES (?, ?, ?, ?, ?)';
+    const values = [datum, null, null, null, null]; // Platzhalterwerte für BestellartID, MitarbeiterID und KundenID
+  
+    connection.query(query, values, (error, results) => {
+      if (error) {
+        console.error('Fehler beim Speichern der Bestellung:', error);
+        res.status(500).json({ error: 'Fehler beim Speichern der Bestellung' });
+      } else {
+        const bestellungsnummer = results.insertId;
+        res.status(200).json(bestellungsnummer);
+      }
+    });
+  });
+  
+  
+  
+  
+  
+  
+  
   
