@@ -29,5 +29,9 @@
 .loginUl {
     width: 100% !important;
     list-style-type: none;
+    display: flex;
+    padding: 7px 0;
+    margin-bottom: 0;
 }
+
 
