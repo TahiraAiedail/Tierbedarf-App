@@ -74,7 +74,7 @@ export class ErsatzfuerregComponent implements OnInit {
       if (control) {
         control.valueChanges.subscribe(() => {
           if (control.invalid && (control.dirty || control.touched)) {
-            control.markAsTouched(); // Markiere das Feld als berührt, um die Fehleranzeige auszulösen
+            control.markAsTouched(); 
           }
         });
       }
