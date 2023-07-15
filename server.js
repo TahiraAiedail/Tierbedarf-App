@@ -83,18 +83,7 @@ app.get('/tiere', (req, res) => {
     });
 })
 
-/*
-GET-ANFRAGEN
-*/
 
-/*app.get('/tierheimtiere', (req, res) => {
-    con.query("SELECT * FROM Tierheimtiere",
-    function(error, results, fields) {
-        if(error) throw error;
-        console.log(results);
-        res.send(results);
-    });
-})*/
 
 /* Inserts*/
 
@@ -883,11 +872,3 @@ app.put('/kunde/:kundenid', (req, res) => {
       }
     });
   });
-  
-  
-  
-  
-  
-  
-  
-  
