@@ -83,18 +83,7 @@ app.get('/tiere', (req, res) => {
     });
 })
 
-/*
-GET-ANFRAGEN
-*/
 
-/*app.get('/tierheimtiere', (req, res) => {
-    con.query("SELECT * FROM Tierheimtiere",
-    function(error, results, fields) {
-        if(error) throw error;
-        console.log(results);
-        res.send(results);
-    });
-})*/
 
 /* Inserts*/
 
@@ -192,7 +181,7 @@ app.post('/tierfotos', (req, res) => {
     });
 
 app.post('/kennenlerntermin', (req, res) => {
-    const {Datum, KundenID, TierID, MitarbeiterID} = req.body; // Extrahieren der Werte aus dem Request-Body
+    const {Datum, KundenID, TierID, MitarbeiterID} = req.body; 
     con.query(`INSERT INTO Kennenlerntermin(Datum, KundenID, TierID, MitarbeiterID) VALUES(?,?,?,?)`,
     [Datum, KundenID, TierID, MitarbeiterID],
     function(error, results, fields) {
@@ -236,7 +225,7 @@ app.post('/bestellart', (req, res) => {
     });
     });
 
-app.post('/bestellung', (req, res) => {
+/*app.post('/bestellung', (req, res) => {
     const {Datum, BestellartID, MitarbeiterID, KundenID} = req.body;
     con.query(`INSERT INTO Bestellung(Datum, BestellartID, MitarbeiterID, KundenID) VALUES(?,?,?,?)`,
     [Datum, BestellartID, MitarbeiterID, KundenID],
@@ -245,7 +234,7 @@ app.post('/bestellung', (req, res) => {
         console.log(results.insertId);
         res.send(results);
     });
-    });
+    });*/
 
 app.post('/warenkorb', (req, res) => {
     const {Warenmenge, WarenID, Bestellnummer} = req.body;
@@ -281,27 +270,7 @@ app.post('/rechnung', (req, res) => {
     });
     });
 
-app.post('/nachbestellung', (req, res) => {
-    const {Nachbestellungsnummer, Firma, Datum, MitarbeiterID} = reg.body;
-    con.query(`INSERT INTO Nachbestellung(Nachbestellungsnummer, Firma, Datum, MitarbeiterID) VALUES(?,?,?,?)`,
-    [Nachbestellungsnummer, Firma, Datum, MitarbeiterID],
-    function(error, results, fields) {
-        if (error) throw error;
-        console.log(results.insertId);
-        res.send(results);
-    });
-    });
 
-app.post('/nachbestellungskorb', (req, res) => {
-    const {Warenmenge, WarenID, NachbestellungsID} = req.body;
-    con.query(`INSERT INTO Nachbestellungskorb(Warenmenge, WarenID, NachbestellungsID) VALUES(?,?,?)`,
-    [Warenmenge, WarenID, NachbestellungsID],
-    function(error, results, fields) {
-        if (error) throw error;
-        console.log(results.insertId);
-        res.send(results);
-    });
-    });
     
     app.post('/loginKunde', (req, res) => {
         const { email, password } = req.body; 
@@ -350,7 +319,23 @@ app.post('/nachbestellungskorb', (req, res) => {
         });
       });
       
-
+      app.post('/email', (req, res) => {
+        const { EMail } = req.body;
+      
+        con.query('SELECT COUNT(*) AS count FROM Kunde WHERE EMail = ?', [EMail], (error, results, fields) => {
+          if (error) {
+            throw error;
+          }
+      
+          const count = results[0].count;
+          if (count > 0) {
+            res.status(200).json({ available: false });
+          } else {
+            res.status(200).json({ available: true });
+          }
+        });
+      });
+      
 /* Select Statements*/
 
 app.get('/kunde', (req, res) => {
@@ -372,7 +357,7 @@ app.get('/kundenzahlungsmethode', (req, res) => {
 });
 
 app.get('/event', (req, res) => {
-    con.query("SELECT * FROM Event",
+    con.query("SELECT * FROM Event WHERE Datum >= CURDATE()",
     function(error, results, fields) {
         if(error) throw error;
         console.log(results);
@@ -541,7 +526,41 @@ app.get('/rechnungsstatus', (req, res) => {
     });
 });
 
-app.get('/rechnung', (req, res) => {
+/*app.get('rechnungkundedetails', (req, res) => {
+    con.query("SELECT * FROM Rechnung",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
+    });
+});*/
+app.get('/rechnungkundedetails/:rechnungsnummer', (req, res) => {
+  const rechnungsnummer = req.params.rechnungsnummer;
+  con.query("SELECT * FROM Rechnung WHERE Rechnungsnummer = ?", [rechnungsnummer], function(error, results, fields) {
+    if (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    } else {
+      console.log(results);
+      res.json(results);
+    }
+  });
+});
+
+/*app.get('/rechnungkundedetails/:rechnungsnummer', (req, res) => {
+    const rechnungsnummer = req.params.rechnungsnummer;
+  
+    con.query('SELECT * FROM Rechnung WHERE Rechnungsnummer = ?', [rechnungsnummer], (error, results, fields) => {
+      if (error) {
+        throw error;
+      }
+      console.log(results);
+      res.send(results);
+    });
+});*/
+  
+
+app.get('/rechnungkundeuebersicht', (req, res) => {
     con.query("SELECT * FROM Rechnung",
     function(error, results, fields) {
         if(error) throw error;
@@ -550,23 +569,7 @@ app.get('/rechnung', (req, res) => {
     });
 });
 
-app.get('/nachbestellung', (req, res) => {
-    con.query("SELECT * FROM Nachbestellung",
-    function(error, results, fields) {
-        if(error) throw error;
-        console.log(results);
-        res.send(results);
-    });
-});
 
-app.get('/nachbestellungskorb', (req, res) => {
-    con.query("SELECT * FROM Nachbestellungskorb",
-    function(error, results, fields) {
-        if(error) throw error;
-        console.log(results);
-        res.send(results);
-    });
-});
 
 app.get('/rechnungkundeuebersicht', (req, res) => {
     const kundenID = req.query.kundenID; // Kunden-ID aus dem Anfrageparameter abrufen
@@ -578,9 +581,9 @@ app.get('/rechnungkundeuebersicht', (req, res) => {
       console.log(results);
       res.send(results);
     });
-  });
+});
 
-  app.get('/events/:eventid/teilnehmer', (req, res) => {
+app.get('/events/:eventid/teilnehmer', (req, res) => {
     const eventid = req.params.eventid;
     con.query(
       'SELECT Kunde.KundenID, Kunde.Nachname, Kunde.Vorname, Kunde.Email ' +
@@ -610,17 +613,7 @@ app.get('/rechnungkundeuebersicht', (req, res) => {
   
   
 
-  app.get('/rechnungkundedetails/:rechnungsnummer', (req, res) => {
-    const rechnungsnummer = req.params.rechnungsnummer;
-  
-    con.query('SELECT * FROM Rechnung WHERE Rechnungsnummer = ?', [rechnungsnummer], (error, results, fields) => {
-      if (error) {
-        throw error;
-      }
-      console.log(results);
-      res.send(results);
-    });
-  });
+ 
   
 app.get('/mitarbeitermitwenigstenkennenlernterminen', (req, res) => {
   
@@ -780,26 +773,6 @@ app.delete('/rechnung/:id', (req, res) => {
     });
 });
 
-app.delete('/nachbestellung/:id', (req, res) => {
-    con.query('DELETE FROM Nachbestellung WHERE NachbestellungsID = ?',
-    function(error, results, fields) {
-        if(error) throw error;
-        console.log(results);
-        res.send(results);
-    });
-});
-
-app.delete('/nachbestellungskorb/:id', (req, res) => {
-    con.query('DELETE FROM Nachbestellungskorb WHERE NachbestellungskorbID = ?',
-    function(error, results, fields) {
-        if(error) throw error;
-        console.log(results);
-        res.send(results);
-    });
-});
-
-})
-
 
 /* Update */
 
@@ -813,6 +786,7 @@ app.put('/kunde/:kundenid', (req, res) => {
       function(error, results, fields) {
         if (error) throw error;
         console.log(results.affectedRows);
+        res.send(results);
       }
     );
   });
@@ -826,6 +800,7 @@ app.put('/kunde/:kundenid', (req, res) => {
       function(error, results, fields) {
         if (error) throw error;
         console.log(results.affectedRows);
+        res.send(results);
       }
     );
   });
@@ -839,6 +814,7 @@ app.put('/kunde/:kundenid', (req, res) => {
       function(error, results, fields) {
         if (error) throw error;
         console.log(results.affectedRows);
+        res.send(results);
       }
     );
   });
@@ -852,7 +828,33 @@ app.put('/kunde/:kundenid', (req, res) => {
       function(error, results, fields) {
         if (error) throw error;
         console.log(results.affectedRows);
+        res.send(results);
       }
     );
   });
   
+ // Route zum Erstellen einer Bestellung
+ app.post('/api/bestellung', (req, res) => {
+    const zahlungsart = req.body.zahlungsart;
+    const warenkorb = req.body.warenkorb;
+    const datum = req.body.datum; // Datum aus dem Request Body entnehmen
+  
+    // Weitere Verarbeitung der Bestellung, z. B. Speichern in der Datenbank
+    // Generierung der Bestellungsnummer, etc.
+  
+    // Beispiel: Einfügen der Bestellung in die Datenbank und Rückgabe der Bestellungsnummer
+    const query = 'INSERT INTO Bestellung (Datum, BestellartID, MitarbeiterID, KundenID, Zahlungsart) VALUES (?, ?, ?, ?, ?)';
+    const values = [datum, null, null, null, null]; // Platzhalterwerte für BestellartID, MitarbeiterID und KundenID
+  
+    connection.query(query, values, (error, results) => {
+      if (error) {
+        console.error('Fehler beim Speichern der Bestellung:', error);
+        res.status(500).json({ error: 'Fehler beim Speichern der Bestellung' });
+      } else {
+        const bestellungsnummer = results.insertId;
+        res.status(200).json(bestellungsnummer);
+      }
+    });
+  });
+  
+})

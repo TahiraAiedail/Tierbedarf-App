@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   templateUrl: './rechnungsuebersichtkunde.component.html',
   styleUrls: ['./rechnungsuebersichtkunde.component.css']
 })
+
+
 export class RechnungsuebersichtkundeComponent implements OnInit {
   rechnungsdaten: any[] = [];
 
@@ -23,16 +25,28 @@ export class RechnungsuebersichtkundeComponent implements OnInit {
     if (kundenID) {
       this.http.get<any[]>('/rechnungkundeuebersicht')
         .subscribe(
-          data => {
-            this.rechnungsdaten = data;
+          (response: any[]) => {
+            const data = response.map((item) => ({
+              Rechnungsnummer: item.Rechnungsnummer,
+              Datum: item.Datum,
+              Rechnungssumme: item.Rechnungssumme,
+              Rechnungsstatusid: item.RechnungsstatusID,
+            }));
+            this.rechnungsdaten = data; // Rechnungsdaten aktualisieren
+            console.log(this.rechnungsdaten)
           },
           error => {
-            console.error('Fehler beim Laden der Rechnungsdaten:', error);
+            console.error(error); // Fehlerbehandlung, falls der Aufruf fehlschlägt
           }
         );
     }
   }
+  
+  
   zeigeRechnungsdetails(rechnungsnummer: number): void {
-    this.router.navigate(['/rechnungkunde', rechnungsnummer]);
+    if(rechnungsnummer){
+    this.router.navigate(['/rechnungkunde']);
+    }
   }
 }
+

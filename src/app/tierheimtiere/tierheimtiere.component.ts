@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router'; 
+import { AuthService } from '../auth/auth.service';
 
 
 
@@ -16,10 +17,10 @@ export class TierheimtiereComponent {
     animals: []
   };
   
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.getTierheimtiere(); // Aufruf der Methode bei Initialisierung der Komponente
+    this.getTierheimtiere(); 
   }
 
   getTierheimtiere() {
@@ -33,9 +34,9 @@ export class TierheimtiereComponent {
           type: item.Tierart,
           breed: item.Rasse,
           gender: item.Geschlecht,
-          age: this.formatDate(item.Geburtsdatum), // Formatieren des Geburtsdatums
+          age: this.formatDate(item.Geburtsdatum), 
           description: item.Beschreibung,
-          image: 'assets/images/' + item.Name + '_'+ item.Tierart + '.jpg', // Stelle sicher, dass die Bilder im assets/images-Ordner vorhanden sind
+          image: 'assets/images/' + item.Name + '_'+ item.Tierart + '.jpg', 
         }));
         this.tierheimtiere.animals = fetchedTierheimtiere;
         console.log('Tierheimdaten: ', this.tierheimtiere);
@@ -65,6 +66,9 @@ export class TierheimtiereComponent {
   }
   logAnimal(animal: any) {
     console.log(animal);
+  }
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
   }
 }
 

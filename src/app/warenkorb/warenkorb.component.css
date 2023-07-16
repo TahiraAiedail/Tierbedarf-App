@@ -1,33 +1,58 @@
 h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .warenkorb-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .warenkorb-artikel {
-    background-color:  #f5f5f5;
-    width: 200px;
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #e8e8e8;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-    text-align: center;
-  }
-  
-  .warenkorb-artikel img {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  .gesamtsumme {
-    text-align: right;
-    margin-top: 20px;
-    font-weight: bold;
-  }
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.warenkorb-container {
+  text-align: center;
+}
+
+.warenkorb-artikel {
+  background-color:  #f5f5f5;
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  text-align: center;
+}
+
+.warenkorb-artikel img {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.gesamtsumme {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.zahlungsarten-container {
+  text-align: center;
+}
+
+.bestellart-container {
+  text-align: center;
+}
+
+.zahlungsarten-container ul,
+.bestellart-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.zahlungsarten-container li,
+.bestellart-container li {
+  margin-bottom: 10px;
+}
+
+.zahlungsarten-container label,
+.bestellart-container label {
+  display: block;
+}
+

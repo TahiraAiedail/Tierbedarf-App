@@ -7,13 +7,21 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'Tierbedarf-App';
 
+  isSubMenuOpen: boolean = false;
+
   constructor(private router: Router, public authService: AuthService) {}
+
+  toggleSubMenu() {
+    this.isSubMenuOpen = !this.isSubMenuOpen;
+  }
 
   navigateToBestellungsuebersicht(): void {
     const kundenID = this.authService.getKundenID();
+    console.log('Kunden-ID:', kundenID); // Konsolenausgabe
     if (kundenID) {
       this.router.navigate(['/rechnungsuebersicht', kundenID]);
     }
