@@ -357,7 +357,7 @@ app.get('/kundenzahlungsmethode', (req, res) => {
 });
 
 app.get('/event', (req, res) => {
-    con.query("SELECT * FROM Event",
+    con.query("SELECT * FROM Event WHERE Datum >= CURDATE()",
     function(error, results, fields) {
         if(error) throw error;
         console.log(results);
