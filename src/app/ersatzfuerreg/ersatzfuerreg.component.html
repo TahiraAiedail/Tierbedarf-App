@@ -1,5 +1,3 @@
-<p>ersatzfuerreg works!</p>
-
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div *ngIf="registerForm.get('Benutzername')?.errors && registerForm.get('Benutzername')?.dirty">
         <p *ngIf="registerForm.get('Benutzername')?.errors?.['required']">Der Benutzername ist erforderlich.</p>
