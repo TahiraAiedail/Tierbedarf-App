@@ -128,9 +128,6 @@ export class ProfilComponent {
    
   }
 
-
-
-
   submitFormPasswort(): void {
     // Überprüfen, ob das eingegebene alte Passwort mit dem gespeicherten alten Passwort übereinstimmt
     if (this.oldPasswordInput.nativeElement.value !== this.authService.getPasswort()) {
@@ -151,8 +148,7 @@ export class ProfilComponent {
           console.error('Fehler beim Aktualisieren des Passworts:', error);
         }
       });
-      
-    
+
     }
   
   }
