@@ -535,14 +535,29 @@ app.get('/rechnungsstatus', (req, res) => {
     });
 });*/
 app.get('/rechnungkundedetails/:rechnungsnummer', (req, res) => {
-    const rechnungsnummer = req.params.rechnungsnummer;
-    con.query("SELECT * FROM Rechnung WHERE Rechnungsnummer = ?", [rechnungsnummer],
-      function(error, results, fields) {
-        if (error) throw error;
-        console.log(results);
-        res.send(results);
-      });
+  const rechnungsnummer = req.params.rechnungsnummer;
+  con.query("SELECT * FROM Rechnung WHERE Rechnungsnummer = ?", [rechnungsnummer], function(error, results, fields) {
+    if (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    } else {
+      console.log(results);
+      res.json(results);
+    }
   });
+});
+
+/*app.get('/rechnungkundedetails/:rechnungsnummer', (req, res) => {
+    const rechnungsnummer = req.params.rechnungsnummer;
+  
+    con.query('SELECT * FROM Rechnung WHERE Rechnungsnummer = ?', [rechnungsnummer], (error, results, fields) => {
+      if (error) {
+        throw error;
+      }
+      console.log(results);
+      res.send(results);
+    });
+});*/
   
 
 app.get('/rechnungkundeuebersicht', (req, res) => {
@@ -566,9 +581,9 @@ app.get('/rechnungkundeuebersicht', (req, res) => {
       console.log(results);
       res.send(results);
     });
-  });
+});
 
-  app.get('/events/:eventid/teilnehmer', (req, res) => {
+app.get('/events/:eventid/teilnehmer', (req, res) => {
     const eventid = req.params.eventid;
     con.query(
       'SELECT Kunde.KundenID, Kunde.Nachname, Kunde.Vorname, Kunde.Email ' +
@@ -598,17 +613,7 @@ app.get('/rechnungkundeuebersicht', (req, res) => {
   
   
 
-  app.get('/rechnungkundedetails/:rechnungsnummer', (req, res) => {
-    const rechnungsnummer = req.params.rechnungsnummer;
-  
-    con.query('SELECT * FROM Rechnung WHERE Rechnungsnummer = ?', [rechnungsnummer], (error, results, fields) => {
-      if (error) {
-        throw error;
-      }
-      console.log(results);
-      res.send(results);
-    });
-  });
+ 
   
 app.get('/mitarbeitermitwenigstenkennenlernterminen', (req, res) => {
   

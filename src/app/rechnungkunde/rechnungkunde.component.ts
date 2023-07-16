@@ -23,11 +23,11 @@ export class RechnungkundeComponent implements OnInit {
   }
 
   ladeDetailierteRechnung(): void {
-    const Rechnungsnummer = this.route.snapshot.paramMap.get('Rechnungsnummer');
+    const rechnungsnummer = this.route.snapshot.paramMap.get('Rechnungsnummer');
     const kundenID = this.authService.getKundenID();
     
-    if (kundenID && Rechnungsnummer) {
-      this.http.get<any[]>(`/rechnungkundedetails/${Rechnungsnummer}`)
+    if (kundenID && rechnungsnummer) {
+      this.http.get<any[]>(`/rechnungkundedetails/${rechnungsnummer}`)
         .subscribe(
           (response: any[]) => {
             const data = response.map((item) => ({
