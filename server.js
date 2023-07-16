@@ -627,20 +627,10 @@ app.get('/events/:eventid/teilnehmer', (req, res) => {
     );
   });
   
-  app.get('/bestellung/:kundenID', (req, res) => {
-    const kundenID = req.params.kundenID;
-    con.query(
-      'SELECT FROM Bestellung WHERE KundenID = ?',
-      [kundenID],
-      function(error, results, fields) {
-        if (error) throw error;
-        res.send(results);
-      }
-    );
-  });
-  
   
 
+ 
+  
 app.get('/mitarbeitermitwenigstenkennenlernterminen', (req, res) => {
   
     con.query('SELECT MitarbeiterID FROM Mitarbeiter ORDER BY (SELECT COUNT(*) FROM Kennenlerntermin WHERE Mitarbeiter.MitarbeiterID = Kennenlerntermin.MitarbeiterID) ASC LIMIT 1',
@@ -872,7 +862,7 @@ app.put('/kunde/:kundenid', (req, res) => {
     const query = 'INSERT INTO Bestellung (Datum, BestellartID, MitarbeiterID, KundenID, Zahlungsart) VALUES (?, ?, ?, ?, ?)';
     const values = [datum, null, null, null, null]; // Platzhalterwerte für BestellartID, MitarbeiterID und KundenID
   
-    connection. query(query, values, (error, results) => {
+    connection.query(query, values, (error, results) => {
       if (error) {
         console.error('Fehler beim Speichern der Bestellung:', error);
         res.status(500).json({ error: 'Fehler beim Speichern der Bestellung' });
