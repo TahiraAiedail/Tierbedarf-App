@@ -270,27 +270,7 @@ app.post('/rechnung', (req, res) => {
     });
     });
 
-app.post('/nachbestellung', (req, res) => {
-    const {Nachbestellungsnummer, Firma, Datum, MitarbeiterID} = reg.body;
-    con.query(`INSERT INTO Nachbestellung(Nachbestellungsnummer, Firma, Datum, MitarbeiterID) VALUES(?,?,?,?)`,
-    [Nachbestellungsnummer, Firma, Datum, MitarbeiterID],
-    function(error, results, fields) {
-        if (error) throw error;
-        console.log(results.insertId);
-        res.send(results);
-    });
-    });
 
-app.post('/nachbestellungskorb', (req, res) => {
-    const {Warenmenge, WarenID, NachbestellungsID} = req.body;
-    con.query(`INSERT INTO Nachbestellungskorb(Warenmenge, WarenID, NachbestellungsID) VALUES(?,?,?)`,
-    [Warenmenge, WarenID, NachbestellungsID],
-    function(error, results, fields) {
-        if (error) throw error;
-        console.log(results.insertId);
-        res.send(results);
-    });
-    });
     
     app.post('/loginKunde', (req, res) => {
         const { email, password } = req.body; 
@@ -574,23 +554,7 @@ app.get('/rechnungkundeuebersicht', (req, res) => {
     });
 });
 
-app.get('/nachbestellung', (req, res) => {
-    con.query("SELECT * FROM Nachbestellung",
-    function(error, results, fields) {
-        if(error) throw error;
-        console.log(results);
-        res.send(results);
-    });
-});
 
-app.get('/nachbestellungskorb', (req, res) => {
-    con.query("SELECT * FROM Nachbestellungskorb",
-    function(error, results, fields) {
-        if(error) throw error;
-        console.log(results);
-        res.send(results);
-    });
-});
 
 app.get('/rechnungkundeuebersicht', (req, res) => {
     const kundenID = req.query.kundenID; // Kunden-ID aus dem Anfrageparameter abrufen
@@ -804,26 +768,6 @@ app.delete('/rechnung/:id', (req, res) => {
     });
 });
 
-app.delete('/nachbestellung/:id', (req, res) => {
-    con.query('DELETE FROM Nachbestellung WHERE NachbestellungsID = ?',
-    function(error, results, fields) {
-        if(error) throw error;
-        console.log(results);
-        res.send(results);
-    });
-});
-
-app.delete('/nachbestellungskorb/:id', (req, res) => {
-    con.query('DELETE FROM Nachbestellungskorb WHERE NachbestellungskorbID = ?',
-    function(error, results, fields) {
-        if(error) throw error;
-        console.log(results);
-        res.send(results);
-    });
-});
-
-})
-
 
 /* Update */
 
@@ -907,3 +851,5 @@ app.put('/kunde/:kundenid', (req, res) => {
       }
     });
   });
+  
+})
