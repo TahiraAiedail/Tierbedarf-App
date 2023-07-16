@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -25,12 +25,21 @@ export class ErsatzfuerregComponent implements OnInit {
     stadt: /^[\p{L}\s-]+$/u
   };
 
+  minAgeValidator(minAge: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const date = new Date(control.value);
+      const age = Math.floor((Date.now() - date.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+      
+      return age >= minAge ? null : { 'minAge': {value: control.value} };
+    };
+  }
+
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       Benutzername: ['', [Validators.required, Validators.pattern(this.pattern.name)]],
       Nachname: ['', [Validators.required, Validators.pattern(this.pattern.name)]],
       Vorname: ['', [Validators.required, Validators.pattern(this.pattern.name)]],
-      Geburtsdatum: ['', Validators.required],
+      Geburtsdatum: ['', [Validators.required, this.minAgeValidator(18)]],
       Telefonnummer: ['', [Validators.required, Validators.pattern(this.pattern.telefonnummerr)]],
       EMail: ['', [Validators.required, Validators.email]],
       Passwort: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.pattern.passwort)]],
@@ -41,6 +50,7 @@ export class ErsatzfuerregComponent implements OnInit {
     });
     this.checkBenutzernameAvailability();
     this.setupLiveValidation();
+    this.checkEMailAvailability();
   }
   checkBenutzernameAvailability() {
     const benutzernameControl = this.registerForm.get('Benutzername');
@@ -65,6 +75,29 @@ export class ErsatzfuerregComponent implements OnInit {
     }
   }
   
+  checkEMailAvailability() {
+    const EMailControl = this.registerForm.get('EMail');
+  
+    if (EMailControl) {
+      EMailControl.valueChanges.subscribe((email: string) => {
+        if (email) {
+          this.http.post('/email', { EMail: email }).subscribe(
+            (response: any) => {
+              if (!response.available) {
+                EMailControl.setErrors({ emailExists: true });
+              } else {
+                EMailControl.setErrors(null);
+              }
+            },
+            (error) => {
+              console.error('Fehler bei der Überprüfung der E-Mail:', error);
+            }
+          );
+        }
+      });
+    }
+  }
+  
   setupLiveValidation() {
     const formControls = this.registerForm.controls;
   
@@ -81,7 +114,8 @@ export class ErsatzfuerregComponent implements OnInit {
     });
   }
   
-    
+ 
+
   onSubmit() {
     if (this.registerForm.valid) {
       const data = {

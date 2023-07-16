@@ -181,7 +181,7 @@ app.post('/tierfotos', (req, res) => {
     });
 
 app.post('/kennenlerntermin', (req, res) => {
-    const {Datum, KundenID, TierID, MitarbeiterID} = req.body; // Extrahieren der Werte aus dem Request-Body
+    const {Datum, KundenID, TierID, MitarbeiterID} = req.body; 
     con.query(`INSERT INTO Kennenlerntermin(Datum, KundenID, TierID, MitarbeiterID) VALUES(?,?,?,?)`,
     [Datum, KundenID, TierID, MitarbeiterID],
     function(error, results, fields) {
@@ -339,7 +339,23 @@ app.post('/nachbestellungskorb', (req, res) => {
         });
       });
       
-
+      app.post('/email', (req, res) => {
+        const { EMail } = req.body;
+      
+        con.query('SELECT COUNT(*) AS count FROM Kunde WHERE EMail = ?', [EMail], (error, results, fields) => {
+          if (error) {
+            throw error;
+          }
+      
+          const count = results[0].count;
+          if (count > 0) {
+            res.status(200).json({ available: false });
+          } else {
+            res.status(200).json({ available: true });
+          }
+        });
+      });
+      
 /* Select Statements*/
 
 app.get('/kunde', (req, res) => {
