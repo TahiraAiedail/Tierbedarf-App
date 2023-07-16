@@ -57,6 +57,7 @@ export class AuthService {
           this.stadt = response.data.Stadt;
           this.plz = response.data.PLZ;
           console.log('Login erfolgreich, Benutzername: ', this.benutzername);
+          this.router.navigate(['/home']);
         } else {
           console.log('Login fehlgeschlagen, Antwort: ', response);
         }

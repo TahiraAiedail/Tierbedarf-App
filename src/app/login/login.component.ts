@@ -33,7 +33,7 @@ export class LoginComponent {
       if(this.authService.isLoggedIn) {
         const redirect = this.authService.redirectUrl ? this.router.parseUrl(this.authService.redirectUrl) : 'login';
         this.message = 'status: logged in'
-        this.router.navigateByUrl(redirect);
+        
       }
     })
   }
