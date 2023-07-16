@@ -530,7 +530,26 @@ app.get('/rechnungsstatus', (req, res) => {
     });
 });
 
-app.get('/rechnung', (req, res) => {
+/*app.get('rechnungkundedetails', (req, res) => {
+    con.query("SELECT * FROM Rechnung",
+    function(error, results, fields) {
+        if(error) throw error;
+        console.log(results);
+        res.send(results);
+    });
+});*/
+app.get('/rechnungkundedetails/:rechnungsnummer', (req, res) => {
+    const rechnungsnummer = req.params.rechnungsnummer;
+    con.query("SELECT * FROM Rechnung WHERE Rechnungsnummer = ?", [rechnungsnummer],
+      function(error, results, fields) {
+        if (error) throw error;
+        console.log(results);
+        res.send(results);
+      });
+  });
+  
+
+app.get('/rechnungkundeuebersicht', (req, res) => {
     con.query("SELECT * FROM Rechnung",
     function(error, results, fields) {
         if(error) throw error;

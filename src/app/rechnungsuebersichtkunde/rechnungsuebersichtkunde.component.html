@@ -10,9 +10,9 @@
     <tbody>
       <tr *ngFor="let rechnung of rechnungsdaten" (click)="zeigeRechnungsdetails(rechnung.Rechnungsnummer)">
         <td>{{ rechnung.Rechnungsnummer }}</td>
-        <td>{{ rechnung.Rechnungsdatum | date }}</td>
+        <td>{{ rechnung.Datum | date }}</td>
         <td>{{ rechnung.Rechnungssumme }}</td>
-        <td>{{ rechnung.Rechnungsstatus}}</td>
+        <td>{{ rechnung.RechnungsstatusID}}</td>
       </tr>
     </tbody>
   </table>
