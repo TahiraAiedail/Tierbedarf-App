@@ -22,7 +22,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li *ngIf="isKundeLoggedIn()"><a class="dropdown-item" routerLink="profil">Profil</a></li>
               <li *ngIf="isMitarbeiterLoggedIn()"><a class="dropdown-item" routerLink="profilmitarbeiter">Profil</a></li>
-              <li><a class="dropdown-item" routerLink="rechnungsuebersichtkunde">Bestellungsübersicht</a></li>
+              <li *ngIf="isKundeLoggedIn()"><a class="dropdown-item" routerLink="rechnungsuebersichtkunde">Bestellungsübersicht</a></li>
               <li><a class="dropdown-item" (click)="this.authService.logout()">Logout</a></li>
             </ul>
           </li>
