@@ -534,6 +534,22 @@ app.get('/rechnungsstatus', (req, res) => {
         res.send(results);
     });
 });*/
+
+app.get('/doublekennenlerntermin', (req, res) => {
+  const { KundenID, TierID } = req.query;
+
+  // Führen Sie eine Datenbankabfrage durch, um nach vorhandenen Terminen zu suchen
+  const query = 'SELECT * FROM Kennenlerntermin WHERE KundenID = ? AND TierID = ?';
+  con.query(query, [KundenID, TierID], (error, results) => {
+    if (error) {
+      console.error('Fehler beim Abrufen der Kennenlerntermine:', error);
+      res.status(500).json({ error: 'Fehler beim Abrufen der Kennenlerntermine' });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
 app.get('/rechnungkundedetails/:rechnungsnummer', (req, res) => {
   const rechnungsnummer = req.params.rechnungsnummer;
   con.query("SELECT * FROM Rechnung WHERE Rechnungsnummer = ?", [rechnungsnummer], function(error, results, fields) {

@@ -24,6 +24,8 @@ export class KennenlernformularComponent implements OnInit {
   date!: Date;
   public datepipe: DatePipe;
   public pickerFilter: any;
+  public terminAlreadyRequested: boolean = false; 
+
 
   constructor(
     private route: ActivatedRoute,
@@ -85,20 +87,33 @@ export class KennenlernformularComponent implements OnInit {
           TierID: this.tierID,
           MitarbeiterID: this.MitarbeiterID
         };
-
-        this.http.post('/kennenlerntermin', data).subscribe(
-          (response) => {
-            console.log('Daten erfolgreich gesendet:', response);
-            this.openConfirmationDialog(); 
-          },
-          (error) => {
-            console.error('Fehler beim Senden der Daten:', error);
-          }
-        );
+        if (data.KundenID !== null) {
+          this.http.get<any>('/doublekennenlerntermin', { params: { KundenID: data.KundenID.toString(), TierID: data.TierID.toString() } }).subscribe(
+            (response) => {
+              if (response.length > 0) {
+                this.terminAlreadyRequested = true;
+                console.log('Eintrag verweigert: Termin bereits vorhanden.');
+              } else {
+                this.http.post('/kennenlerntermin', data).subscribe(
+                  (response) => {
+                    console.log('Daten erfolgreich gesendet:', response);
+                    this.openConfirmationDialog();
+                  },
+                  (error) => {
+                    console.error('Fehler beim Senden der Daten:', error);
+                  }
+                );
+              }
+            },
+            (error) => {
+              console.error('Fehler beim Überprüfen des Termins:', error);
+            }
+          );
+        }
       }
     }
   }
-
+   
   openConfirmationDialog(): void {
     const dialogRef = this.dialog.open(KennenlernbestaetigungComponent, {
       width: '400px' // Geben Sie hier die gewünschte Breite des Dialogs an

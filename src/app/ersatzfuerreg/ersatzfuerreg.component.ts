@@ -17,14 +17,12 @@ export class ErsatzfuerregComponent implements OnInit {
 
   pattern = {
     name: /^[A-Za-z]+$/,
-    telefonnummerr: /^\d{1,8}$/,
-    passwort: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-    strasse: /^[\p{L}\säöüÄÖÜß\/.-]+$/u,
+    telefonnummer: /^\d{1,8}$/,
+    passwort: /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
     nummer: /^[0-9]+$/,
-    plz: /^\d{5}$/,
-    stadt: /^[\p{L}\s-]+$/u
+    stadt: /^[\w\s-]+$/,
   };
-
+  
   minAgeValidator(minAge: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const date = new Date(control.value);
@@ -40,13 +38,13 @@ export class ErsatzfuerregComponent implements OnInit {
       Nachname: ['', [Validators.required, Validators.pattern(this.pattern.name)]],
       Vorname: ['', [Validators.required, Validators.pattern(this.pattern.name)]],
       Geburtsdatum: ['', [Validators.required, this.minAgeValidator(18)]],
-      Telefonnummer: ['', [Validators.required, Validators.pattern(this.pattern.telefonnummerr)]],
+      Telefonnummer: ['', [Validators.required, Validators.pattern(this.pattern.telefonnummer)]],
       EMail: ['', [Validators.required, Validators.email]],
       Passwort: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.pattern.passwort)]],
-      Straße: ['', [Validators.required, Validators.pattern(this.pattern.strasse)]],
+      Straße: ['', [Validators.required, Validators.pattern(this.pattern.name)]],
       Hausnummer: ['', [Validators.required, Validators.pattern(this.pattern.nummer)]],
       Stadt: ['', [Validators.required, Validators.pattern(this.pattern.stadt)]],
-      PLZ: ['', [Validators.required, Validators.pattern(this.pattern.plz)]]
+      PLZ: ['', [Validators.required, Validators.pattern(this.pattern.nummer)]]
     });
     this.checkBenutzernameAvailability();
     this.setupLiveValidation();
@@ -114,8 +112,6 @@ export class ErsatzfuerregComponent implements OnInit {
     });
   }
   
- 
-
   onSubmit() {
     if (this.registerForm.valid) {
       const data = {
@@ -131,6 +127,7 @@ export class ErsatzfuerregComponent implements OnInit {
         Stadt: this.registerForm.value.Stadt,
         PLZ: this.registerForm.value.PLZ
       };
+  
       this.http.post('/kunde', data).subscribe(
         response => {
           console.log('Registrierung erfolgreich! Antwort: ', response);
@@ -143,3 +140,4 @@ export class ErsatzfuerregComponent implements OnInit {
     }
   }
 }
+  
