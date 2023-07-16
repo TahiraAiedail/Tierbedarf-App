@@ -135,7 +135,7 @@ app.post('/mitarbeiter', (req, res) => {
 
 app.post('/eventteilnehmerliste', (req, res) => {
     const {KundenID, EventID} = req.body;
-    con.query(`INSERT INTO EventTeilnehmerliste(KundenID, EventID) VALUES(?,?)`,
+    con.query(`INSERT IGNORE INTO EventTeilnehmerliste(KundenID, EventID) VALUES(?,?)`,
     [KundenID, EventID],
     function(error, results, fields) {
         if (error) throw error;
