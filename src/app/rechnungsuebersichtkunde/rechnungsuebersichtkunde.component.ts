@@ -44,7 +44,9 @@ export class RechnungsuebersichtkundeComponent implements OnInit {
   
   
   zeigeRechnungsdetails(rechnungsnummer: number): void {
-    this.router.navigate(['/rechnungkunde', rechnungsnummer]);
+    if(rechnungsnummer){
+    this.router.navigate(['/rechnungkunde']);
+    }
   }
 }
 
