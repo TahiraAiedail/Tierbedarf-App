@@ -182,7 +182,7 @@ app.post('/tierfotos', (req, res) => {
 
 app.post('/kennenlerntermin', (req, res) => {
     const {Datum, KundenID, TierID, MitarbeiterID} = req.body; 
-    con.query(`INSERT INTO Kennenlerntermin(Datum, KundenID, TierID, MitarbeiterID) VALUES(?,?,?,?)`,
+    con.query(`INSERT IGNORE INTO Kennenlerntermin(Datum, KundenID, TierID, MitarbeiterID) VALUES(?,?,?,?)`,
     [Datum, KundenID, TierID, MitarbeiterID],
     function(error, results, fields) {
         if (error) throw error;
