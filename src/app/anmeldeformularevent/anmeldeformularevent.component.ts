@@ -46,18 +46,15 @@ export class AnmeldeformulareventComponent {
     KundenID: this.user.kundenID,
     EventID: this.eventid
   };
-    // HTTP-Anfrage an den Server senden
   this.http.post('/eventteilnehmerliste',requestData).subscribe(
   (response) => {
-    // Erfolgreiche Antwort vom Server erhalten
+    this.snackBar.open('Anmeldung erfolgreich!', 'OK', { duration: 3000 });
+    this.router.navigate(['/events']);
     console.log('Erfolgreich eingefügt:', response);
   },
   (error) => {
-    // Fehler beim Senden der Anfrage oder beim Verarbeiten der Antwort
     console.error('Fehler beim Einfügen:', error);
   }
 );
-  this.router.navigate(['/events']);
-  this.snackBar.open('Anmeldung erfolgreich!', 'OK', { duration: 3000 });
  }
 }
