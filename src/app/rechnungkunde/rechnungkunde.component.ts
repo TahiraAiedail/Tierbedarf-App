@@ -1,34 +1,53 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-rechnungkunde',
   templateUrl: './rechnungkunde.component.html',
   styleUrls: ['./rechnungkunde.component.css']
 })
-
-
 export class RechnungkundeComponent implements OnInit {
   rechnungsdetails: any[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    const rechnungsnummer = this.route.snapshot.paramMap.get('rechnungsnummer');
+    this.ladeDetailierteRechnung();
+  }
 
-    this.http.get<any[]>(`/rechnungkundedetails/${rechnungsnummer}`)
-      .subscribe(
-        data => {
-          this.rechnungsdetails = data;
-        },
-        error => {
-          console.error('Fehler beim Laden der Rechnungsdetails:', error);
-        }
-      );
+  ladeDetailierteRechnung(): void {
+    const Rechnungsnummer = this.route.snapshot.paramMap.get('Rechnungsnummer');
+    const kundenID = this.authService.getKundenID();
+    
+    if (kundenID && Rechnungsnummer) {
+      this.http.get<any[]>(`/rechnungkundedetails/${Rechnungsnummer}`)
+        .subscribe(
+          (response: any[]) => {
+            const data = response.map((item) => ({
+              Rechnungsnummer: item.Rechnungsnummer,
+              Rechnungssumme: item.Rechnungssumme,
+              Datum: item.Datum,
+              Bestellnummer: item.Bestellnummer,
+              RechnungsstatusID: item.RechnungsstatusID,
+            }));
+            this.rechnungsdetails = data; // Rechnungsdaten aktualisieren
+            console.log(this.rechnungsdetails);
+          },
+          (error) => {
+            console.error(error); // Fehlerbehandlung, falls der Aufruf fehlschlägt
+          }
+        );
+    }
   }
 
   goBack() {
-    this.router.navigate(['/rechnungsuebersicht']);
+    this.router.navigate(['/rechnungsuebersichtkunde']);
   }
 }
